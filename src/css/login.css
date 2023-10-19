@@ -1,0 +1,138 @@
+.container-login {
+    width: 100%;
+    height: 89.2vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login {
+    width: 40%;
+    height: 60%;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.login h1 {
+    color: #000;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 40px 0;
+    height: 5%;
+}
+
+.login form {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login form input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.login form input:focus {
+    outline: none;
+    border: 2px solid #909CFF;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.login form span {
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: flex;
+    align-self: flex-start;
+}
+
+.login form span a {
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 10px 0;
+    text-decoration: none;
+}
+
+.login form span a:hover {
+    color: #909CFF;
+    text-decoration: underline;
+    transition: all 0.2s ease-in-out;
+}
+
+.login form button {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.login form button:hover {
+    background-color: #fff;
+    color: #000;
+    transition: all 0.5s ease-in-out;
+}
+
+.container-login .img-login {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-login img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .container-login {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .login {
+        width: 80%;
+        height: 80%;
+        margin: 20px 0;
+    }
+
+    .login h1 {
+        font-size: 2.5rem;
+    }
+
+    .container-login .img-login {
+        width: 100%;
+        height: 50%;
+    }
+
+    .img-login img {
+        display: none;
+    }
+}
+
+

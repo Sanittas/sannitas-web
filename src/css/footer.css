@@ -1,0 +1,98 @@
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18vh;
+    background-color: #909CFF;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;   
+}
+
+footer .footer-left {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+footer .footer-left img {
+    width: 180px;
+    height: 160px;
+    margin: 0 10px;
+}
+
+footer .footer-center {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer .footer-center a {
+    color: #000;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #fff;
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+footer .footer-center a:hover {
+    background-color: #000;
+    color: #fff;
+    font-size: 1.3rem;
+    transition: all 0.5s ease-in-out;
+}
+
+footer .footer-right {
+    width: 20%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer .footer-right .redes-sociais {
+    width: 30%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+footer .footer-right .redes-sociais p {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+footer .footer-right .icons-redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+footer .footer-right .icons-redes img {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+}
+
