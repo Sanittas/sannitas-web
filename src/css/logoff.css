@@ -1,0 +1,35 @@
+.container-log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+    flex-direction: column;
+}
+
+.container-log h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    color: #000;
+    margin: 20px;
+}
+
+.container-log a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    transition: all 0.5s ease-in-out;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.container-log a:hover {
+    background-color: #000;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}

@@ -1,12 +1,43 @@
 import React from "react";
 
+import { useState } from "react";
+
 import "./css/login.css";
 
 import Navbar from "./components/Navbar"
 
 import login from "./assets/senior-couple-holding-hands.jpg"
 
+import api from "./api";
+
+
+
 function Login() {
+
+
+    
+    const realizarLogin = () => {
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
+
+        api.post("/login", {
+            email: email,
+            senha: senha
+            
+        }).then((res) => {
+            console.log(res);
+            
+            sessionStorage.setItem("token", res.data.token);
+            sessionStorage.setItem("nome", res.data.nome);
+            
+            window.location.href = "/login/logoff";
+            
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+
     return (
         <>
         <Navbar />
@@ -18,7 +49,7 @@ function Login() {
                     <input type="text" placeholder="Email" id="email" />
                     <input type="password" placeholder="Senha" id="senha"/>
                     <span><a href="#">Esqueceu sua Senha?</a></span>
-                    <button type="submit" className="btn-login" >Entrar</button>
+                    <a className="btn-login" onClick={realizarLogin}>Login</a>
                 </form>
             </div>
 
