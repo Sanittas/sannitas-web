@@ -10,6 +10,8 @@ import login from "./assets/senior-couple-holding-hands.jpg"
 
 import api from "./api";
 
+import Swal from "sweetalert2";
+
 
 
 function Login() {
@@ -29,11 +31,24 @@ function Login() {
             
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("nome", res.data.nome);
+
+            Swal.fire({
+                icon: "success",
+                title: "Login realizado com sucesso!",
+                showConfirmButton: true,
+                timer: 1500
+            })
             
             window.location.href = "/login/logoff";
             
         }).catch((err) => {
             console.log(err);
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao realizar login!",
+                showConfirmButton: true,
+                timer: 1500
+            })
         })
     }
 

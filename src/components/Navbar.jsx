@@ -2,7 +2,7 @@ import React from "react";
 
 import { Outlet, Link } from "react-router-dom";
 
-import '../css/navbar.css';
+import "../css/navbar.css";
 
 import logo from "../assets/icons-sanittas/white-bottomless.svg";
 
@@ -25,9 +25,10 @@ function Navbar(props) {
         <a href="#" class="icon-menu" onClick={toggleMenu}>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/2048px-Hamburger_icon.svg.png"></img>
         </a>
-        <a href="#" class="logo">
+        <Link to={"/"} className="logo">
           <img src={logo} />
-        </a>
+        </Link>
+
         <ul class="nav-full">
           <li>
             <Link to="/">Home</Link>

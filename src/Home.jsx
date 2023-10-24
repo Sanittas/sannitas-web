@@ -28,7 +28,7 @@ function Home() {
           <div class="text-banner">
             <h1>Seja bem vindo!</h1>
             <p>
-              A VitalCare é uma empresa que atua no segmento de home care, com
+              A Sanittas é uma empresa que atua no segmento de home care, com
               foco na assistência domiciliar de pacientes adultos e pediátricos.
             </p>
           </div>
@@ -97,9 +97,9 @@ function Home() {
             <h2>Quem Somos</h2>
             <p>
               Fundada com a visão de redefinir os cuidados de saúde no conforto
-              do lar, a VitalCare emerge como uma empresa líder no setor de home
+              do lar, a Sanittas emerge como uma empresa no setor de home
               care. Combinando a compaixão de profissionais dedicados e a
-              eficiência das mais recentes inovações médicas, a VitalCare está
+              eficiência das mais recentes inovações médicas, a Sanittas está
               mudando a maneira como as pessoas recebem cuidados médicos.
             </p>
           </div>
