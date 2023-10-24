@@ -207,7 +207,7 @@ header .banner p {
 @media (max-width: 768px) {
 
     header {
-        height: 100vh;
+        height: 60vh;
         background-repeat: no-repeat;
         display: flex;
         justify-content: center;
@@ -232,24 +232,24 @@ header .banner p {
     }
 
     .container {
-        height: 300vh;
+        height: 1150vh;
         width: 100%;
 
     }
 
     .container .cards {
-        height: 60%;
+        height: 300vh;
     }
 
     .sobre {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 25%;
+        height: 100vh;
     }
 
     .sobre .img-sobre {
-        width: 90%;
+        width: 100%;
         height: 50%;
         margin-bottom: 30px;
         display: flex;
@@ -277,7 +277,8 @@ header .banner p {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 60vh;
+        height: 80vh;
+        margin-bottom: 0;
     }
 
     .container .pos-banner .title-pos-banner {
@@ -297,7 +298,7 @@ header .banner p {
 
     .container .pos-banner .text-pos-banner {
         width: 90%;
-        height: 80%;
+        height: 60%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -316,13 +317,13 @@ header .banner p {
     
     .container .valores {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 60%;
+        justify-content: flex-start;
+        margin: 0;
+        height: 250vh;
     }
 
     .container .noticias-title {
-        height: 3%;
+        height: 10vh;
     }
 
     .container .noticias-title h1 {
@@ -333,10 +334,11 @@ header .banner p {
     }
 
     .container .noticias {
+        height: 400vh;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 60%;
     }
 
     .container .noticias .cardNoticia {

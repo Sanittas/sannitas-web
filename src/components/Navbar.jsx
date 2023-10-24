@@ -55,19 +55,19 @@ function Navbar(props) {
 
         <ul class="side-nav">
           <li>
-            <a href="#">Home</a>
+            <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <a href="#">Serviços</a>
+            <Link to={"/servicos"}>Serviços</Link>
           </li>
           <li>
-            <a href="#">Sobre</a>
+            <Link to={"/sobre"}>Sobre</Link>
           </li>
           <li>
-            <a href="#">Login</a>
+            <Link to={"/login"}>Login</Link>
           </li>
           <li>
-            <a href="#">Cadastro</a>
+            <Link to={"/cadastro"}>Cadastro</Link>
           </li>
         </ul>
       </nav>
