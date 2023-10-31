@@ -1,13 +1,13 @@
-.container-login {
+.container-cadastro {
     width: 100%;
     height: 89.2vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
-.login {
+.cadastro {
     width: 40%;
     height: 60%;
     background-color: #fff;
@@ -19,7 +19,7 @@
     margin: 0 20px;
 }
 
-.login h1 {
+.cadastro h1 {
     color: #000;
     font-size: 3.5rem;
     font-weight: 700;
@@ -27,16 +27,17 @@
     height: 5%;
 }
 
-.login form {
+.cadastro form {
     width: 80%;
     height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 50px 0;
 }
 
-.login form input {
+.cadastro form input {
     width: 100%;
     height: 50px;
     border: 1px solid #000;
@@ -47,14 +48,14 @@
     font-weight: 500;
 }
 
-.login form input:focus {
+.cadastro form input:focus {
     outline: none;
     border: 2px solid #909CFF;
     transition: all 0.5s ease-in-out;
 
 }
 
-.login form span {
+.cadastro form link {
     color: #000;
     font-size: 1.2rem;
     font-weight: 500;
@@ -62,7 +63,7 @@
     align-self: flex-start;
 }
 
-.login form span a {
+.cadastro form link a {
     color: #000;
     font-size: 1.2rem;
     font-weight: 500;
@@ -70,13 +71,13 @@
     text-decoration: none;
 }
 
-.login form span a:hover {
+.cadastro form link a:hover {
     color: #909CFF;
     text-decoration: underline;
     transition: all 0.2s ease-in-out;
 }
 
-.login form .btn-login {
+.cadastro form .btn-cadastro {
     width: 100%;
     height: 50px;
     border: 1px solid #000;
@@ -91,13 +92,13 @@
     text-align: center;
 }
 
-.login form .btn-login:hover {
+.cadastro form .btn-cadastro:hover {
     background-color: #fff;
     color: #000;
     transition: all 0.5s ease-in-out;
 }
 
-.container-login .img-login {
+.container-cadastro .img-cadastro {
     width: 60%;
     height: 100%;
     display: flex;
@@ -105,34 +106,34 @@
     align-items: center;
 }
 
-.img-login img {
+.img-cadastro img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 @media (max-width: 768px) {
-    .container-login {
+    .container-cadastro {
         flex-direction: column;
         height: 100%;
     }
 
-    .login {
+    .cadastro {
         width: 80%;
         height: 80%;
         margin: 20px 0;
     }
 
-    .login h1 {
+    .cadastro h1 {
         font-size: 2.5rem;
     }
 
-    .container-login .img-login {
+    .container-cadastro .img-cadastro {
         width: 100%;
         height: 50%;
     }
 
-    .img-login img {
+    .img-cadastro img {
         display: none;
     }
 }

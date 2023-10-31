@@ -4,6 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import Logoff from './pos-login/Logoff';
 import Cadastro from './Cadastro';
+import CadastroEmpresa from './CadastroEmpresa';
 
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/login/logoff' element={<Logoff />} />
         <Route path="/cadastro/*" element={<Cadastro/>} />
+        <Route path="/cadastroEmpresa" element={<CadastroEmpresa/>} />
       </Routes>
     </BrowserRouter>
   );
