@@ -1,0 +1,67 @@
+.container-troca{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+
+.container-troca .troca{
+    width: 40%;
+    border: 1px solid black;
+    height: 40vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #f1f1f1;
+}
+
+.container-troca .troca input{
+    width: 80%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    
+}
+
+
+
+.cadastro form input:focus {
+    outline: none;
+    border: 2px solid #909CFF;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.container-troca .troca a{
+
+    width: 30%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.container-troca .troca a:hover{
+    background-color: #fff;
+    color: #000;
+    transition: all 0.5s ease-in-out;
+}
+
+
