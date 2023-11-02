@@ -12,6 +12,8 @@ import api from "./api";
 
 import Swal from "sweetalert2";
 
+import { Outlet, Link } from "react-router-dom";
+
 
 
 function Login() {
@@ -63,7 +65,7 @@ function Login() {
                 <form>
                     <input type="text" placeholder="Email" id="email" />
                     <input type="password" placeholder="Senha" id="senha"/>
-                    <span><a href="#">Esqueceu sua Senha?</a></span>
+                    <Link to="/redefinirSenha">Esqueceu sua senha?</Link>
                     <a className="btn-login" onClick={realizarLogin}>Login</a>
                 </form>
             </div>
