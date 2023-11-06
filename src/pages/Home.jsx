@@ -1,22 +1,22 @@
 import React from "react";
 
-import Navbar from "./components/Navbar";
-import Card from "./components/Card";
-import CardEmpresa from "./components/CardEmpresa";
-import CardNoticia from "./components/CardNoticia";
-import Footer from "./components/Footer";
+import Navbar from "../components/Navbar";
+import Card from "../components/Card";
+import CardEmpresa from "../components/CardEmpresa";
+import CardNoticia from "../components/CardNoticia";
+import Footer from "../components/Footer";
 
-import "./css/home.css";
+import "../css/home.css";
 
-import img1 from "./assets/emergencia.png";
-import img2 from "./assets/estetoscopio.png";
-import img3 from "./assets/ambulancia.png";
+import img1 from "../assets/emergencia.png";
+import img2 from "../assets/estetoscopio.png";
+import img3 from "../assets/ambulancia.png";
 
-import missao from "./assets/missao.png";
-import visao from "./assets/marketing-on-line.png";
-import valores from "./assets/valor.png";
+import missao from "../assets/missao.png";
+import visao from "../assets/marketing-on-line.png";
+import valores from "../assets/valor.png";
 
-import somos from "./assets/Untitled-1.jpg"
+import somos from "../assets/Untitled-1.jpg"
 
 
 function Home() {

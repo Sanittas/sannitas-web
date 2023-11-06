@@ -4,13 +4,13 @@ import React from "react";
 
 import { useState } from "react";
 
-import "./css/redefinirSenha.css";
+import "../css/redefinirSenha.css";
 
-import Navbar from "./components/Navbar"
+import Navbar from "../components/Navbar"
 
-import login from "./assets/senior-couple-holding-hands.jpg"
+import login from "../assets/senior-couple-holding-hands.jpg"
 
-import api from "./api";
+import api from "../api/api";
 
 import Swal from "sweetalert2";
 

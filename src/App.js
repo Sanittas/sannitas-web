@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import Login from './Login';
+import Home from './pages/Home';
+import Login from './pages/Login';
 import Logoff from './pos-login/Logoff';
-import Cadastro from './Cadastro';
-import CadastroEmpresa from './CadastroEmpresa';
-import RedefinirSenha from './redefinirSenha';
-import TrocaSenha from './trocaSenha'; 
+import Cadastro from './pages/Cadastro';
+import CadastroEmpresa from './pages/CadastroEmpresa';
+import RedefinirSenha from './pages/redefinirSenha';
+import TrocaSenha from './pages/trocaSenha'; 
+import Cliente from './pages/cliente';
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/cadastro/*" element={<Cadastro/>} />
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa/>} />
         <Route path="/trocaSenha" element={<TrocaSenha/>} />
+        <Route path="/cliente" element={<Cliente/>} />
       </Routes>
     </BrowserRouter>
   );

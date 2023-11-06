@@ -1,0 +1,73 @@
+.container-cliente{
+    width: 100%;
+    height: 89.2vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.cliente {
+    width: 40%;
+    height: 75%;
+    background-color: #5665E0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.cliente form {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0;
+}
+
+.cliente p {
+    font-size: 20px;
+}
+
+.cliente form input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.cliente form input:focus {
+    outline: none;
+    border: 2px solid #909CFF;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.cliente form .btn-cliente {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cliente form .btn-cliente:hover {
+    background-color: #fff;
+    color: #000;
+    transition: all 0.5s ease-in-out;
+}

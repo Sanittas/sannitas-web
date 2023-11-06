@@ -1,6 +1,6 @@
 import React from "react";
 
-import apiIBGE from "../apiIBGE";
+import apiIBGE from "../api/apiIBGE";
 
 import "../css/cardNoticas.css";
 
