@@ -67,9 +67,9 @@ function cadastro() {
             <div className="cadastro">
                 <h1>Cadastro</h1>
                 <form>
-                    <input type="text" placeholder="nome" id="nome" />
+                    <input type="text" placeholder="Nome" id="nome" />
                     <input type="text" placeholder="Email" id="email" />
-                    <input type="text" placeholder="telefone" id="telefone" />
+                    <input type="text" placeholder="Telefone" id="telefone" />
                     <input type="text" placeholder="CPF" id="cpf" />
                     <input type="password" placeholder="Senha" id="senha"/>
                     <a className="btn-cadastro" onClick={realizarCadastro}>Cadastrar</a>

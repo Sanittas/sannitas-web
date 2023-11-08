@@ -1,4 +1,4 @@
-.container-cadastro {
+.container-cadastroEmpresa {
     width: 100%;
     height: 89.2vh;
     display: flex;
@@ -7,7 +7,7 @@
     flex-direction: row;
 }
 
-.cadastro {
+.cadastroEmpresa {
     width: 40%;
     height: 60%;
     background-color: #fff;
@@ -19,7 +19,7 @@
     margin: 0 20px;
 }
 
-.cadastro h1 {
+.cadastroEmpresa h1 {
     color: #000;
     font-size: 3.5rem;
     font-weight: 700;
@@ -27,7 +27,7 @@
     height: 5%;
 }
 
-.cadastro form {
+.cadastroEmpresa form {
     width: 80%;
     height: 80%;
     display: flex;
@@ -37,7 +37,7 @@
     margin: 50px 0;
 }
 
-.cadastro form input {
+.cadastroEmpresa form input {
     width: 100%;
     height: 50px;
     border: 1px solid #000;
@@ -48,14 +48,14 @@
     font-weight: 500;
 }
 
-.cadastro form input:focus {
+.cadastroEmpresa form input:focus {
     outline: none;
     border: 2px solid #909CFF;
     transition: all 0.5s ease-in-out;
 
 }
 
-.cadastro form link {
+.cadastroEmpresa form link {
     color: #000;
     font-size: 1.2rem;
     font-weight: 500;
@@ -63,7 +63,7 @@
     align-self: flex-start;
 }
 
-.cadastro form link a {
+.cadastroEmpresa form link a {
     color: #000;
     font-size: 1.2rem;
     font-weight: 500;
@@ -71,13 +71,13 @@
     text-decoration: none;
 }
 
-.cadastro form link a:hover {
+.cadastroEmpresa form link a:hover {
     color: #909CFF;
     text-decoration: underline;
     transition: all 0.2s ease-in-out;
 }
 
-.cadastro form .btn-cadastro {
+.cadastroEmpresa form .btn-cadastroEmpresa {
     width: 100%;
     height: 50px;
     border: 1px solid #000;
@@ -92,13 +92,13 @@
     text-align: center;
 }
 
-.cadastro form .btn-cadastro:hover {
+.cadastroEmpresa form .btn-cadastroEmpresa:hover {
     background-color: #fff;
     color: #000;
     transition: all 0.5s ease-in-out;
 }
 
-.container-cadastro .img-cadastro {
+.container-cadastroEmpresa .img-cadastroEmpresa {
     width: 60%;
     height: 100%;
     display: flex;
@@ -106,34 +106,34 @@
     align-items: center;
 }
 
-.img-cadastro img {
+.img-cadastroEmpresa img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 @media (max-width: 768px) {
-    .container-cadastro {
+    .container-cadastroEmpresa {
         flex-direction: column;
         height: 100%;
     }
 
-    .cadastro {
+    .cadastroEmpresa {
         width: 80%;
         height: 80%;
         margin: 20px 0;
     }
 
-    .cadastro h1 {
+    .cadastroEmpresa h1 {
         font-size: 2.5rem;
     }
 
-    .container-cadastro .img-cadastro {
+    .container-cadastroEmpresa .img-cadastroEmpresa {
         width: 100%;
         height: 50%;
     }
 
-    .img-cadastro img {
+    .img-cadastroEmpresa img {
         display: none;
     }
 }

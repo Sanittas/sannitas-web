@@ -34,14 +34,6 @@
 }
 
 
-
-.cadastro form input:focus {
-    outline: none;
-    border: 2px solid #909CFF;
-    transition: all 0.5s ease-in-out;
-
-}
-
 .container-troca .troca a{
 
     width: 30%;
