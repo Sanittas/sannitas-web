@@ -41,7 +41,8 @@ function Login() {
                 timer: 1500
             })
             
-            window.location.href = "/login/logoff";
+            // window.location.href = "/login/logoff";
+            window.location.href = "/cliente";
             
         }).catch((err) => {
             console.log(err);

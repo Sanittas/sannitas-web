@@ -28,21 +28,21 @@ function Cliente (props) {
     const handleSave = () => {
         
 
-        // api.put(`/usuarios/${id}`, {
-        //         nome,
-        //         email,
-        //         cpf,
-        //         senha
+        api.put(`/usuarios/${id}`, {
+                nome,
+                email,
+                cpf,
+                senha
             
-        // }).then(() => {
+        }).then(() => {
 
-        //     Swal.fire({
-        //         icon: "success",
-        //         title: "Alterações realizadas com sucesso!",
-        //         showConfirmButton: true,
-        //         timer: 1500
-        //     })
-        // });
+            Swal.fire({
+                icon: "success",
+                title: "Alterações realizadas com sucesso!",
+                showConfirmButton: true,
+                timer: 1500
+            })
+        });
     };
     
     
@@ -59,13 +59,13 @@ function Cliente (props) {
                     <input class="input-music-enable" type="text" value={cpf} onChange={(e) => setCpf(e.target.value)}/>
                     <input class="input-music-enable" type="text" value={senha} onChange={(e) => setSenha(e.target.value)}/> */}
                     <p>Nome:</p>
-                    <input class="input-music-enable" type="text" value="EU" onChange={(e) => setNome(e.target.value)}/>
+                    <input class="input-music-enable" type="text" value={nome} onChange={(e) => setNome(e.target.value)}/>
                     <p>Email:</p>
-                    <input class="input-music-enable" type="text" value="TU" onChange={(e) => setEmail(e.target.value)}/>
+                    <input class="input-music-enable" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <p>CPF:</p>
-                    <input class="input-music-enable" type="text" value="E O" onChange={(e) => setCpf(e.target.value)}/>
+                    <input class="input-music-enable" type="text" value={cpf} onChange={(e) => setCpf(e.target.value)}/>
                     <p>Senha:</p>
-                    <input class="input-music-enable" type="password" value="ZUBUMAFU" onChange={(e) => setSenha(e.target.value)}/>
+                    <input class="input-music-enable" type="password" value={senha} onChange={(e) => setSenha(e.target.value)}/>
     
                         <a className="btn-cliente" onClick={handleSave}>salvar</a>
                     </form>

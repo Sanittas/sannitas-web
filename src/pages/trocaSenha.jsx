@@ -1,14 +1,11 @@
 import React from "react";
 
-
-
 import { useState } from "react";
 
 import "../css/trocaSenha.css";
 
 import Navbar from "../components/Navbar"
 
-import login from "../assets/senior-couple-holding-hands.jpg"
 
 import api from "../api/api";
 

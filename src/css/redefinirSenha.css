@@ -33,6 +33,40 @@
     
 }
 
+.container-redefinir .confirmacao{
+    width: 40%;
+    border: 1px solid black;
+    height: 40vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #f1f1f1;
+}
+
+.container-redefinir .confirmacao input{
+    width: 80%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    
+    
+}
+
+.container-redefinir .confirmacao p{
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+    
+}
 
 
 .cadastro form input:focus {
