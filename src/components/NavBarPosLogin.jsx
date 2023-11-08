@@ -59,7 +59,7 @@ function NavbarPosLogin(props) {
             <Link to={"/sobre"}>Sobre</Link>
           </li>
           <li>
-            <Link to={"/cliente"}>Conta</Link>
+            <Link to={`/cliente/${2}`}>Conta</Link>
           </li>
         </ul>
       </nav>

@@ -22,7 +22,7 @@ function App() {
         <Route path="/cadastro/*" element={<Cadastro/>} />
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa/>} />
         <Route path="/trocaSenha" element={<TrocaSenha/>} />
-        <Route path="/cliente" element={<Cliente/>} />
+        <Route path="/cliente/:idUsuario" element={<Cliente/>} />
       </Routes>
     </BrowserRouter>
   );
