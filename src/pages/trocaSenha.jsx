@@ -24,12 +24,15 @@ function TrocaSenha() {
         api.get((`/usuarios/validarToken/${token}`)).then((response) => {
             console.log("ALOUUUUUUUUU");
         }).catch(() => {
+            
             Swal.fire({
                 icon: "error",
                 title: "Token expirado!",
                 showConfirmButton: true,
-                timer: 1500
+                timer: 2000
             })
+
+            window.location.href = "/home"
         })
 
     }, [])
