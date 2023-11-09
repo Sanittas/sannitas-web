@@ -22,9 +22,9 @@ function TrocaSenha() {
     useEffect(() => {
         
         api.get((`/usuarios/validarToken/${token}`)).then((response) => {
-            console.log("ALOUUUUUUUUU");
-        }).catch(() => {
             
+        }).catch(() => {
+
             Swal.fire({
                 icon: "error",
                 title: "Token expirado!",
@@ -32,7 +32,7 @@ function TrocaSenha() {
                 timer: 2000
             })
 
-            window.location.href = "/home"
+            window.location.href = "/"
         })
 
     }, [])
