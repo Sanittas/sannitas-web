@@ -22,7 +22,7 @@ function TrocaSenha() {
     useEffect(() => {
         
         api.get((`/usuarios/validarToken/${token}`)).then((response) => {
-            confirmarTroca();
+            console.log("ALOUUUUUUUUU");
         }).catch(() => {
             Swal.fire({
                 icon: "error",
@@ -40,8 +40,9 @@ function TrocaSenha() {
     
         if (senha >= 8 && senha.match(/[a-zA-Z0-9!@#$%^&*()_+-={}|;:<>,.?]/) && senha != null) {
             if (senha === senhaConfirmacao) {
-                api.post("/usuarios/", {
-                    senha: senha
+                api.post(`/usuarios/alterar-senha`, {
+                    token: token,
+                    novaSenha: senha
         
                 }).then((res) => {
                     console.log(res);
