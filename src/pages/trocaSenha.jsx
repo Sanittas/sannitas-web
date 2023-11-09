@@ -21,7 +21,7 @@ function TrocaSenha() {
 
     useEffect(() => {
         
-        api.get((`/trocaSenha/${token}`)).then((response) => {
+        api.get((`/usuarios/validarToken/${token}`)).then((response) => {
             confirmarTroca();
         }).catch(() => {
             Swal.fire({
