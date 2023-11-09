@@ -12,8 +12,27 @@ import api from "../api/api";
 import Swal from "sweetalert2";
 
 import { Outlet, Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function TrocaSenha() {
+
+    const token = useParams("token");
+
+    useEffect(() => {
+        
+        api.get((`/trocaSenha/${token}`)).then((response) => {
+            confirmarTroca();
+        }).catch(() => {
+            Swal.fire({
+                icon: "error",
+                title: "Token expirado!",
+                showConfirmButton: true,
+                timer: 1500
+            })
+        })
+
+    }, [])
 
     const confirmarTroca = (email) => {
         const senha = document.getElementById("novaSenha").value;
@@ -21,7 +40,7 @@ function TrocaSenha() {
     
         if (senha >= 8 && senha.match(/[a-zA-Z0-9!@#$%^&*()_+-={}|;:<>,.?]/) && senha != null) {
             if (senha === senhaConfirmacao) {
-                api.post("/redefinirSenha", {
+                api.post("/usuarios/", {
                     senha: senha
         
                 }).then((res) => {

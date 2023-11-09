@@ -12,7 +12,7 @@ function RedefinirSenha() {
 
         if (email != null && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
             api
-                .post("/email", {
+                .post(`/usuarios/esqueci-senha?email=${email}`, {
                     email: email,
                 })
                 .then((res) => {})

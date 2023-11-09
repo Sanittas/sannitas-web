@@ -21,7 +21,7 @@ function App() {
         <Route path='/login/logoff' element={<Logoff />} />
         <Route path="/cadastro/*" element={<Cadastro/>} />
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa/>} />
-        <Route path="/trocaSenha" element={<TrocaSenha/>} />
+        <Route path="/trocaSenha/:token" element={<TrocaSenha/>} />
         <Route path="/cliente/:idUsuario" element={<Cliente/>} />
       </Routes>
     </BrowserRouter>
