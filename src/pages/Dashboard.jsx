@@ -4,7 +4,6 @@ import Widget from "../components/Widgets";
 import Destaque from "../components/Destaque";
 import Chart from "../components/Chart";
 
-
 function Dashboard() {
     return (
         <div className="dashboard">
