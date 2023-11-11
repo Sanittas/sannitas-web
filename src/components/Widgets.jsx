@@ -28,7 +28,10 @@ function Widget({ type }) {
                 title: "SATISFAÇÃO DO USUÁRIO   ",
                 isMoney: false,
                 link: "Ver avaliações",
-                icon: <ThumbUpOffAltIcon className="icon" />,
+                icon: <ThumbUpOffAltIcon className="icon" style={{
+                    color: "#fff",
+                    backgroundColor: "#909CFF"
+                }} />,
             };
             break;
         case "popular":
@@ -36,7 +39,10 @@ function Widget({ type }) {
                 title: "SERVIÇO MAIS POPULAR",
                 isMoney: false,
                 link: "Ver todos",
-                icon: <HomeRepairServiceOutlinedIcon className="icon" />,
+                icon: <HomeRepairServiceOutlinedIcon className="icon" style={{
+                    color: "#fff",
+                    backgroundColor: "#909CFF"
+                }} />,
             };
             break;
         case "total":
@@ -44,7 +50,10 @@ function Widget({ type }) {
                 title: "RECEITA TOTAL",
                 isMoney: true,
                 link: "Ver detalhes",
-                icon: <AccountBalanceWalletOutlinedIcon className="icon" />,
+                icon: <AccountBalanceWalletOutlinedIcon className="icon" style={{
+                    color: "#fff",
+                    backgroundColor: "#909CFF"
+                }} />,
             };
             break;
         default:
@@ -56,7 +65,7 @@ function Widget({ type }) {
             <div className="left">
                 <span className="title">{data.title}</span>
                 <span className="counter">
-                    {data.isMoney && "$"} {amount}
+                    {data.isMoney && "R$"} {amount}
                 </span>
                 <span className="link">{data.link}</span>
             </div>
