@@ -1,6 +1,9 @@
 import "../css/dashboard.css";
 import Navbar from "../components/NavbarDash";
 import Widget from "../components/Widgets";
+import Destaque from "../components/Destaque";
+import Chart from "../components/Chart";
+
 
 function Dashboard() {
     return (
@@ -13,6 +16,10 @@ function Dashboard() {
                     <Widget type="satisfaction" />
                     <Widget type="popular" />
                     <Widget type="total" />
+                </div>
+                <div className="charts">
+                    <Destaque />
+                    <Chart />
                 </div>
             </div>
         </div>
