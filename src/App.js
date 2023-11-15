@@ -8,8 +8,10 @@ import CadastroEmpresa from './pages/CadastroEmpresa';
 import RedefinirSenha from './pages/redefinirSenha';
 import TrocaSenha from './pages/trocaSenha';
 import Cliente from './pages/cliente';
+import Servicos from './pages/servicos';
 import LoginEmpresa from './pages/LoginEmpresa';
 import Empresa from './pages/Empresa';
+
 
 
 function App() {
@@ -20,6 +22,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/redefinirSenha" element={<RedefinirSenha />} />
         <Route path='/login/logoff' element={<Logoff />} />
+        <Route path="/cadastro/*" element={<Cadastro/>} />
+        <Route path="/cadastroEmpresa" element={<CadastroEmpresa/>} />
+        <Route path="/validarToken/:token" element={<TrocaSenha/>} />
+        <Route path="/cliente/:idUsuario" element={<Cliente/>} />
+        <Route path="/servicos/:idUsuario" element={<Servicos/>} />
         <Route path="/cadastro/*" element={<Cadastro />} />
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa />} />
         <Route path="/validarToken/:token" element={<TrocaSenha />} />
