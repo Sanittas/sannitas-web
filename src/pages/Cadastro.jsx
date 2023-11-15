@@ -33,7 +33,7 @@ function cadastro() {
             cpf: cpf,
             celular: telefone,
             senha: senha
-            
+
             
         }).then((res) => {
             console.log(res);
@@ -45,7 +45,7 @@ function cadastro() {
                 timer: 1500
             })
             
-            window.location.href = "/cadastro";
+            window.location.href = "/login";
             
         }).catch((err) => {
             console.log(err);
