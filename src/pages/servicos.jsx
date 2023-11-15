@@ -1,78 +1,51 @@
-import React from "react";
-
-import { useState } from "react";
-
-import "../css/cliente.css";
-
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import NavbarPosLogin from "../components/NavBarPosLogin";
+import CardServico from "../components/CardServico";
 import api from "../api/api";
-
+import "../css/cliente.css";
 import Swal from "sweetalert2";
 
-import { Outlet, Link, useLocation, useParams } from "react-router-dom";
-import NavbarPosLogin from "../components/NavBarPosLogin";
-import { useEffect } from "react";
+function Servicos(props) {
+  const { idUsuario } = useParams(); 
 
+  const [servicos, setServicos] = useState([]);
+  
+  
 
-function servicos (props) {
-
-    const idUsuario = useParams("idUsuario");
-
-    const [tituloServico, setTituloServico] = useState();
-    const [descricao, setDescricao] = useState();
-    const [areaSaude, setAreaSaude] = useState();
-    const [valorServico, setValorServico] = useState();
-    const [tempoServico, setTempoServico] = useState();
-
-    useEffect(() => {
+  useEffect(() => {
+    api.get(`/servicos/`).then((response) => {
         
-        api.get((`/servicos/`)).then((response) => {
-            setTituloServico(response.nome)
-            setDescricao(response.email)
-            setAreaSaude(response.cpf)
-            setValorServico(response.senha)
-            setTempoServico(response.senha)
-        }).catch(() => {
-            console.log("deu erro")
+        setServicos(response.data); 
+    
+    }).catch(() => {
+      console.log("deu erro");
+    });
+  }, []);
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    
+  };
+
+  return (
+    <>
+      <NavbarPosLogin />
+      
+      {
+        servicos.map(servico => {
+            <CardServico 
+            titulo = {servico.titulo}
+            descricao = {servico.descricao}
+            valor = {servico.valor}
+            area = {servico.areaSaude}
+            tempo = {servico.duracaoEstimada}
+            />
         })
-
-    }, [])
-
-    const handleSave = (e) => {
-        e.preventDefault();
-
-        console.log(nome);
-        console.log(email);
-        console.log(cpf);
-        console.log(senha);
-
-        api.put(`/usuarios/${idUsuario}`, {
-                nome,
-                email,
-                cpf,
-                senha
-            
-        }).then(() => {
-
-            Swal.fire({
-                icon: "success",
-                title: "Alterações realizadas com sucesso!",
-                showConfirmButton: true,
-                timer: 1500
-            })
-        });
-    };
-    
-    
-        return (
-            <>
-            <NavbarPosLogin />
-            
-            
-            
-            </>
-        )
+      }
+      
+    </>
+  );
 }
 
-
-
-export default servicos;
+export default Servicos;

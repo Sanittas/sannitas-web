@@ -1,16 +1,17 @@
 import React from "react";
-function ItemMusica(props) {
+function CardServico(props) {
     return (
         <>
             <div class="card-servico">
                 <div class="card-conteudo">
-                    <h2>Título!!!!</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore aliquam dolores nobis minus cum eligendi, 
-                        vero molestias ex ipsum autem eius at deleniti possimus ipsam illo! Quaerat, expedita quasi? Dignissimos.</p>
+                    <h2>{props.areaSaude}</h2>
+                    <h4>{props.titulo}</h4>
+                    <p>{props.descricao}</p>
+                    <span>{props.valor}</span> <span>{props.duracaoEstimada}</span>
                 </div>
             </div>
         </>
     );
 }
 
-export default ItemMusica;
+export default CardServico;
