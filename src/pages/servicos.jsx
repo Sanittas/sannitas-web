@@ -34,7 +34,8 @@ function Servicos(props) {
       
       {
         servicos.map(servico => {
-            <CardServico 
+            <CardServico
+            id = {servico.idServico} 
             titulo = {servico.titulo}
             descricao = {servico.descricao}
             valor = {servico.valor}

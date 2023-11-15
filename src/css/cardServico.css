@@ -1,10 +1,11 @@
-.card-servico {
+/* .card-servico {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     padding: 30px;
-    height: 90%;
+    width: 350px;
+    height: 350px;
     border: 2px solid black;
     margin: 10px;
     border-radius: 20px;
@@ -12,5 +13,47 @@
 }
 
 .card-conteudo {
-    
-}
+    display: flex;
+    flex-direction: column;
+} */
+
+.card-servico {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    padding: 16px;
+    width: 450px;
+    height: 350px;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  .card-conteudo {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+
+  }
+  
+  h2 {
+    color: #2196f3;
+    margin: 0.1rem;
+  }
+  
+  h4 {
+    margin-top: 8px;
+  }
+  
+  p {
+    margin-top: 8px;
+  }
+  
+  span {
+    margin-top: 8px;
+    display: inline-block;
+  }
