@@ -35,6 +35,7 @@ function LoginEmpresa() {
             
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("razaoSocial", res.data.razaoSocial);
+            sessionStorage.setItem("idEmpresa", res.data.enterpriseId);
 
             Swal.fire({
                 icon: "success",
@@ -55,6 +56,7 @@ function LoginEmpresa() {
                 timer: 1500
             })
         })
+
     }
 
 

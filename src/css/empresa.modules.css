@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-empresa {
+    width: 100%;
+    max-width: 95%;
+    height: 88vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+.container-empresa .card-infos-update {
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 80%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow:  0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #f1f1f1;
+}
+
+.card-infos-update .card-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 70%;
+    width: 100%;
+
+}
+
+.card-infos h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 1.5px;
+}
+
+.card-infos p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #000;
+    text-align: justify;
+}
+
+.card-infos a {
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.5s;
+    width: 40%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card-infos a:hover {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.container-empresa .lista-funcionarios {
+    border: 1px solid blue;
+    height: 80%;
+    width: 60%;
+}
+
+
+
+
+

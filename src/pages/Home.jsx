@@ -89,7 +89,7 @@ function Home() {
           />
         </div>
 
-        <div class="sobre">
+        <div class="sobre" id="sobre">
           <div class="img-sobre">
             <img src={somos} alt="Imagem aleatória" />
           </div>

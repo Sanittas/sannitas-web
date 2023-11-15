@@ -13,6 +13,7 @@ import api from "../api/api";
 import Swal from "sweetalert2";
 
 import { Outlet, Link } from "react-router-dom";
+import { responsiveFontSizes } from "@mui/material";
 
 
 
@@ -55,6 +56,14 @@ function Login() {
                 timer: 1500
             })
         })
+        
+        api.get(`/usuarios/${email}`).then((response) => {
+            sessionStorage.setItem("idUsuario", response.idUsuario);
+        }
+        ).catch((e) => {
+            console.log(e)
+        })
+
     }
 
 

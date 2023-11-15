@@ -9,7 +9,7 @@ import RedefinirSenha from './pages/redefinirSenha';
 import TrocaSenha from './pages/trocaSenha';
 import Cliente from './pages/cliente';
 import LoginEmpresa from './pages/LoginEmpresa';
-
+import Empresa from './pages/Empresa';
 
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
         <Route path="/validarToken/:token" element={<TrocaSenha />} />
         <Route path="/cliente/:idUsuario" element={<Cliente />} />
         <Route path="/loginEmpresa" element={<LoginEmpresa />} />
+        <Route path="/empresa/:idEmpresa" element={<Empresa />} />
       </Routes>
     </BrowserRouter>
   );
