@@ -9,6 +9,7 @@ import RedefinirSenha from './pages/redefinirSenha';
 import TrocaSenha from './pages/trocaSenha';
 import Cliente from './pages/cliente';
 import Servicos from './pages/servicos';
+import LoginEmpresa from './pages/LoginEmpresa';
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa />} />
         <Route path="/validarToken/:token" element={<TrocaSenha />} />
         <Route path="/cliente/:idUsuario" element={<Cliente />} />
+        <Route path="/loginEmpresa" element={<LoginEmpresa />} />
       </Routes>
     </BrowserRouter>
   );

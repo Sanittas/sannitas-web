@@ -46,7 +46,7 @@ function cadastroEmpresa() {
                 timer: 1500
             })
             
-            // window.location.href = "/cadastro";
+            window.location.href = "/loginEmpresa";
             
         }).catch((err) => {
             console.log(err);

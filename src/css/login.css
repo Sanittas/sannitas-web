@@ -1,6 +1,6 @@
 .container-login {
     width: 100%;
-    height: 89.2vh;
+    height: 88vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -29,7 +29,7 @@
 
 .login form {
     width: 80%;
-    height: 80%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,42 +39,37 @@
 .login form input {
     width: 100%;
     height: 50px;
-    border: 1px solid #000;
-    border-radius: 10px;
+    border: 0;
+    border-bottom: 2px solid #000;
     padding: 10px;
-    margin: 10px 0;
+    margin: 15px 0;
     font-size: 1.2rem;
     font-weight: 500;
+    outline: 0;
+    
 }
 
 .login form input:focus {
     outline: none;
-    border: 2px solid #909CFF;
+    border-bottom: 2px solid #909CFF;
     transition: all 0.5s ease-in-out;
 
 }
 
-.login form span {
+.login form .redefSenha {
     color: #000;
     font-size: 1.2rem;
-    font-weight: 500;
-    display: flex;
-    align-self: flex-start;
-}
-
-.login form span a {
-    color: #000;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 10px 0;
     text-decoration: none;
+    margin: 10px 0;
+    font-weight: 500;
 }
 
-.login form span a:hover {
-    color: #909CFF;
-    text-decoration: underline;
+.login form .redefSenha:hover {
+    color: #000;
     transition: all 0.2s ease-in-out;
+    border-bottom: 2px solid #000;
 }
+
 
 .login form .btn-login {
     width: 100%;
@@ -97,6 +92,20 @@
     transition: all 0.5s ease-in-out;
 }
 
+.login .loginEmpresa {
+    color: #000;
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.login .loginEmpresa:hover {
+    color: #000;
+    transition: all 0.2s ease-in-out;
+    border-bottom: 2px solid #000;
+}
+
 .container-login .img-login {
     width: 60%;
     height: 100%;
@@ -110,6 +119,8 @@
     height: 100%;
     object-fit: cover;
 }
+
+
 
 @media (max-width: 768px) {
     .container-login {

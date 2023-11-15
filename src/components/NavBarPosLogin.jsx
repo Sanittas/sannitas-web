@@ -1,12 +1,31 @@
 import React from "react";
 
+import { useState, useEffect } from "react";
+
 import { Outlet, Link } from "react-router-dom";
 
 import "../css/navbar.css";
 
 import logo from "../assets/icons-sanittas/white-bottomless.svg";
 
+
+
 function NavbarPosLogin(props) {
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") == null) {
+      window.location.href = "/login";
+    }
+  });
+
+
+  const deslogar = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("nome");
+    window.location.href = "/";
+  };
+
+
   const toggleMenu = () => {
     const sideNav = document.querySelector(".side-nav");
 
@@ -40,8 +59,11 @@ function NavbarPosLogin(props) {
             <Link to="/#sobre">Sobre</Link>
           </li>
           <li>
-            <Link to="/cliente">
-              Cliente
+            <Link to="/cliente/">Cliente</Link>
+          </li>
+          <li>
+            <Link className="btn-action" onClick={deslogar}>
+              Logoff
             </Link>
           </li>
 

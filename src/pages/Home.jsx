@@ -17,12 +17,13 @@ import visao from "../assets/marketing-on-line.png";
 import valores from "../assets/valor.png";
 
 import somos from "../assets/Untitled-1.jpg"
+import NavbarPosLogin from "../components/NavBarPosLogin";
 
 
 function Home() {
   return (
     <>
-      <Navbar />
+      {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
       <header>
         <div class="banner">
           <div class="text-banner">

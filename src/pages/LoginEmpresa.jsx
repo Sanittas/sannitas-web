@@ -16,25 +16,25 @@ import { Outlet, Link } from "react-router-dom";
 
 
 
-function Login() {
+function LoginEmpresa() {
 
 
     
     const realizarLogin = () => {
-        const email = document.getElementById("email").value;
+        const cnpj = document.getElementById("cnpj").value;
         const senha = document.getElementById("senha").value;
 
         
 
-        api.post("/usuarios/login", {
-            email: email,
+       api.post("/empresas/login", {
+            cnpj: cnpj,
             senha: senha
             
         }).then((res) => {
             console.log(res);
             
             sessionStorage.setItem("token", res.data.token);
-            sessionStorage.setItem("nome", res.data.nome);
+            sessionStorage.setItem("razaoSocial", res.data.razaoSocial);
 
             Swal.fire({
                 icon: "success",
@@ -66,11 +66,11 @@ function Login() {
             <div className="login">
                 <h1>Login</h1>
                 <form>
-                    <input type="text" placeholder="Email" id="email" />
+                    <input type="text" placeholder="CNPJ" id="cnpj" />
                     <input type="password" placeholder="Senha" id="senha"/>
                     <Link className="redefSenha" to="/redefinirSenha">Esqueceu sua senha?</Link>
                     <a className="btn-login" onClick={realizarLogin}>Login</a>
-                    <Link className="loginEmpresa" to="/loginEmpresa">É uma empresa?</Link>
+                    <Link className="loginEmpresa" to="/login">É um Cliente?</Link>
                 </form>
             </div>
 
@@ -82,4 +82,4 @@ function Login() {
     )
 }
 
-export default Login;
+export default LoginEmpresa;
