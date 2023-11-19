@@ -16,6 +16,8 @@ import { Outlet, Link, useLocation, useParams } from "react-router-dom";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import { useEffect } from "react";
 
+import Input from "../components/Input";
+
 // Chamar essa página passando o OBJETO do usuário
 
 
@@ -77,14 +79,35 @@ function Cliente (props) {
                     <form onSubmit={handleSave}>
                     <h1>Olá, {props.nome} !</h1>
                     
-                    <p>Nome:</p>
-                    <input class="input-music-enable" type="text" defaultValue={nome} onChange={(e) => setNome(e.target.value)}/>
-                    <p>Email:</p>
-                    <input class="input-music-enable" type="text" defaultValue={email} onChange={(e) => setEmail(e.target.value)}/>
-                    <p>CPF:</p>
-                    <input class="input-music-enable" type="text" defaultValue={cpf} onChange={(e) => setCpf(e.target.value)}/>
-                    <p>Senha:</p>
-                    <input class="input-music-enable" type="password" defaultValue={senha} onChange={(e) => setSenha(e.target.value)}/>
+                    <Input 
+                        id="nome"
+                        type="text"
+                        placeholder="Digite seu nome"
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
+                    />
+                    <Input 
+                        id="email"
+                        type="email"
+                        placeholder="Digite seu email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Input 
+                        id="cpf"
+                        type="text"
+                        placeholder="Digite seu CPF"
+                        value={cpf}
+                        onChange={(e) => setCpf(e.target.value)}
+                    />
+                    <Input 
+                        id="senha"
+                        type="password"
+                        placeholder="Digite sua senha"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                    />
+
                     <button type="submit" className="btn-cliente" onClick={handleSave}>salvar</button>
                     </form>
                 </div>

@@ -14,6 +14,9 @@ import Swal from "sweetalert2";
 
 import { Outlet, Link } from "react-router-dom";
 
+import Input from "../components/Input";
+import Button from "../components/Button";
+
 
 
 function cadastroEmpresa() {
@@ -63,11 +66,16 @@ function cadastroEmpresa() {
             <div className="cadastro">
                 <h1>Cadastro</h1>
                 <form>
-                    <input type="text" placeholder="Razão Social" id="razaoSocial" />
-                    <input type="text" placeholder="CNPJ" id="cnpj" />
-                    <input type="text" placeholder="Email" id="email" />
-                    <input type="password" placeholder="Senha" id="senha"/>
-                    <a className="btn-cadastro" onClick={realizarCadastro}>Cadastrar</a>
+                    <Input type="text" placeholder="Razão Social" id="razaoSocial" />
+                    <Input type="text" placeholder="CNPJ" id="cnpj" />
+                    <Input type="email" placeholder="Email" id="email" />
+                    <Input type="password" placeholder="Senha" id="senha" />
+                    <Button
+                        type="button"
+                        id="btn-cadastro"
+                        onClick={realizarCadastro}
+                        value="Cadastrar"
+                    />
                 <Link className="link"to={"/cadastro"}>É uma pessoa fisíca?</Link>
                 </form>
                 

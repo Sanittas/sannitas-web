@@ -21,17 +21,7 @@
     background-color: #f1f1f1;
 }
 
-.container-redefinir .redefinir input{
-    width: 80%;
-    height: 50px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-    
-}
+
 
 .container-redefinir .confirmacao{
     width: 40%;
@@ -46,18 +36,7 @@
     background-color: #f1f1f1;
 }
 
-.container-redefinir .confirmacao input{
-    width: 80%;
-    height: 50px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-    
-    
-}
+
 
 .container-redefinir .confirmacao p{
     border-radius: 10px;

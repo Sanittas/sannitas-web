@@ -15,6 +15,11 @@ import Swal from "sweetalert2";
 import { Outlet, Link } from "react-router-dom";
 import { responsiveFontSizes } from "@mui/material";
 
+import Input from "../components/Input";
+import Button from "../components/Button";
+
+
+
 
 
 function Login() {
@@ -75,10 +80,23 @@ function Login() {
             <div className="login">
                 <h1>Login</h1>
                 <form>
-                    <input type="text" placeholder="Email" id="email" />
-                    <input type="password" placeholder="Senha" id="senha"/>
+                    <Input 
+                    type="email"
+                    placeholder="Email"
+                    id="email"
+                    />
+                    <Input
+                    type="password"
+                    placeholder="Senha"
+                    id="senha"
+                    />
                     <Link className="redefSenha" to="/redefinirSenha">Esqueceu sua senha?</Link>
-                    <a className="btn-login" onClick={realizarLogin}>Login</a>
+                    <Button
+                    type="button"
+                    id="btn-login"
+                    value="Login"
+                    onClick={realizarLogin}
+                    />
                     <Link className="loginEmpresa" to="/loginEmpresa">É uma empresa?</Link>
                 </form>
             </div>

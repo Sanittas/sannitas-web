@@ -3,6 +3,7 @@ import "../css/redefinirSenha.css";
 import Navbar from "../components/Navbar";
 import api from "../api/api";
 import Swal from "sweetalert2";
+import Input from "../components/Input";
 
 function RedefinirSenha() {
     const enviarEmail = () => {
@@ -39,7 +40,8 @@ function RedefinirSenha() {
             <div className="container-redefinir">
                 <div className="redefinir" id="referenciar">
                     <h1>Redefinir senha</h1>
-                    <input type="text" placeholder="Email Cadastrado" id="email" className="" />
+                    <p>Insira seu email para redefinir sua senha</p>
+                    <Input type="email" placeholder="Email" id="email" />
                     <a className="btn-login" onClick={enviarEmail}>
                         Confirmar Email
                     </a>

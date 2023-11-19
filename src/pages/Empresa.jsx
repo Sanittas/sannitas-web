@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 import api from "../api/api";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
-import { South, Token } from "@mui/icons-material";
 import Swal from "sweetalert2";
+import Button from "../components/Button";
 
 function Empresa(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
@@ -118,7 +118,12 @@ function Empresa(props) {
             <p>Razão Social: {razaoSocial}</p>
             <p>CNPJ: {cnpj}</p>
             <p>Email: {email}</p>
-            <a onClick={modalUpdate}>Atualizar</a>
+            <Button
+              type="button"
+              id="btn-update"
+              value="Atualizar"
+              onClick={modalUpdate}
+            />
           </div>
         </div>
 
@@ -126,7 +131,12 @@ function Empresa(props) {
           <div className="card-infos">
             <h1>Funcionários</h1>
             <p>Quantidade de Funcionários: 0</p>
-            <a onClick={cadastrarFuncionario}>Cadastrar Funcionários</a>
+            <Button
+              type="button"
+              id="btn-update"
+              value="Cadastrar"
+              onClick={cadastrarFuncionario}
+            />
           </div>
         </div>
 

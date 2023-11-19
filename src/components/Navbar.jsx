@@ -6,6 +6,7 @@ import "../css/navbar.css";
 
 import logo from "../assets/icons-sanittas/white-bottomless.svg";
 
+
 function Navbar(props) {
   const toggleMenu = () => {
     const sideNav = document.querySelector(".side-nav");
