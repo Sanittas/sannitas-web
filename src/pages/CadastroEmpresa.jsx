@@ -26,16 +26,11 @@ function cadastroEmpresa() {
         const email = document.getElementById("email").value;
         const senha = document.getElementById("senha").value;
         
-        console.log(razaoSocial, cnpj, senha,email);
-
         api.post("empresas/cadastrar/", {
             razaoSocial: razaoSocial,
             cnpj: cnpj,
             senha: senha,
             email: email
-
-            
-            
         }).then((res) => {
             console.log(res);
 

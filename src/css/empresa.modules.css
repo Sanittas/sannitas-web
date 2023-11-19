@@ -11,39 +11,38 @@
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
     color: black;
 }
 
 .container-empresa .card-infos-update {
     border: 1px solid black;
     border-radius: 15px;
-    height: 80%;
-    width: 30%;
+    height: 40%;
+    width: 45%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    box-shadow:  0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: #f1f1f1;
+    margin: 20px;
 }
 
 .card-infos-update .card-infos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 70%;
+    justify-content: space-around;
+    height: 100%;
     width: 100%;
-
 }
 
 .card-infos h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #000;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.3px;
 }
 
 .card-infos p {
@@ -62,22 +61,50 @@
     border-radius: 10px;
     text-decoration: none;
     transition: 0.5s;
-    width: 40%;
+    width: 60%;
     text-align: center;
     cursor: pointer;
 }
 
 .card-infos a:hover {
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #000;
+    background-color: #909CFF;
+    color: #fff;
+    border: 2px solid #fff;
 }
 
-.container-empresa .lista-funcionarios {
-    border: 1px solid blue;
-    height: 80%;
-    width: 60%;
+.container-empresa .card-infos-funcionarios {
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 40%;
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
 }
+
+.card-infos-funcionarios .card-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+.container-empresa .card-read-funcionarios {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: fit-content;
+    width: 93%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+}
+
 
 
 

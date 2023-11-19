@@ -24,7 +24,7 @@ function Home() {
   return (
     <>
       {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
-      <header>
+      <header id="home">
         <div class="banner">
           <div class="text-banner">
             <h1>Seja bem vindo!</h1>

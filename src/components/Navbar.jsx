@@ -37,7 +37,7 @@ function Navbar(props) {
             <Link to="/servicos">Serviços</Link>
           </li>
           <li>
-            <Link to="/#sobre">Sobre</Link>
+            <a href="#sobre">Sobre</a>
           </li>
           <li>
             <Link className="btn-action" to="/login">
