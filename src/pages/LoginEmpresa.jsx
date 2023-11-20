@@ -22,6 +22,9 @@ function LoginEmpresa() {
     const cnpj = document.getElementById("cnpj").value;
     const senha = document.getElementById("senha").value;
 
+    console.log(cnpj);
+    
+
     api
       .post("/empresas/login", {
         cnpj: cnpj,

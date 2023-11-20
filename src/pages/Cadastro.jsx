@@ -98,7 +98,7 @@ function cadastro() {
             <Button
             type="button"
             id="btn-cadastro"
-            onClick={realizarCadastro}
+            onClick={realizarCadastro()}
             value="Cadastrar"
             />
             <Link className="link" to={"/cadastroEmpresa"}>

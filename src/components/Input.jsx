@@ -6,6 +6,7 @@ import "../css/input.modules.css"
 
 function Input(props) {
 
+
     const [value, setValue] = useState(props.value);
 
     const handleInput = (e) => {
@@ -14,7 +15,7 @@ function Input(props) {
 
     return(
         <>
-            <input type={props.type} placeholder={props.placeholder} id={props.placeholder} value={value} onChange={handleInput} />
+            <input type={props.type} placeholder={props.placeholder} id={props.id} value={value} onChange={handleInput} />
         </>
     )
 }

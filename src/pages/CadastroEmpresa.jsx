@@ -73,9 +73,9 @@ function cadastroEmpresa() {
                     <Button
                         type="button"
                         id="btn-cadastro"
-                        onClick={realizarCadastro}
                         value="Cadastrar"
                     />
+                    
                 <Link className="link"to={"/cadastro"}>É uma pessoa fisíca?</Link>
                 </form>
                 
