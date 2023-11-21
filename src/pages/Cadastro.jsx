@@ -71,7 +71,7 @@ function cadastro() {
               placeholder="Digite seu nome"
             />
             <Input
-              label="Email"
+            label="Email"
               id="email"
               type="email"
               placeholder="Digite seu email"
@@ -89,6 +89,7 @@ function cadastro() {
               placeholder="Digite seu CPF"
             />
             <Input
+            
               label="Senha"
               id="senha"
               type="password"
@@ -98,7 +99,7 @@ function cadastro() {
             <Button
             type="button"
             id="btn-cadastro"
-            onClick={realizarCadastro()}
+            onClick={realizarCadastro}
             value="Cadastrar"
             />
             <Link className="link" to={"/cadastroEmpresa"}>

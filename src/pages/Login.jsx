@@ -81,11 +81,13 @@ function Login() {
                 <h1>Login</h1>
                 <form>
                     <Input 
+                    label="Email"
                     type="email"
                     placeholder="Email"
                     id="email"
                     />
                     <Input
+                    label="Senha"
                     type="password"
                     placeholder="Senha"
                     id="senha"

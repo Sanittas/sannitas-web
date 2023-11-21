@@ -4,11 +4,56 @@ input {
     border: 0;
     border-bottom: 2px solid #000;
     padding: 10px;
-    margin: 15px 0;
-    font-size: 1.2rem;
+    margin: 10px 0;
+    font-size: 1.1rem;
     font-weight: 500;
     outline: 0;
 }
+
+div:where(.swal2-container) .swal2-input {
+    width: 450px;
+}
+
+@keyframes slide-top {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+    display: flex;
+    align-self: flex-start;
+    animation: slide-top 0.5s ease-in-out; 
+}
+
+
+
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus:-moz-placeholder {
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+
+
 
 input:focus {
     outline: none;

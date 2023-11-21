@@ -2,11 +2,11 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import api from "../api/api";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
+import apiToken from "../api/apiToken";
 
 function Empresa(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
@@ -19,7 +19,7 @@ function Empresa(props) {
       window.location.href = "/";
     }
 
-    api
+    apiToken
       .get(`/empresas/${idEmpresa}`)
       .then((response) => {
         setRazaoSocial(response.data.razaoSocial);
@@ -43,6 +43,7 @@ function Empresa(props) {
                 </form>    
                 `,
       showCancelButton: true,
+      width: "600px",
       confirmButtonText: "Atualizar",
       cancelButtonText: "Cancelar",
       showLoaderOnConfirm: true,
@@ -70,7 +71,7 @@ function Empresa(props) {
   };
 
   const updateEmpresa = (value) => {
-    api
+    apiToken
       .put(
         `/empresas/${idEmpresa}`,
         {
@@ -105,7 +106,84 @@ function Empresa(props) {
   };
 
   const cadastrarFuncionario = () => {
-    
+    Swal.fire({
+      title: "Cadastrar Funcionário",
+      html: `
+                <form width="400px">
+                    <input id="nome" class="swal2-input" type="text" placeholder="Digite seu Nome"/>
+                    <input id="email" class="swal2-input" type="email" placeholder="Digite seu Email"/>
+                    <input id="cpf" class="swal2-input" type="text" placeholder="Digite seu CPF"/>
+                    <input id="rg" class="swal2-input" type="text" placeholder="Digite seu RG"/>
+                    <input id="funcional" type="text" class="swal2-input" placeholder="Digite seu Número Funcional"/>
+                    <input id="numeroRegAtuacao" class="swal2-input" type="text" placeholder="Digite seu Número de Registro de Atuação"/>
+                    <input id="senha" class="swal2-input" type="password"  placeholder="Digite sua Senha"/>
+                    <input id="senhaConfirm" class="swal2-input" type="password" placeholder="Confirme sua Senha"/>
+                </form>    
+                `,
+                width: '600px',
+      showCancelButton: true,
+      confirmButtonText: "Cadastrar",
+      cancelButtonText: "Cancelar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const nome = Swal.getPopup().querySelector("#nome").value;
+        const email = Swal.getPopup().querySelector("#email").value;
+        const cpf = Swal.getPopup().querySelector("#cpf").value;
+        const rg = Swal.getPopup().querySelector("#rg").value;
+        const funcional = Swal.getPopup().querySelector("#funcional").value;
+        const numeroRegAtuacao = Swal.getPopup().querySelector("#numeroRegAtuacao").value;
+        const senha = Swal.getPopup().querySelector("#senha").value;
+        const senhaConfirm = Swal.getPopup().querySelector("#senhaConfirm").value;
+        if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao || !senha || !senhaConfirm) {
+          Swal.showValidationMessage(`Preencha todos os campos`);
+        }else if(senha != senhaConfirm){
+          Swal.showValidationMessage(`Senhas não conferem`);
+        }
+        return {
+          nome: nome,
+          email: email,
+          cpf: cpf,
+          rg: rg,
+          funcional: funcional,
+          numeroRegAtuacao: numeroRegAtuacao,
+          senha: senha,
+          senhaConfirm: senhaConfirm
+        };
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiToken.post(`/funcionarios/`, {
+          nome: result.value.nome,
+          email: result.value.email,
+          cpf: result.value.cpf,
+          rg: result.value.rg,
+          funcional: result.value.funcional,
+          numeroRegAtuacao: result.value.numeroRegAtuacao,
+          senha: result.value.senha,
+          senhaConfirm: result.value.senhaConfirm,
+          idEmpresa: idEmpresa
+        }).then((res) => {
+          Swal.fire({
+            icon: "success",
+            title: "Cadastro realizado com sucesso!",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+        }).catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Erro ao realizar cadastro!",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+        })
+      }
+    });
+
+
+
   }
   return (
     <>

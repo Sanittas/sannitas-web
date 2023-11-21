@@ -12,8 +12,8 @@ button {
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-    height: 15%;
-    width: 100%;
+    max-height: fit-content;
+    width: 30%;
 }
 
 button:hover {

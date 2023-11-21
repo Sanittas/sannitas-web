@@ -15,7 +15,9 @@ function Input(props) {
 
     return(
         <>
+            <label for={props.id}>{props.label}</label>
             <input type={props.type} placeholder={props.placeholder} id={props.id} value={value} onChange={handleInput} />
+
         </>
     )
 }

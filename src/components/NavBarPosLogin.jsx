@@ -59,7 +59,7 @@ function NavbarPosLogin(props) {
             <Link to="/#sobre">Sobre</Link>
           </li>
           <li>
-            {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}`}>Empresa</Link> : <Link to="/cliente">Cliente</Link>}
+            {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}`}>{sessionStorage.getItem("razaoSocial")}</Link> : <Link to="/cliente">{sessionStorage.getItem("nome")}</Link>}
           </li>
           <li>
             <Link className="btn-action" onClick={deslogar}>

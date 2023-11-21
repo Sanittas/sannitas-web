@@ -66,14 +66,15 @@ function cadastroEmpresa() {
             <div className="cadastro">
                 <h1>Cadastro</h1>
                 <form>
-                    <Input type="text" placeholder="Razão Social" id="razaoSocial" />
-                    <Input type="text" placeholder="CNPJ" id="cnpj" />
-                    <Input type="email" placeholder="Email" id="email" />
-                    <Input type="password" placeholder="Senha" id="senha" />
+                    <Input label="Razão Social" type="text" placeholder="Razão Social" id="razaoSocial" />
+                    <Input label="CNPJ" type="text" placeholder="CNPJ" id="cnpj" />
+                    <Input label="Email" type="email" placeholder="Email" id="email" />
+                    <Input label="Senha" type="password" placeholder="Senha" id="senha" />
                     <Button
                         type="button"
                         id="btn-cadastro"
                         value="Cadastrar"
+                        onClick={realizarCadastro}
                     />
                     
                 <Link className="link"to={"/cadastro"}>É uma pessoa fisíca?</Link>
