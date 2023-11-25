@@ -54,7 +54,7 @@
     object-fit: cover;
 }
 
-.cadastro .link {
+.cadastro .linkk {
     color: #000;
     font-size: 1.2rem;
     text-decoration: none;
@@ -62,10 +62,17 @@
     font-weight: 500;
 }
 
-.cadastro .link:hover {
-    color: #000;
-    transition: all 0.2s ease-in-out;
-    border-bottom: 2px solid #000;
+.cadastro .linkk::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .4s;
+}
+
+.cadastro .linkk:hover::after {
+    width: 100%;
 }
 
 @media (max-width: 768px) {

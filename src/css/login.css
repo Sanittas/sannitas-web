@@ -45,11 +45,20 @@
     font-weight: 500;
 }
 
-.login form .redefSenha:hover {
-    color: #000;
-    transition: all 0.2s ease-in-out;
-    border-bottom: 2px solid #000;
+.login form .redefSenha::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .4s;
 }
+
+.login form .redefSenha:hover::after {
+    width: 100%;
+}
+
+
 
 
 .login form .btn-login {
@@ -81,11 +90,19 @@
     font-weight: 500;
 }
 
-.login .loginEmpresa:hover {
-    color: #000;
-    transition: all 0.2s ease-in-out;
-    border-bottom: 2px solid #000;
+.login .loginEmpresa::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .4s;
 }
+
+.login .loginEmpresa:hover::after {
+    width: 100%;
+}
+
 
 .container-login .img-login {
     width: 60%;

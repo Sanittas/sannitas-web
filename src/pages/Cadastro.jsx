@@ -102,7 +102,7 @@ function cadastro() {
             onClick={realizarCadastro}
             value="Cadastrar"
             />
-            <Link className="link" to={"/cadastroEmpresa"}>
+            <Link className="linkk" to={"/cadastroEmpresa"}>
               É uma empresa?
             </Link>
           </form>

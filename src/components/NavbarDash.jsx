@@ -6,7 +6,7 @@ import "../css/navbarDash.css";
 
 import logo from "../assets/icons-sanittas/white-bottomless.svg";
 
-function Navbar(props) {
+function NavbarDash(props) {
   const toggleMenu = () => {
     const sideNav = document.querySelector(".side-nav");
 
@@ -56,4 +56,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export default NavbarDash;

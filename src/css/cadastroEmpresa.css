@@ -38,27 +38,30 @@
 }
 
 
-.cadastroEmpresa form link {
-    color: #000;
-    font-size: 1.2rem;
-    font-weight: 500;
-    display: flex;
-    align-self: flex-start;
-}
 
-.cadastroEmpresa form link a {
+
+.cadastroEmpresa .linkk {
     color: #000;
     font-size: 1.2rem;
-    font-weight: 500;
-    margin: 10px 0;
     text-decoration: none;
+    margin: 10px 0;
+    font-weight: 500;
 }
 
-.cadastroEmpresa form link a:hover {
-    color: #909CFF;
-    text-decoration: underline;
-    transition: all 0.2s ease-in-out;
+.cadastroEmpresa .linkk::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .4s;
 }
+
+.cadastroEmpresa .linkk:hover::after {
+    width: 100%;
+}
+
+
 
 
 .container-cadastroEmpresa .img-cadastroEmpresa {

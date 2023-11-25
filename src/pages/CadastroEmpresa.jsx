@@ -63,7 +63,7 @@ function cadastroEmpresa() {
         <Navbar />
 
         <div className="container-cadastro">
-            <div className="cadastro">
+            <div className="cadastroEmpresa">
                 <h1>Cadastro</h1>
                 <form>
                     <Input label="Razão Social" type="text" placeholder="Razão Social" id="razaoSocial" />
@@ -77,7 +77,7 @@ function cadastroEmpresa() {
                         onClick={realizarCadastro}
                     />
                     
-                <Link className="link"to={"/cadastro"}>É uma pessoa fisíca?</Link>
+                <Link className="linkk" to={"/cadastro"}>É uma pessoa fisíca?</Link>
                 </form>
                 
             </div>
