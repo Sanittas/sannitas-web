@@ -11,6 +11,7 @@ import Cliente from './pages/cliente';
 import Servicos from './pages/servicos';
 import LoginEmpresa from './pages/LoginEmpresa';
 import Empresa from './pages/Empresa';
+import Dashboard from './pages/Dashboard';
 
 
 
@@ -22,17 +23,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/redefinirSenha" element={<RedefinirSenha />} />
         <Route path='/login/logoff' element={<Logoff />} />
-        <Route path="/cadastro/*" element={<Cadastro/>} />
-        <Route path="/cadastroEmpresa" element={<CadastroEmpresa/>} />
-        <Route path="/validarToken/:token" element={<TrocaSenha/>} />
-        <Route path="/cliente/:idUsuario" element={<Cliente/>} />
-        <Route path="/servicos/:idUsuario" element={<Servicos/>} />
+        <Route path="/cadastro/*" element={<Cadastro />} />
+        <Route path="/cadastroEmpresa" element={<CadastroEmpresa />} />
+        <Route path="/validarToken/:token" element={<TrocaSenha />} />
+        <Route path="/cliente/:idUsuario" element={<Cliente />} />
+        <Route path="/servicos/:idUsuario" element={<Servicos />} />
         <Route path="/cadastro/*" element={<Cadastro />} />
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa />} />
         <Route path="/validarToken/:token" element={<TrocaSenha />} />
         <Route path="/cliente/:idUsuario" element={<Cliente />} />
         <Route path="/loginEmpresa" element={<LoginEmpresa />} />
         <Route path="/empresa/:idEmpresa" element={<Empresa />} />
+        <Route path="/dashboard/" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
