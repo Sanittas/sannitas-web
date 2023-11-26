@@ -66,7 +66,7 @@ function LoginEmpresa() {
         <div className="login">
           <h1>Login</h1>
           <form>
-            <Input label="CNPJ" id="cnpj" type="text" placeholder="CNPJ" />
+            <Input label="CNPJ" id="cnpj" type="text" placeholder="CNPJ" mask="cnpj" max="18" />
 
             <Input label="Senha" id="senha" type="password" placeholder="Senha" />
             <Link className="redefSenha" to="/redefinirSenha">

@@ -18,7 +18,7 @@ function Button(props) {
 
     return(
         <>
-            <button className="button-component" type={props.type} id={props.id} onClick={props.onClick} onChange={handleInput}>
+            <button className={props.class ? props.class : "button-component"} type={props.type} id={props.id} onClick={props.onClick} onChange={handleInput}>
                 {value}
             </button>
         </>

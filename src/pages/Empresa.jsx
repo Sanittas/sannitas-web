@@ -14,6 +14,7 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 
 
+
 function Empresa(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
 
@@ -352,18 +353,25 @@ function Empresa(props) {
               </tr>
             </thead>
             <tbody>
-              {funcionarios.map((funcionario) => (
-                <tr>
-                  <td>{funcionario.nome}</td>
-                  <td>{funcionario.email}</td>
-                  <td>{funcionario.cpf}</td>
-                  <td>{funcionario.rg}</td>
-                  <td>{funcionario.funcional}</td>
-                  <td>{funcionario.numeroRegistroAtuacao}</td>
-                  <td onClick={() => deleteFuncionario(funcionario.id)}><FontAwesomeIcon icon={faTrashAlt}/></td>
-                  <td onClick={() => modalUpdateFuncionario(funcionario.id)}><FontAwesomeIcon icon={faPen}/></td>
-                </tr>
-              ))}
+              {
+                funcionarios ? funcionarios.map((funcionario) => (
+                  <tr key={funcionario.id}>
+                    <td>{funcionario.nome}</td>
+                    <td>{funcionario.email}</td>
+                    <td>{funcionario.cpf}</td>
+                    <td>{funcionario.rg}</td>
+                    <td>{funcionario.funcional}</td>
+                    <td>{funcionario.numeroRegistroAtuacao}</td>
+                    <td>
+
+                      <Button type="button" class="btn-update" value={<FontAwesomeIcon icon={faPen}/>} onClick={() => modalUpdateFuncionario(funcionario.id)} />
+                    </td>
+                    <td>
+                      <Button type="button" class="btn-delete" value={<FontAwesomeIcon icon={faTrashAlt}/>} onClick={() => deleteFuncionario(funcionario.id)} />
+                    </td>
+                  </tr>
+                )) : <tr><td>Sem funcionários</td></tr>
+              }
             </tbody>
           </table>
         </div>

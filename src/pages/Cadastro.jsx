@@ -81,12 +81,17 @@ function cadastro() {
               id="telefone"
               type="text"
               placeholder="Digite seu telefone"
+              mask="telefone"
+              max="15"
             />
             <Input
+              mask="cpf"
               label="CPF"
               id="cpf"
               type="text"
               placeholder="Digite seu CPF"
+              max="14"
+
             />
             <Input
             

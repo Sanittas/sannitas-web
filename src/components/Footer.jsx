@@ -20,6 +20,7 @@ function Footer() {
                 </form>    
                 `,
         showCancelButton: true,
+        width: "600px",
         confirmButtonText: "Enviar",
         cancelButtonText: "Cancelar",
         showLoaderOnConfirm: true,
