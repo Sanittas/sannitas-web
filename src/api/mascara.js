@@ -22,10 +22,11 @@ const mascaraCpf = (e) => {
   const mascaraTelefone = (e) => {
     let telefone = e;
     telefone = telefone.replace(/\D/g, "");
-    telefone = telefone.replace(/(\d{2})(\d)/, "($1) $2");
+    telefone = telefone.replace(/(\d{2})(\d)/, "($1)$2");
     telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
 
-    return telefone;
+
+  return telefone;
   };
 
   export default { mascaraCpf, mascaraCnpj, mascaraTelefone };

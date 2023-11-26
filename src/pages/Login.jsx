@@ -41,6 +41,7 @@ function Login() {
             
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("nome", res.data.nome);
+            sessionStorage.setItem("id", res.data.userId);
 
             Swal.fire({
                 icon: "success",
@@ -62,12 +63,6 @@ function Login() {
             })
         })
         
-        api.get(`/usuarios/${email}`).then((response) => {
-            sessionStorage.setItem("idUsuario", response.idUsuario);
-        }
-        ).catch((e) => {
-            console.log(e)
-        })
 
     }
 

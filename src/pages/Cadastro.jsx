@@ -82,7 +82,7 @@ function cadastro() {
               type="text"
               placeholder="Digite seu telefone"
               mask="telefone"
-              max="15"
+              max="14"
             />
             <Input
               mask="cpf"
@@ -99,6 +99,7 @@ function cadastro() {
               id="senha"
               type="password"
               placeholder="Digite sua senha"
+              max="20"
             />
 
             <Button
