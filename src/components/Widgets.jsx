@@ -56,10 +56,12 @@ function Widget({ type }) {
         const fetchPopServiceData = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/data/total-revenue');
-                setTotalRevenue(response.data[0].revenue_total);
-                const current_month = response.data[0].revenue_current_month;
-                setTotalRevenueDiff(((100 * current_month) / (totalRevenue - current_month) - 100).toFixed(2));
-                console.log(totalRevenueDiff);
+                setTotalRevenue(prevTotalRevenue => {
+                    const current_month = response.data[0].revenue_current_month;
+                    const diff = ((100 * current_month) / (prevTotalRevenue - current_month) - 100);
+                    setTotalRevenueDiff(diff);
+                    return response.data[0].revenue_total;
+                });
             } catch (error) {
                 console.error('error fetching total revenue data:', error);
             }
