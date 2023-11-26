@@ -12,8 +12,8 @@ function Dashboard() {
             <div className="dashContainer">
                 <div className="widgets">
                     <Widget type="user" />
-                    <Widget type="satisfaction" />
                     <Widget type="popular" />
+                    <Widget type="satisfaction" />
                     <Widget type="total" />
                 </div>
                 <div className="charts">
