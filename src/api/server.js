@@ -8,7 +8,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '---------',
+    password: '--',
     database: 'mydb',
 });
 db.connect();
@@ -96,6 +96,70 @@ app.get('/data/total-revenue', (req, res) => {
     JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
     JOIN mydb.pagamento p ON a.fk_pagamento = p.idpagamento
     WHERE a.fk_servico_empresa = 5) AS revenue_total;
+`;
+    db.query(query, (error, results) => {
+        if (error) {
+            res.status(500).json({ error });
+        } else {
+            res.json(results);
+        }
+    });
+});
+app.get('/data/daily-service', (req, res) => {
+    const query = `SELECT s.descricao AS servico, COUNT(*) AS quantidade_atendimentos
+    FROM mydb.agendamento_servico a
+    JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
+    JOIN mydb.servico s ON se.fk_idservico = s.idservico
+    WHERE DATE(a.data_agendamento) = CURRENT_DATE() AND a.fk_servico_empresa = 5
+    GROUP BY s.descricao;
+`;
+    db.query(query, (error, results) => {
+        if (error) {
+            res.status(500).json({ error });
+        } else {
+            res.json(results);
+        }
+    });
+});
+app.get('/data/daily-revenue', (req, res) => {
+    const query = `SELECT SUM(se.valor_servico) AS receita_do_dia
+    FROM mydb.agendamento_servico a
+    JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
+    JOIN mydb.pagamento p ON a.fk_pagamento = p.idpagamento
+    WHERE DATE(p.data_hora_pagamento) = CURRENT_DATE() AND a.fk_servico_empresa = 5;
+`;
+    db.query(query, (error, results) => {
+        if (error) {
+            res.status(500).json({ error });
+        } else {
+            res.json(results);
+        }
+    });
+});
+app.get('/data/chart-data', (req, res) => {
+    const query = `SELECT
+    s.idservico,
+    s.descricao,
+    MONTH(a.data_agendamento) AS mes,
+    YEAR(a.data_agendamento) AS ano,
+    SUM(se.valor_servico) AS receita
+FROM
+    mydb.servico s
+JOIN
+    mydb.servico_empresa se ON s.idservico = se.fk_idservico
+JOIN
+    mydb.agendamento_servico a ON se.fk_idempresa = a.fk_servico_empresa AND se.fk_idservico = a.fk_servico
+JOIN
+    mydb.pagamento p ON a.fk_pagamento = p.idpagamento
+WHERE
+    a.data_agendamento >= CURDATE() - INTERVAL 6 MONTH AND se.fk_idempresa = 5
+GROUP BY
+    s.idservico,
+    s.descricao,
+    YEAR(a.data_agendamento),
+    MONTH(a.data_agendamento)
+ORDER BY
+    ano DESC, mes DESC, receita DESC;
 `;
     db.query(query, (error, results) => {
         if (error) {
