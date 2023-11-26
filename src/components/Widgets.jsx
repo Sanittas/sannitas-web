@@ -58,7 +58,7 @@ function Widget({ type }) {
                 const response = await axios.get('http://localhost:3001/data/total-revenue');
                 setTotalRevenue(prevTotalRevenue => {
                     const current_month = response.data[0].revenue_current_month;
-                    const diff = ((100 * current_month) / (prevTotalRevenue - current_month) - 100).tofixed(2);
+                    const diff = (((100 * current_month) / (prevTotalRevenue - current_month) - 100).toFixed(1));
                     setTotalRevenueDiff(diff);
                     return response.data[0].revenue_total;
                 });
