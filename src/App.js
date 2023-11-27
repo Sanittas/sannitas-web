@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Logoff from './pos-login/Logoff';
 import Cadastro from './pages/Cadastro';
 import CadastroEmpresa from './pages/CadastroEmpresa';
+import CadastrarServicos from './pages/CadastrarServicos';
 import RedefinirSenha from './pages/redefinirSenha';
 import TrocaSenha from './pages/trocaSenha';
 import Cliente from './pages/cliente';
@@ -35,6 +36,7 @@ function App() {
         <Route path="/loginEmpresa" element={<LoginEmpresa />} />
         <Route path="/empresa/:idEmpresa" element={<Empresa />} />
         <Route path="/dashboard/" element={<Dashboard />} />
+        <Route path="/empresa/:idEmpresa/CadastrarServicos" element={<CadastrarServicos />} />
       </Routes>
     </BrowserRouter>
   );

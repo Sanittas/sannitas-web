@@ -1,8 +1,9 @@
 import React from "react";
+import Button from "./Button";
 function CardServico(props) {
 
     function contratar(idServico) {
-        // requisição enviado o idServico no pathVariable
+        // api.post(`/servico-empresa`)
     }
 
     return (
@@ -13,7 +14,11 @@ function CardServico(props) {
                     <h4>{props.titulo}</h4>
                     <p>{props.descricao}</p>
                     <span>{props.valor}</span> <span>{props.duracaoEstimada}</span>
-                    <button onClick={contratar(props.id)}></button>
+                    <Button
+                        type="button"
+                        id="btn-contrato"
+                        onClick={contratar(props.id)}
+                        value="Contratar" />
                 </div>
             </div>
         </>

@@ -14,7 +14,7 @@ function Servicos(props) {
   
 
   useEffect(() => {
-    api.get(`/servicos/`).then((response) => {
+    api.get(`servicos/`).then((response) => {
         
         setServicos(response.data); 
     

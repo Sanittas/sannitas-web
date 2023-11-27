@@ -1,0 +1,71 @@
+.container {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btns-servicos {
+    display: flex;
+    width: 1000px;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.button-component {
+    width: 70%;
+}
+
+.card-read-servicos table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: center;
+}
+
+.card-read-servicos table thead tr th {
+    background-color: #000;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.5s;
+    width:200px;
+    text-align: center;
+    padding: 10px;
+    
+}
+
+.card-read-servicos table tbody tr td {
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.5s;
+    width:200px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
+}
+
+.card-read-servicos table tbody tr td svg {
+    color: #000;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-update, .btn-delete {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.titulo {
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
