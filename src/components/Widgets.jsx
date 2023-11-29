@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "../css/widgets.css";
+import idEmpresa from "../pages/Dashboard";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
@@ -16,11 +17,12 @@ function Widget({ type }) {
     const [usersDiff, setUsersDiff] = useState([]);
     const [csatDiff, setCsatDiff] = useState([]);
     const [totalRevenueDiff, setTotalRevenueDiff] = useState([]);
+    const idEmpresa = sessionStorage.getItem("idEmpresa");
 
     useEffect(() => {
         const fetchUsersData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/data/num-users');
+                const response = await axios.get(`http://localhost:3001/data/num-users/${idEmpresa}`);
                 setUsers(response.data[0].total_users);
                 setUsersDiff(response.data[0].current_users);
             } catch (error) {
