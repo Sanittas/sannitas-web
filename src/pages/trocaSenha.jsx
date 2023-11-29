@@ -7,7 +7,7 @@ import "../css/trocaSenha.css";
 import Navbar from "../components/Navbar"
 
 
-import api from "../api/api";
+import {api, api8081} from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -23,7 +23,7 @@ function TrocaSenha() {
 
     useEffect(() => {
         
-        api.get((`/usuarios/validarToken/${token}`)).then((response) => {
+        api8081.get((`/usuarios/validarToken/${token}`)).then((response) => {
             
         }).catch(() => {
 
@@ -45,7 +45,7 @@ function TrocaSenha() {
     
         if (senha >= 8 && senha.match(/[a-zA-Z0-9!@#$%^&*()_+-={}|;:<>,.?]/) && senha != null) {
             if (senha === senhaConfirmacao) {
-                api.post(`/usuarios/alterar-senha`, {
+                api8081.post(`/usuarios/alterar-senha`, {
                     token: token,
                     novaSenha: senha
         

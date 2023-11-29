@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar"
 
 import cadastroImg from "../assets/hospital.jpg"
 
-import api from "../api/api";
+import { api } from "../api/api";
 
 import Swal from "sweetalert2";
 

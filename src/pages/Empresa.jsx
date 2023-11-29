@@ -59,7 +59,6 @@ function Empresa(props) {
                     <input id="razaoSocial" class="swal2-input" placeholder="Razão Social">
                     <input id="cnpj" class="swal2-input" placeholder="CNPJ">
                     <input id="senha" type="password" class="swal2-input" placeholder="Senha">
-                    <input id="email" class="swal2-input" placeholder="Email">
                 </form>    
                 `,
       showCancelButton: true,
@@ -71,15 +70,15 @@ function Empresa(props) {
         const razaoSocial = Swal.getPopup().querySelector("#razaoSocial").value;
         const cnpj = Swal.getPopup().querySelector("#cnpj").value;
         const senha = Swal.getPopup().querySelector("#senha").value;
-        const email = Swal.getPopup().querySelector("#email").value;
-        if (!razaoSocial || !cnpj || !senha || !email) {
+        // const email = Swal.getPopup().querySelector("#email").value;
+        if (!razaoSocial || !cnpj || !senha) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
           razaoSocial: razaoSocial,
           cnpj: cnpj,
           senha: senha,
-          email: email,
+          // email: email,
         };
       },
       allowOutsideClick: () => !Swal.isLoading(),
@@ -98,7 +97,7 @@ function Empresa(props) {
           razaoSocial: value.razaoSocial,
           cnpj: value.cnpj,
           senha: value.senha,
-          email: value.email,
+          // email: value.email,
         },
       )
       .then(() => {
@@ -129,6 +128,9 @@ function Empresa(props) {
                     <input id="rg" class="swal2-input" placeholder="RG">
                     <input id="funcional" class="swal2-input" placeholder="Número Funcional">
                     <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação">
+                    <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
+                    <input id="especializacao" class="swal2-input" placeholder="Especialização">
+                    <input id="nivelProficiencia" class="swal2-input" placeholder="Nível de Proficiência">
                 </form>    
                 `,
       showCancelButton: true,
@@ -142,9 +144,12 @@ function Empresa(props) {
         const cpf = Swal.getPopup().querySelector("#cpf").value;
         const rg = Swal.getPopup().querySelector("#rg").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
-        const numeroRegAtuacao =
+        const numeroRegAtuacao = Swal.getPopup().querySelector("numeroRegAtuacao").value;
+        const expCompetencia = Swal.getPopup().querySelector("#expCompetencia").value;
+        const especializacao = Swal.getPopup().querySelector("#especializacao").value;
+        const nivelProficiencia = Swal.getPopup().querySelector("#nivelProficiencia").value;
           Swal.getPopup().querySelector("#numeroRegAtuacao").value;
-        if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao) {
+        if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao || !expCompetencia || !especializacao || !nivelProficiencia) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
@@ -155,18 +160,24 @@ function Empresa(props) {
           rg: rg,
           funcional: funcional,
           numeroRegistroAtuacao: numeroRegAtuacao,
+          expCompetencia: expCompetencia,
+          especializacao: especializacao,
+          nivelProficiencia: nivelProficiencia,
         };
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
         updateFuncionario(result.value);
+
+
+        
       }
     });
   }
 
   const updateFuncionario = (value) => {
-    api8081
+    api8080
       .put(
         `/funcionarios/${value.id}`,
         {
@@ -194,6 +205,17 @@ function Empresa(props) {
         console.log(e);
       });
   }
+
+  const vincularFuncionarioCompetencia = (value) => {
+    api8080.post( `/funcionarios/${value.id}/competencias`, {
+      idFuncionario: value.id,
+      expCompetencia: value.expCompetencia,
+      especializacao: value.especializacao,
+      nivelProficiencia: value.nivelProficiencia,
+
+    }).catch((e) => {
+      console.log(e);
+    });
 
   const cadastrarFuncionario = () => {
     Swal.fire({
@@ -238,7 +260,7 @@ function Empresa(props) {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        api8081
+        api8080
           .post(`/funcionarios/`, {
             nome: result.value.nome,
             email: result.value.email,
@@ -284,7 +306,7 @@ function Empresa(props) {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8081
+        api8080
           .delete(`/funcionarios/${idFuncionario}`)
           .then(() => {
             Swal.fire({
@@ -377,6 +399,7 @@ function Empresa(props) {
       </div>
     </>
   );
+}
 }
 
 export default Empresa;

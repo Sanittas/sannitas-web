@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 import cadastroImg from "../assets/senior-couple-holding-hands.jpg";
 
-import api from "../api/api";
+import { api8081 } from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -25,7 +25,7 @@ function cadastro() {
     const cpf = document.getElementById("cpf").value;
     const senha = document.getElementById("senha").value;
 
-    api.post("usuarios/cadastrar/", {
+    api8081.post("usuarios/cadastrar/", {
         nome: nome,
         email: email,
         cpf: cpf,

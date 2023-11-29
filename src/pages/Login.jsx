@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar"
 
 import login from "../assets/senior-couple-holding-hands.jpg"
 
-import api from "../api/api";
+import {api8081, api} from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -32,7 +32,7 @@ function Login() {
 
         
 
-        api.post("/usuarios/login", {
+        api8081.post("/usuarios/login", {
             email: email,
             senha: senha
             
