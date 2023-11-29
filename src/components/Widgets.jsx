@@ -17,7 +17,8 @@ function Widget({ type }) {
     const [usersDiff, setUsersDiff] = useState([]);
     const [csatDiff, setCsatDiff] = useState([]);
     const [totalRevenueDiff, setTotalRevenueDiff] = useState([]);
-    const idEmpresa = sessionStorage.getItem("idEmpresa");
+    //const idEmpresa = sessionStorage.getItem("idEmpresa");
+    const idEmpresa = 4;	
 
     useEffect(() => {
         const fetchUsersData = async () => {
@@ -34,7 +35,7 @@ function Widget({ type }) {
     useEffect(() => {
         const fetchCsatData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/data/csat');
+                const response = await axios.get(`http://localhost:3001/data/csat/${idEmpresa}`);
                 setCsat(response.data[0].csat_percentage);
                 setCsatDiff(response.data[0].csat_percentage_current_month);
             } catch (error) {
@@ -46,7 +47,7 @@ function Widget({ type }) {
     useEffect(() => {
         const fetchPopServiceData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/data/popular-service');
+                const response = await axios.get(`http://localhost:3001/data/popular-service/${idEmpresa}`);
                 setPopService(response.data[0].nome_servico);
             } catch (error) {
                 console.error('error fetching popular service data:', error);
@@ -57,7 +58,7 @@ function Widget({ type }) {
     useEffect(() => {
         const fetchPopServiceData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/data/total-revenue');
+                const response = await axios.get(`http://localhost:3001/data/total-revenue/${idEmpresa}`);
                 setTotalRevenue(prevTotalRevenue => {
                     const current_month = response.data[0].revenue_current_month;
                     const diff = (((100 * current_month) / (prevTotalRevenue - current_month) - 100).toFixed(1));

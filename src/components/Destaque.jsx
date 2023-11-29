@@ -9,13 +9,15 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 function Destaque() {
     const [dailyServiceData, setDailyServiceData] = useState([]);
     const [dailyRevenue, setDailyRevenue] = useState([]);
+    //const idEmpresa = sessionStorage.getItem("idEmpresa");
+    const idEmpresa = 4;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const serviceResponse = await axios.get('http://localhost:3001/data/daily-service');
+                const serviceResponse = await axios.get(`http://localhost:3001/data/daily-service/${idEmpresa}`);
                 setDailyServiceData(serviceResponse.data);
-                const revenueResponse = await axios.get('http://localhost:3001/data/daily-revenue');
+                const revenueResponse = await axios.get(`http://localhost:3001/data/daily-revenue/${idEmpresa}`);
                 setDailyRevenue(revenueResponse.data);
             } catch (error) {
                 console.error('error fetching data:', error);
@@ -28,7 +30,7 @@ function Destaque() {
         const shadesOfBlue = ["#5465e2", "#949bf3", "#8bc1da", "#0c88bc", "#042474"];
         const randomIndex = Math.floor(Math.random() * shadesOfBlue.length);
         const color = shadesOfBlue[randomIndex];
-    
+
         return {
             backgroundColor: color,
             borderColor: color,
@@ -42,7 +44,7 @@ function Destaque() {
                 label: "Atendimentos",
                 data: dailyServiceData.map(entry => entry.quantidade_atendimentos),
                 backgroundColor: dailyServiceData.map(() => getRandomColor().backgroundColor),
-            borderColor: dailyServiceData.map(() => getRandomColor().borderColor),
+                borderColor: dailyServiceData.map(() => getRandomColor().borderColor),
                 borderWidth: 1,
                 hoverBackgroundColor: ["#36A2EB"],
             },
@@ -50,7 +52,7 @@ function Destaque() {
     };
 
     const options = {
-        
+
     };
 
     return (
