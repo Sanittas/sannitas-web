@@ -8,22 +8,20 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'LsA147504',
-    database: 'mydb',
+    password: '--',
+    database: 'sanittas',
 });
 db.connect();
 
-app.get('/data/num-users', (req, res) => {
-    const query = `SELECT
-    (SELECT COUNT(DISTINCT fk_usuario)
-     FROM mydb.agendamento_servico
-     WHERE fk_servico_empresa = 5
-     AND MONTH(data_agendamento) = MONTH(CURRENT_DATE())) AS current_users,
-    (SELECT COUNT(DISTINCT fk_usuario)
-     FROM mydb.agendamento_servico
-     WHERE fk_servico_empresa = 5
-     AND MONTH(data_agendamento) <= MONTH(CURRENT_DATE())) AS total_users;`;
-    db.query(query, (error, results) => {
+app.get('/data/num-users/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
+    const query = `
+    SELECT
+    COUNT(DISTINCT CASE WHEN MONTH(data_agendamento) = MONTH(CURRENT_DATE()) THEN fk_usuario END) AS current_users,
+    COUNT(DISTINCT fk_usuario) AS total_users
+FROM sanittas.agendamento_servico
+WHERE fk_servico_empresa = ?;`;
+    db.query(query, [idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
@@ -31,26 +29,27 @@ app.get('/data/num-users', (req, res) => {
         }
     });
 });
-app.get('/data/csat', (req, res) => {
+app.get('/data/csat/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
     const query = `SELECT
     COUNT(*) AS total_evaluations,
     SUM(CASE WHEN avaliacao_servico >= 4 THEN 1 ELSE 0 END) AS positive_evaluations,
     ROUND((SUM(CASE WHEN avaliacao_servico >= 4 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 1) AS csat_percentage,
     (SELECT COUNT(*)
-     FROM mydb.agendamento_servico
-     WHERE fk_servico_empresa = 1
+     FROM sanittas.agendamento_servico
+     WHERE fk_servico_empresa = ?
      AND MONTH(data_agendamento) = MONTH(CURRENT_DATE())) AS total_evaluations_current_month,
     (SELECT SUM(CASE WHEN avaliacao_servico >= 4 THEN 1 ELSE 0 END)
-     FROM mydb.agendamento_servico
-     WHERE fk_servico_empresa = 1
+     FROM sanittas.agendamento_servico
+     WHERE fk_servico_empresa = ?
      AND MONTH(data_agendamento) = MONTH(CURRENT_DATE())) AS positive_evaluations_current_month,
     (SELECT ROUND((SUM(CASE WHEN avaliacao_servico >= 4 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 1)
-     FROM mydb.agendamento_servico
-     WHERE fk_servico_empresa = 1
+     FROM sanittas.agendamento_servico
+     WHERE fk_servico_empresa = ?
      AND MONTH(data_agendamento) = MONTH(CURRENT_DATE())) AS csat_percentage_current_month
-FROM mydb.agendamento_servico
-WHERE fk_servico_empresa = 1;`;
-    db.query(query, (error, results) => {
+FROM sanittas.agendamento_servico
+WHERE fk_servico_empresa = ?;`;
+    db.query(query, [idEmpresa, idEmpresa, idEmpresa, idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
@@ -58,15 +57,17 @@ WHERE fk_servico_empresa = 1;`;
         }
     });
 });
-app.get('/data/popular-service', (req, res) => {
+app.get('/data/popular-service/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
     const query = `SELECT s.descricao AS nome_servico, COUNT(*) AS quantidade_agendamentos
-    FROM mydb.agendamento_servico a
-    JOIN mydb.servico s ON a.fk_servico = s.idservico
-    WHERE a.fk_servico_empresa = 5
-    GROUP BY a.fk_servico
+    FROM sanittas.agendamento_servico asv
+    JOIN sanittas.servico s ON asv.fk_servico_empresa = s.idservico
+    JOIN sanittas.servico_empresa se ON asv.fk_servico_empresa = se.fk_empresa
+    WHERE se.fk_empresa = ?
+    GROUP BY asv.fk_servico_empresa, s.descricao
     ORDER BY quantidade_agendamentos DESC
     LIMIT 1;`;
-    db.query(query, (error, results) => {
+    db.query(query, [idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
@@ -74,30 +75,30 @@ app.get('/data/popular-service', (req, res) => {
         }
     });
 });
-app.get('/data/total-revenue', (req, res) => {
-    const query = `SELECT 
+app.get('/data/total-revenue/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
+    const query = `SELECT
     COALESCE(
         (SELECT SUM(se.valor_servico) AS receita_total
-        FROM mydb.agendamento_servico a
-        JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
-        JOIN mydb.pagamento p ON a.fk_pagamento = p.idpagamento
-        WHERE a.fk_servico_empresa = 5
-        AND MONTH(a.data_agendamento) = MONTH(CURRENT_DATE) - 1),
+        FROM sanittas.agendamento_servico a
+        JOIN sanittas.servico_empresa se ON a.fk_servico_empresa = se.id AND a.fk_servico_empresa = se.fk_empresa
+        JOIN sanittas.pagamento p ON a.fk_pagamento = p.idpagamento
+        WHERE se.fk_empresa = ?
+        AND MONTH(a.data_agendamento) = MONTH(CURRENT_DATE()) - 1),
         0
     ) AS revenue_last_month,
-    (SELECT SUM(se.valor_servico) AS receita_total
-    FROM mydb.agendamento_servico a
-    JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
-    JOIN mydb.pagamento p ON a.fk_pagamento = p.idpagamento
-    WHERE a.fk_servico_empresa = 5
-    AND MONTH(a.data_agendamento) = MONTH(CURRENT_DATE)) AS revenue_current_month,
-    (SELECT SUM(se.valor_servico) AS receita_total
-    FROM mydb.agendamento_servico a
-    JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
-    JOIN mydb.pagamento p ON a.fk_pagamento = p.idpagamento
-    WHERE a.fk_servico_empresa = 5) AS revenue_total;
-`;
-    db.query(query, (error, results) => {
+        (SELECT SUM(se.valor_servico) AS receita_total
+        FROM sanittas.agendamento_servico a
+        JOIN sanittas.servico_empresa se ON a.fk_servico_empresa = se.id AND a.fk_servico_empresa = se.fk_empresa
+        JOIN sanittas.pagamento p ON a.fk_pagamento = p.idpagamento
+        WHERE se.fk_empresa = ?
+    AND MONTH(a.data_agendamento) = MONTH(CURRENT_DATE())) AS revenue_current_month,
+        (SELECT SUM(se.valor_servico) AS receita_total
+        FROM sanittas.agendamento_servico a
+        JOIN sanittas.servico_empresa se ON a.fk_servico_empresa = se.id AND a.fk_servico_empresa = se.fk_empresa
+        JOIN sanittas.pagamento p ON a.fk_pagamento = p.idpagamento
+        WHERE se.fk_empresa = ?) AS revenue_total;`;
+    db.query(query, [idEmpresa, idEmpresa, idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
@@ -105,15 +106,15 @@ app.get('/data/total-revenue', (req, res) => {
         }
     });
 });
-app.get('/data/daily-service', (req, res) => {
+app.get('/data/daily-service/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
     const query = `SELECT s.descricao AS servico, COUNT(*) AS quantidade_atendimentos
-    FROM mydb.agendamento_servico a
-    JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
-    JOIN mydb.servico s ON se.fk_idservico = s.idservico
-    WHERE DATE(a.data_agendamento) = CURRENT_DATE() AND a.fk_servico_empresa = 5
-    GROUP BY s.descricao;
-`;
-    db.query(query, (error, results) => {
+    FROM sanittas.agendamento_servico a
+    JOIN sanittas.servico_empresa se ON a.fk_servico_empresa = se.fk_empresa
+    JOIN sanittas.servico s ON se.fk_servico = s.idservico
+    WHERE DATE(a.data_agendamento) = CURRENT_DATE() AND se.fk_empresa = ?
+    GROUP BY s.descricao;`;
+    db.query(query, [idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
@@ -121,14 +122,14 @@ app.get('/data/daily-service', (req, res) => {
         }
     });
 });
-app.get('/data/daily-revenue', (req, res) => {
+app.get('/data/daily-revenue/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
     const query = `SELECT SUM(se.valor_servico) AS receita_do_dia
-    FROM mydb.agendamento_servico a
-    JOIN mydb.servico_empresa se ON a.fk_servico_empresa = se.fk_idempresa AND a.fk_servico = se.fk_idservico
-    JOIN mydb.pagamento p ON a.fk_pagamento = p.idpagamento
-    WHERE DATE(p.data_hora_pagamento) = CURRENT_DATE() AND a.fk_servico_empresa = 5;
-`;
-    db.query(query, (error, results) => {
+    FROM sanittas.agendamento_servico a
+    JOIN sanittas.servico_empresa se ON a.fk_servico_empresa = se.fk_empresa
+    JOIN sanittas.pagamento p ON a.fk_pagamento = p.idpagamento
+    WHERE DATE(a.data_agendamento) = CURRENT_DATE() AND a.fk_servico_empresa = ?;`;
+    db.query(query, [idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
@@ -136,7 +137,8 @@ app.get('/data/daily-revenue', (req, res) => {
         }
     });
 });
-app.get('/data/chart-data', (req, res) => {
+app.get('/data/chart-data/:idEmpresa', (req, res) => {
+    const idEmpresa = req.params.idEmpresa;
     const query = `SELECT
     s.idservico,
     s.descricao,
@@ -144,24 +146,23 @@ app.get('/data/chart-data', (req, res) => {
     YEAR(a.data_agendamento) AS ano,
     SUM(se.valor_servico) AS receita
 FROM
-    mydb.servico s
+    sanittas.servico s
 JOIN
-    mydb.servico_empresa se ON s.idservico = se.fk_idservico
+    sanittas.servico_empresa se ON s.idservico = se.fk_servico
 JOIN
-    mydb.agendamento_servico a ON se.fk_idempresa = a.fk_servico_empresa AND se.fk_idservico = a.fk_servico
+    sanittas.agendamento_servico a ON se.fk_empresa = a.fk_servico_empresa AND se.id = a.fk_servico_empresa
 JOIN
-    mydb.pagamento p ON a.fk_pagamento = p.idpagamento
+    sanittas.pagamento p ON a.fk_pagamento = p.idpagamento
 WHERE
-    a.data_agendamento >= CURDATE() - INTERVAL 6 MONTH AND se.fk_idempresa = 5
+    a.data_agendamento >= CURDATE() - INTERVAL 6 MONTH AND se.fk_empresa = ?
 GROUP BY
     s.idservico,
     s.descricao,
     YEAR(a.data_agendamento),
     MONTH(a.data_agendamento)
 ORDER BY
-    ano DESC, mes DESC, receita DESC;
-`;
-    db.query(query, (error, results) => {
+    ano DESC, mes DESC, receita DESC;`;
+    db.query(query, [idEmpresa], (error, results) => {
         if (error) {
             res.status(500).json({ error });
         } else {
