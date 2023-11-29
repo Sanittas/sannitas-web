@@ -7,11 +7,13 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, 
 
 function Chart() {
     const [chartData, setChartData] = useState([]);
+    //const idEmpresa = sessionStorage.getItem("idEmpresa");
+    const idEmpresa = 4;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/data/chart-data');
+                const response = await axios.get(`http://localhost:3001/data/chart-data/${idEmpresa}`);
                 setChartData(response.data);
             } catch (error) {
                 console.error('error fetching chart data:', error);
