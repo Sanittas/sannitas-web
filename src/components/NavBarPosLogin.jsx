@@ -20,8 +20,7 @@ function NavbarPosLogin(props) {
 
 
   const deslogar = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("nome");
+    sessionStorage.clear();
     window.location.href = "/";
   };
 

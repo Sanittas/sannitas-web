@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 import cadastroImg from "../assets/hospital.jpg";
 
-import apiToken from "../api/apiToken";
+import apiToken, { api8082 } from "../api/apiToken";
 
 import Swal from "sweetalert2";
 
@@ -30,7 +30,7 @@ function Cliente(props) {
   const [senha, setSenha] = useState(props.senha);
 
   useEffect(() => {
-    apiToken
+    api8082
       .get(`/usuarios/${idUsuario}`)
       .then((response) => {
         setNome(response.nome);
@@ -51,7 +51,7 @@ function Cliente(props) {
     console.log(cpf);
     console.log(senha);
 
-    apiToken
+    api8082
       .put(`/usuarios/${idUsuario}`, {
         nome,
         email,

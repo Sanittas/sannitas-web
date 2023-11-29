@@ -5,7 +5,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-import apiToken from "../api/apiToken";
+import { api8080, api8082, api8081 } from "../api/apiToken";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
@@ -29,7 +29,7 @@ function Empresa(props) {
 
     const getEmpresa = async () => {
       try {
-        const response = await apiToken.get(`/empresas/${idEmpresa}`);
+        const response = await api8080.get(`/empresas/${idEmpresa}`);
         setEmpresa(response.data);
       } catch (err) {
         console.log(err);
@@ -38,7 +38,7 @@ function Empresa(props) {
 
     const getFuncionarios = async () => {
       try {
-        const response = await apiToken.get(
+        const response = await api8080.get(
           `/funcionarios/empresa/${idEmpresa}`
         );
         setFuncionarios(response.data);
@@ -91,7 +91,7 @@ function Empresa(props) {
   };
 
   const updateEmpresa = (value) => {
-    apiToken
+    api8080
       .put(
         `/empresas/${idEmpresa}`,
         {
@@ -166,7 +166,7 @@ function Empresa(props) {
   }
 
   const updateFuncionario = (value) => {
-    apiToken
+    api8081
       .put(
         `/funcionarios/${value.id}`,
         {
@@ -238,7 +238,7 @@ function Empresa(props) {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        apiToken
+        api8081
           .post(`/funcionarios/`, {
             nome: result.value.nome,
             email: result.value.email,
@@ -284,7 +284,7 @@ function Empresa(props) {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        apiToken
+        api8081
           .delete(`/funcionarios/${idFuncionario}`)
           .then(() => {
             Swal.fire({
@@ -314,7 +314,6 @@ function Empresa(props) {
             <h1>Informações da Empresa</h1>
             <p>Razão Social: {empresas?.razaoSocial}</p>
             <p>CNPJ: {empresas?.cnpj}</p>
-            <p>Email: {empresas?.email}</p>
             <Button
               type="button"
               id="btn-update"

@@ -25,8 +25,7 @@ function cadastro() {
     const cpf = document.getElementById("cpf").value;
     const senha = document.getElementById("senha").value;
 
-    api
-      .post("usuarios/cadastrar/", {
+    api.post("usuarios/cadastrar/", {
         nome: nome,
         email: email,
         cpf: cpf,
