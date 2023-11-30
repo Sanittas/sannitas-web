@@ -15,7 +15,7 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 
 
-function Empresa(props) {
+function Empresa() {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
 
   //variaveis para funcionarios
@@ -50,7 +50,7 @@ function Empresa(props) {
 
     const getCompetencias = async () => {
       try {
-        const response = await api8080.get(`/competencias`);
+        const response = await api8080.get(`/competencias/`);
         setCompetencias(response.data);
       } catch (err) {
         console.log(err);
@@ -223,7 +223,7 @@ function Empresa(props) {
   }
 
   const vincularFuncionarioCompetencia = (value) => {
-    api8080.post( `/funcionarios/${value.id}/competencias`, {
+    api8080.post( `/funcionarios/${value.id}/competencias/`, {
       idFuncionario: value.id,
       expCompetencia: value.expCompetencia,
       especializacao: value.especializacao,
@@ -232,6 +232,7 @@ function Empresa(props) {
     }).catch((e) => {
       console.log(e);
     });
+  }
 
   const cadastrarFuncionario = () => {
     Swal.fire({
@@ -414,7 +415,8 @@ function Empresa(props) {
       </div>
     </>
   );
+
 }
-}
+
 
 export default Empresa;
