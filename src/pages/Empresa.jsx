@@ -11,10 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 
-
-
-
-
 function Empresa() {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
 
@@ -55,7 +51,7 @@ function Empresa() {
       } catch (err) {
         console.log(err);
       }
-    }
+    };
 
     getEmpresa();
     getFuncionarios();
@@ -102,15 +98,12 @@ function Empresa() {
 
   const updateEmpresa = (value) => {
     api8080
-      .put(
-        `/empresas/${idEmpresa}`,
-        {
-          razaoSocial: value.razaoSocial,
-          cnpj: value.cnpj,
-          senha: value.senha,
-          // email: value.email,
-        },
-      )
+      .put(`/empresas/${idEmpresa}`, {
+        razaoSocial: value.razaoSocial,
+        cnpj: value.cnpj,
+        senha: value.senha,
+        // email: value.email,
+      })
       .then(() => {
         Swal.fire({
           icon: "success",
@@ -140,11 +133,15 @@ function Empresa() {
                     <input id="funcional" class="swal2-input" placeholder="Número Funcional">
                     <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação">
                     <select id="idCompetencia" class="swal2-input select-competencia">
-                    {
-                      competencias ? competencias.map((competencia) => (
-                        <option value={competencia.id}>{competencia.nome}</option>
-                      )) : <option>Sem competências</option>
+                    ${
+                      competencias
+                        ? competencias.map(
+                            (competencia) =>
+                              `<option value=${competencia.id}>${competencia.nome}</option>`
+                          )
+                        : `<option>Sem competências</option>`
                     }
+                    </select>
                     <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
                     <input id="especializacao" class="swal2-input" placeholder="Especialização">
                     <input id="nivelProficiencia" class="swal2-input" placeholder="Nível de Proficiência">
@@ -161,11 +158,25 @@ function Empresa() {
         const cpf = Swal.getPopup().querySelector("#cpf").value;
         const rg = Swal.getPopup().querySelector("#rg").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
-        const numeroRegAtuacao = Swal.getPopup().querySelector("numeroRegAtuacao").value;
-        const expCompetencia = Swal.getPopup().querySelector("#expCompetencia").value;
-        const especializacao = Swal.getPopup().querySelector("#especializacao").value;
-        const nivelProficiencia = Swal.getPopup().querySelector("#nivelProficiencia").value;
-        if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao || !expCompetencia || !especializacao || !nivelProficiencia) {
+        const numeroRegAtuacao =
+          Swal.getPopup().querySelector("numeroRegAtuacao").value;
+        const expCompetencia =
+          Swal.getPopup().querySelector("#expCompetencia").value;
+        const especializacao =
+          Swal.getPopup().querySelector("#especializacao").value;
+        const nivelProficiencia =
+          Swal.getPopup().querySelector("#nivelProficiencia").value;
+        if (
+          !nome ||
+          !email ||
+          !cpf ||
+          !rg ||
+          !funcional ||
+          !numeroRegAtuacao ||
+          !expCompetencia ||
+          !especializacao ||
+          !nivelProficiencia
+        ) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
@@ -185,26 +196,20 @@ function Empresa() {
     }).then((result) => {
       if (result.isConfirmed) {
         updateFuncionario(result.value);
-
-
-        
       }
     });
-  }
+  };
 
   const updateFuncionario = (value) => {
     api8080
-      .put(
-        `/funcionarios/${value.id}`,
-        {
-          nome: value.nome,
-          email: value.email,
-          cpf: value.cpf,
-          rg: value.rg,
-          funcional: value.funcional,
-          numeroRegistroAtuacao: value.numeroRegistroAtuacao,
-        },
-      )
+      .put(`/funcionarios/${value.id}`, {
+        nome: value.nome,
+        email: value.email,
+        cpf: value.cpf,
+        rg: value.rg,
+        funcional: value.funcional,
+        numeroRegistroAtuacao: value.numeroRegistroAtuacao,
+      })
       .then(() => {
         Swal.fire({
           icon: "success",
@@ -220,32 +225,46 @@ function Empresa() {
       .catch((e) => {
         console.log(e);
       });
-  }
+  };
 
   const vincularFuncionarioCompetencia = (value) => {
-    api8080.post( `/funcionarios/${value.id}/competencias/`, {
-      idFuncionario: value.id,
-      expCompetencia: value.expCompetencia,
-      especializacao: value.especializacao,
-      nivelProficiencia: value.nivelProficiencia,
-
-    }).catch((e) => {
-      console.log(e);
-    });
-  }
+    api8080
+      .post(`/funcionarios/${value.id}/competencias/`, {
+        idFuncionario: value.id,
+        expCompetencia: value.expCompetencia,
+        especializacao: value.especializacao,
+        nivelProficiencia: value.nivelProficiencia,
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const cadastrarFuncionario = () => {
     Swal.fire({
       title: "Cadastrar Funcionário",
       html: `
-                <form width="400px">
-                    <input id="nome" class="swal2-input" type="text" placeholder="Digite seu Nome"/>
-                    <input id="email" class="swal2-input" type="email" placeholder="Digite seu Email"/>
-                    <input id="cpf" class="swal2-input" type="text" placeholder="Digite seu CPF"/>
-                    <input id="rg" class="swal2-input" type="text" placeholder="Digite seu RG"/>
-                    <input id="funcional" type="text" class="swal2-input" placeholder="Digite seu Número Funcional"/>
-                    <input id="numeroRegAtuacao" class="swal2-input" type="text" placeholder="Digite seu Número de Registro de Atuação"/>
-                </form>    
+      <form>
+      <input id="nome" class="swal2-input" placeholder="Nome">
+      <input id="email" class="swal2-input" placeholder="Email">
+      <input id="cpf" class="swal2-input" placeholder="CPF">
+      <input id="rg" class="swal2-input" placeholder="RG">
+      <input id="funcional" class="swal2-input" placeholder="Número Funcional">
+      <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação">
+      <select id="idCompetencia" class="swal2-input select-competencia">
+      ${
+        competencias
+          ? competencias.map(
+              (competencia) =>
+                `<option value=${competencia.id}>${competencia.nome}</option>`
+            )
+          : `<option>Sem competências</option>`
+      }
+      </select>
+      <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
+      <input id="especializacao" class="swal2-input" placeholder="Especialização">
+      <input id="nivelProficiencia" class="swal2-input" placeholder="Nível de Proficiência">
+  </form>    
                 `,
       width: "600px",
       showCancelButton: true,
@@ -258,7 +277,8 @@ function Empresa() {
         const cpf = Swal.getPopup().querySelector("#cpf").value;
         const rg = Swal.getPopup().querySelector("#rg").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
-        const numeroRegAtuacao = Swal.getPopup().querySelector("#numeroRegAtuacao").value;
+        const numeroRegAtuacao =
+          Swal.getPopup().querySelector("#numeroRegAtuacao").value;
         // const senha = Swal.getPopup().querySelector("#senha").value;
         // const senhaConfirm = Swal.getPopup().querySelector("#senhaConfirm").value;
         if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao) {
@@ -296,8 +316,7 @@ function Empresa() {
 
             setTimeout(() => {
               window.location.reload();
-            }
-            , 2000);
+            }, 2000);
           })
           .catch((err) => {
             console.log(err);
@@ -311,8 +330,6 @@ function Empresa() {
       }
     });
   };
-
-
 
   const deleteFuncionario = (idFuncionario) => {
     Swal.fire({
@@ -376,7 +393,6 @@ function Empresa() {
 
         <div className="card-read-funcionarios">
           <table>
-
             <thead>
               <tr>
                 <th>Nome</th>
@@ -390,8 +406,8 @@ function Empresa() {
               </tr>
             </thead>
             <tbody>
-              {
-                funcionarios ? funcionarios.map((funcionario) => (
+              {funcionarios ? (
+                funcionarios.map((funcionario) => (
                   <tr key={funcionario.id}>
                     <td>{funcionario.nome}</td>
                     <td>{funcionario.email}</td>
@@ -400,23 +416,34 @@ function Empresa() {
                     <td>{funcionario.funcional}</td>
                     <td>{funcionario.numeroRegistroAtuacao}</td>
                     <td>
-
-                      <Button type="button" class="btn-update" value={<FontAwesomeIcon icon={faPen}/>} onClick={() => modalUpdateFuncionario(funcionario.id)} />
+                      <Button
+                        type="button"
+                        class="btn-update"
+                        value={<FontAwesomeIcon icon={faPen} />}
+                        onClick={() => modalUpdateFuncionario(funcionario.id)}
+                      />
                     </td>
                     <td>
-                      <Button type="button" class="btn-delete" value={<FontAwesomeIcon icon={faTrashAlt}/>} onClick={() => deleteFuncionario(funcionario.id)} />
+                      <Button
+                        type="button"
+                        class="btn-delete"
+                        value={<FontAwesomeIcon icon={faTrashAlt} />}
+                        onClick={() => deleteFuncionario(funcionario.id)}
+                      />
                     </td>
                   </tr>
-                )) : <tr><td>Sem funcionários</td></tr>
-              }
+                ))
+              ) : (
+                <tr>
+                  <td>Sem funcionários</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
       </div>
     </>
   );
-
 }
-
 
 export default Empresa;
