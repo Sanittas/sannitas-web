@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import CardServico from "../components/CardServico";
-import api from "../api/api";
+import {api} from "../api/api";
 import "../css/cliente.css";
 import Swal from "sweetalert2";
 

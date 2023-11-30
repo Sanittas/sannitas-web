@@ -5,7 +5,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-import { api8080, api8082, api8081 } from "../api/apiToken";
+import { api8080 } from "../api/apiToken";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
@@ -21,6 +21,7 @@ function Empresa(props) {
   //variaveis para funcionarios
   const [funcionarios, setFuncionarios] = useState([]);
   const [empresas, setEmpresa] = useState();
+  const [competencias, setCompetencias] = useState([]);
 
   useEffect(() => {
     if (sessionStorage.getItem("token") == null) {
@@ -47,8 +48,18 @@ function Empresa(props) {
       }
     };
 
+    const getCompetencias = async () => {
+      try {
+        const response = await api8080.get(`/competencias`);
+        setCompetencias(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     getEmpresa();
     getFuncionarios();
+    getCompetencias();
   }, []);
 
   const modalUpdate = () => {
@@ -128,6 +139,12 @@ function Empresa(props) {
                     <input id="rg" class="swal2-input" placeholder="RG">
                     <input id="funcional" class="swal2-input" placeholder="Número Funcional">
                     <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação">
+                    <select id="idCompetencia" class="swal2-input select-competencia">
+                    {
+                      competencias ? competencias.map((competencia) => (
+                        <option value={competencia.id}>{competencia.nome}</option>
+                      )) : <option>Sem competências</option>
+                    }
                     <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
                     <input id="especializacao" class="swal2-input" placeholder="Especialização">
                     <input id="nivelProficiencia" class="swal2-input" placeholder="Nível de Proficiência">
@@ -148,7 +165,6 @@ function Empresa(props) {
         const expCompetencia = Swal.getPopup().querySelector("#expCompetencia").value;
         const especializacao = Swal.getPopup().querySelector("#especializacao").value;
         const nivelProficiencia = Swal.getPopup().querySelector("#nivelProficiencia").value;
-          Swal.getPopup().querySelector("#numeroRegAtuacao").value;
         if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao || !expCompetencia || !especializacao || !nivelProficiencia) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
@@ -241,8 +257,7 @@ function Empresa(props) {
         const cpf = Swal.getPopup().querySelector("#cpf").value;
         const rg = Swal.getPopup().querySelector("#rg").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
-        const numeroRegAtuacao =
-          Swal.getPopup().querySelector("#numeroRegAtuacao").value;
+        const numeroRegAtuacao = Swal.getPopup().querySelector("#numeroRegAtuacao").value;
         // const senha = Swal.getPopup().querySelector("#senha").value;
         // const senhaConfirm = Swal.getPopup().querySelector("#senhaConfirm").value;
         if (!nome || !email || !cpf || !rg || !funcional || !numeroRegAtuacao) {
