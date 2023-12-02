@@ -14,13 +14,18 @@ function Servicos(props) {
   
 
   useEffect(() => {
-    api.get(`servicos/`).then((response) => {
-        
-        setServicos(response.data); 
-    
-    }).catch(() => {
-      console.log("deu erro");
-    });
+    getServicosVinculados = async () => {
+      try {
+        const response = await api8080.get(
+          `/servicos-empresas/` // path rota api
+        );
+
+        console.log(response.data);
+        setServicos(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }, []);
 
   const handleSave = (e) => {
@@ -35,12 +40,15 @@ function Servicos(props) {
       {
         servicos.map(servico => {
             <CardServico
-            id = {servico.idServico} 
-            titulo = {servico.titulo}
-            descricao = {servico.descricao}
-            valor = {servico.valor}
-            area = {servico.areaSaude}
+            id = {servico.id} 
             tempo = {servico.duracaoEstimada}
+            equipeResponsavel = {servico.equipeResponsavel}
+            valor = {servico.valorServico}
+            idEmpresa = {servico.idEmpresa}
+            idServico = {servico.idServico}
+            // descricao = {servico.descricao}
+            // area = {servico.areaSaude}
+            // titulo = {servico.titulo}
             />
         })
       }

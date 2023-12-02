@@ -48,6 +48,7 @@ function Empresa() {
       try {
         const response = await api8080.get(`/competencias/`);
         setCompetencias(response.data);
+        console.log(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -137,9 +138,11 @@ function Empresa() {
                       competencias
                         ? competencias.map(
                             (competencia) =>
-                              `<option value=${competencia.id}>${competencia.nome}</option>`
+                              `<option value=${competencia.id}>
+                              ${competencia.descricao}
+                              </option>`
                           )
-                        : `<option>Sem competências</option>`
+                        : <option>Sem competências</option>
                     }
                     </select>
                     <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
@@ -256,9 +259,11 @@ function Empresa() {
         competencias
           ? competencias.map(
               (competencia) =>
-                `<option value=${competencia.id}>${competencia.nome}</option>`
+                `<option value=${competencia.id}>
+                ${competencia.descricao}
+                </option>`
             )
-          : `<option>Sem competências</option>`
+          : <option>Sem competências</option>
       }
       </select>
       <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
