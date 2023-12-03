@@ -19,6 +19,7 @@
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     margin-top: 40px;
     border-radius: 20px;
+    background-color: #fafafa;
 }
 
 .container-empresa .card-infos-update, .card-infos-funcionarios {
@@ -98,6 +99,7 @@
     border-spacing: 0;
     text-align: center;
     margin-top: 20px;
+    background-color: #f1f1f1;
 }
 
 .card-read-funcionarios table thead tr th {
@@ -125,6 +127,7 @@
     width: 17%;
     text-align: center;
     cursor: pointer;
+    background-color: #fafafa;
     
     border-bottom: 1px solid #000;
 }

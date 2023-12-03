@@ -52,13 +52,13 @@ function NavbarPosLogin(props) {
             <Link to="/">Home</Link>
           </li>
           <li>
-          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/cliente/${sessionStorage.getItem("id")}`}>Serviços</Link>}
+          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
           </li>
           <li>
           <a href="#sobre">Sobre</a>
           </li>
           <li>
-            {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}`}>{sessionStorage.getItem("razaoSocial")}</Link> : <Link to={`/cliente/${sessionStorage.getItem("id")}`}>{sessionStorage.getItem("nome").substring(0, sessionStorage.getItem("nome").indexOf(' '))}</Link>}
+            {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}`}>{sessionStorage.getItem("razaoSocial")}</Link> : <Link to={`/cliente/${sessionStorage.getItem("id")}`}>{sessionStorage.getItem("nome")}</Link>}
           </li>
           <li>
             <Link className="btn-action" onClick={deslogar}>

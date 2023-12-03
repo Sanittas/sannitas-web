@@ -54,9 +54,7 @@ function Empresa() {
     const getCompetencias = async () => {
       try {
         const response = await api8080.get(`/competencias/`);
-        console.log(response.data);
         setCompetencias(response.data);
-        console.log(response.data);
       } catch (err) {
         console.log(err);
       }
