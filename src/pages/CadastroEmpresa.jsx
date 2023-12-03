@@ -62,9 +62,10 @@ function cadastroEmpresa() {
         <>
         <Navbar />
 
-        <div className="container-cadastro">
+        <div className="container-cadastroEmpresa">
             <div className="cadastroEmpresa">
                 <h1>Cadastro</h1>
+                <p>Empresa</p>
                 <form>
                     <Input label="Razão Social" type="text" placeholder="Razão Social" id="razaoSocial" />
                     <Input label="CNPJ" type="text" placeholder="CNPJ" id="cnpj" mask="cnpj" max="18"/>
@@ -82,7 +83,7 @@ function cadastroEmpresa() {
                 
             </div>
 
-            <div className="img-cadastro">
+            <div className="img-cadastroEmpresa">
                 <img src={cadastroImg} />
                 </div>
         </div>

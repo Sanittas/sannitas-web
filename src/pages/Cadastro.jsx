@@ -62,6 +62,7 @@ function cadastro() {
       <div className="container-cadastro">
         <div className="cadastro">
           <h1>Cadastro</h1>
+          <p>Usuário</p>
           <form>
             <Input
               label="Nome"
