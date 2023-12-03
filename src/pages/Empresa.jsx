@@ -11,7 +11,10 @@ import mascara from "../api/mascara";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { SetMealSharp } from "@mui/icons-material";
+import {
+  LocalConvenienceStoreOutlined,
+  SetMealSharp,
+} from "@mui/icons-material";
 
 function Empresa() {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
@@ -304,7 +307,6 @@ function Empresa() {
       });
   };
 
-
   const cadastrarFuncionario = async () => {
     Swal.fire({
       title: "Cadastrar Funcionário",
@@ -318,12 +320,14 @@ function Empresa() {
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
       <select id="idCompetencia" class="swal2-input select-competencia" type="number">
       ${
-        competencias
-          ? competencias.map(
-              (competencia) =>
-                `<option value=${competencia.id}>${competencia.descricao}</option>`
-            )
-          : <option>Sem competências</option>
+        competencias ? (
+          competencias.map(
+            (competencia) =>
+              `<option value=${competencia.id}>${competencia.descricao}</option>`
+          )
+        ) : (
+          <option>Sem competências</option>
+        )
       }
 
       
@@ -472,22 +476,11 @@ function Empresa() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   const handleBotaoClick = () => {
-    if(mostrarModal === false){
-      setMostrarModal(true);
-    }else {
-      setMostrarModal(false);
-    }
-  }
+    mostrarModal ? setMostrarModal(false) : setMostrarModal(true)
 
-  const modalRef = useRef(null)
+    
+  };
 
-
-
-  const handleClickForaModal = (e) => {
-    if(modalRef.current && !modalRef.current.contains(e.target)) {
-      setMostrarModal(false)
-    }
-  }
   return (
     <>
       <NavbarPosLogin />
@@ -511,14 +504,12 @@ function Empresa() {
               onClick={handleBotaoClick}
             />
 
-            {
-              mostrarModal && (
+            {mostrarModal ? (
+              <>
                 <ModalCadastroEndereco />
-              )
-
-            }
-
-            
+              
+              </>
+            ) : null}
           </div>
         </div>
 

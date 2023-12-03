@@ -10,12 +10,17 @@ import apiViaCep from "../api/apiViaCep";
 import mascara from "../api/mascara";
 
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 
 
 function ModalCadastroEndereco(props) {
 
+
+
+
+    
     
 
     const [cep, setCep] = useState("");
@@ -57,6 +62,8 @@ function ModalCadastroEndereco(props) {
                 showConfirmButton: true,
                 timer: 1500,
               });
+
+              fecharModal()
         }).catch((err) => {
             Swal.fire({
                 icon: "error",
@@ -64,11 +71,17 @@ function ModalCadastroEndereco(props) {
                 showConfirmButton: true,
                 timer: 1500,
               });
+              fecharModal()
         })
     }
 
     const formatCep = (e) => {
         setCep(mascara.mascaraCep(e.target.value))
+    }
+
+    const fecharModal = () => {
+        var modalStyle = document.querySelector(".modalCadastroEndereco");
+        modalStyle.style.display = "none";  
     }
 
     
@@ -78,6 +91,7 @@ function ModalCadastroEndereco(props) {
             <div className="modalCadastroEnderecoContainer">
                 <div className="modalCadastroEnderecoHeader">
                     <h2>Cadastro de Endereço</h2>
+                    <button onClick={fecharModal}><FontAwesomeIcon icon={faClose}/></button>
                 </div>
                 <div className="modalCadastroEnderecoBody">
                     <div className="modalCadastroEnderecoBodyContainer">
