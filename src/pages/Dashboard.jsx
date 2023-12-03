@@ -1,5 +1,6 @@
+import React from "react";
 import "../css/dashboard.css";
-import Navbar from "../components/NavbarDash";
+import NavbarPosLogin from "../components/NavBarPosLogin";
 import Widget from "../components/Widgets";
 import Destaque from "../components/Destaque";
 import Chart from "../components/Chart";
@@ -8,7 +9,7 @@ function Dashboard() {
     return (
         <div className="dashboard">
             Dashboard
-            <Navbar />
+            <NavbarPosLogin />
             <div className="dashContainer">
                 <div className="widgets">
                     <Widget type="user" />

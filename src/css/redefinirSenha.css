@@ -27,7 +27,7 @@ body {
     display: none;
 }
 
-h1 {
+.confirmacao h1 {
     color: #3498db;
     font-weight: 500;
 }

@@ -5,11 +5,13 @@ import Swal from "sweetalert2";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
 
 function Cliente() {
   const idUsuario = sessionStorage.getItem("id");
 
   const [usuario, setUsuario] = useState({});
+  const [enderecos, setEnderecos] = useState([]);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -29,8 +31,19 @@ function Cliente() {
       }
     }
 
+    const getEnderecos = async () => {
+      try {
+        const response = await api8081.get(`enderecos/usuarios/${idUsuario}`);
+        console.log(response);
+        setEnderecos(response.data);
+      } catch (error) {
+        console.error("Erro ao obter endereços do usuário:", error);
+      }
+    };
+
     if (idUsuario) {
       fetchUserInfo();
+      getEnderecos();
     }
   }, [idUsuario]);
 
@@ -51,6 +64,10 @@ function Cliente() {
         showConfirmButton: true,
         timer: 1500,
       });
+
+      setInterval(() => {
+        window.location.reload();
+      }, 2500);
     } catch (err) {
       console.error(err);
       Swal.fire({
@@ -60,6 +77,101 @@ function Cliente() {
         timer: 1500,
       });
     }
+  };
+
+  const [viewModal, setViewModal] = useState(false);
+
+  const handleBotaoClick = () => {
+    viewModal ? setViewModal(false) : setViewModal(true);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api8081.delete(`/enderecos/usuarios/${id}`);
+      Swal.fire({
+        icon: "success",
+        title: "Endereço excluído com sucesso!",
+        showConfirmButton: true,
+        timer: 1500,
+      });
+      setInterval(() => {
+        window.location.reload();
+      }, 2500);
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao excluir endereço!",
+        showConfirmButton: true,
+        timer: 1500,
+      });
+    }
+  };
+
+  const handleEdit = async (value) => {
+    Swal.fire({
+      title: "Editar Endereço",
+      width: 600,
+      html: `<input id="swal-input1" class="swal2-input" placeholder="Logradouro" value="${value.logradouro}">
+      <input id="swal-input2" class="swal2-input" placeholder="Número" value="${value.numero}">
+      <input id="swal-input3" class="swal2-input" placeholder="Complemento" value="${value.complemento}">
+      <input id="swal-input4" class="swal2-input" placeholder="Cidade" value="${value.cidade}">
+      <input id="swal-input5" class="swal2-input" placeholder="Estado" value="${value.estado}">`,
+      confirmButtonText: "Salvar",
+      focusConfirm: false,
+      preConfirm: () => {
+        const logradouro = Swal.getPopup().querySelector("#swal-input1").value;
+        const numero = Swal.getPopup().querySelector("#swal-input2").value;
+        const complemento = Swal.getPopup().querySelector("#swal-input3").value;
+        const cidade = Swal.getPopup().querySelector("#swal-input4").value;
+        const estado = Swal.getPopup().querySelector("#swal-input5").value;
+
+        if (!logradouro || !numero || !cidade || !estado) {
+          Swal.showValidationMessage(`Preencha todos os campos!`);
+        }
+
+        return { logradouro, numero, complemento, cidade, estado };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const logradouro = result.value.logradouro;
+        const numero = result.value.numero;
+        const complemento = result.value.complemento;
+        const cidade = result.value.cidade;
+        const estado = result.value.estado;
+
+        api8081
+          .put(`/enderecos/usuarios/${value.id}`, {
+            logradouro: logradouro,
+            numero: numero,
+            complemento: complemento,
+            cidade: cidade,
+            estado: estado,
+          })
+          .then((res) => {
+            console.log(res);
+            Swal.fire({
+              icon: "success",
+              title: "Endereço Editado com Sucesso!",
+              showConfirmButton: true,
+              timer: 1500,
+            });
+
+            setInterval(() => {
+              window.location.reload();
+            }, 2500);
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              icon: "error",
+              title: "Erro ao Editar o Endereço",
+              showConfirmButton: true,
+              timer: 1500,
+            });
+          });
+      }
+    });
   };
 
   return (
@@ -110,6 +222,55 @@ function Cliente() {
               onClick={handleSave}
             />
           </form>
+        </div>
+
+        <div className="enderecos">
+          <h1>Endereços</h1>
+          <Button
+            type="submit"
+            id="btn-cadastrar"
+            value="Cadastrar Endereço"
+            onClick={handleBotaoClick}
+          />
+          <div className="enderecos-container">
+            {enderecos ? (
+              enderecos.map((endereco) => (
+                <div className="endereco" key={endereco.id}>
+                  <label>Logradouro</label>
+                  <p>{endereco.logradouro}</p>
+                  <label>Número</label>
+                  <p>{endereco.numero}</p>
+                  <label>Complemento</label>
+                  <p>{endereco.complemento}</p>
+                  <label>Cidade</label>
+                  <p>{endereco.cidade}</p>
+                  <label>Estado</label>
+                  <p>{endereco.estado}</p>
+
+                  <Button
+                    type="submit"
+                    id="btn-cadastrar"
+                    value="Excluir Endereço"
+                    onClick={() => handleDelete(endereco.id)}
+                  />
+                  <Button
+                    type="submit"
+                    id="btn-cadastrar"
+                    value="Editar Endereço"
+                    onClick={() => handleEdit(endereco)}
+                  />
+                </div>
+              ))
+            ) : (
+              <Button
+                type="submit"
+                id="btn-cadastrar"
+                value="Cadastrar endereço"
+                onClick={handleBotaoClick}
+              />
+            )}
+            {viewModal ? <ModalCadastroEndereco /> : null}
+          </div>
         </div>
 
         <div className="servicos-contratados">
