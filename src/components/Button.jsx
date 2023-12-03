@@ -2,7 +2,7 @@ import React from "react";
 
 import { useState } from "react";
 
-import { Component } from "react";
+import ModalCadastroEndereco from "./ModalCadastroEndereco";
 
 import "../css/button.modules.css"
 

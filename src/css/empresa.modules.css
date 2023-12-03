@@ -146,6 +146,10 @@
     cursor: pointer;
 }
 
+.swal2-input {
+    height:48px!important;
+}
+
 .select-competencia {
     width: 450px;
     height: 2.625em;

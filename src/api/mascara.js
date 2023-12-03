@@ -29,4 +29,12 @@ const mascaraCpf = (e) => {
   return telefone;
   };
 
-  export default { mascaraCpf, mascaraCnpj, mascaraTelefone };
+  const mascaraCep = (e) => {
+    let cep = e;
+    cep = cep.replace(/\D/g, "");
+    cep = cep.replace(/(\d{5})(\d)/, "$1-$2");
+
+    return cep;
+  };
+
+  export default { mascaraCpf, mascaraCnpj, mascaraTelefone, mascaraCep };
