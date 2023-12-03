@@ -20,6 +20,7 @@ function Empresa() {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
 
   //variaveis para funcionarios
+  const [countFuncionarios, setCountFuncionarios] = useState(0);
   const [funcionarios, setFuncionarios] = useState([]);
   const [empresas, setEmpresa] = useState();
   const [competencias, setCompetencias] = useState([]);
@@ -69,10 +70,22 @@ function Empresa() {
       }
     }
 
+    const getCountFuncionarios = async () => {
+      try {
+        const response = await api8080.get(
+          `/funcionarios/count-empresa/`,
+        );
+        setCountFuncionarios(response.data); 
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     getEmpresa();
     getFuncionarios();
     getCompetencias();
     getEnderecos();
+    getCountFuncionarios();
   }, []);
 
   const modalUpdate = () => {
@@ -639,7 +652,7 @@ function Empresa() {
         <div className="card-infos-funcionarios">
           <div className="card-infos">
             <h1>Funcionários</h1>
-            <p>Quantidade de Funcionários: 0</p>
+            <p>Quantidade de Funcionários: {countFuncionarios}</p>
             <Button
               type="button"
               id="btn-update"
