@@ -3,11 +3,12 @@ import React from "react";
 import "../css/telaServicosEmpresa.css"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {api} from "../api/api";
+import { api } from "../api/api";
+import { api8080 } from "../api/apiToken";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-import { Select } from "@mui/material";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
@@ -15,9 +16,6 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 function CadastrarServicos(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
-  const [razaoSocial, setRazaoSocial] = useState();
-  const [cnpj, setCnpj] = useState();
-  const [email, setEmail] = useState();
 
   const [options, setOptions] = useState([]);
   const [servicos, setServicos] = useState([]);
@@ -30,16 +28,12 @@ function CadastrarServicos(props) {
 
     const getTipoServicos = async () => {
       try {
-        const response = await api.get(
-          `/categoria-servico/` // path rota api
+        const response = await api8080.get(
+          `/categorias-servicos/` // path rota api
         );
 
-        const opcoesTransformadas = response.data.map(item => ({
-          value: item.id,
-          label: item.descricao,
-        }));
-
-        setOptions(opcoesTransformadas);
+        setOptions(response.data);
+        console.log(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -47,12 +41,11 @@ function CadastrarServicos(props) {
 
     const getServicos = async () => {
       try {
-        const response = await api.get(
-          `` // path rota api
+        const resposta = await api8080.get(
+          `/servicos/` // path rota api
         );
 
-        setServicos(response.data);
-
+        setServicos(resposta.data);
       } catch (err) {
         console.log(err);
       }
@@ -60,12 +53,12 @@ function CadastrarServicos(props) {
 
     const getServicosVinculados = async () => {
       try {
-        const response = await api.get(
-          `` // path rota api
+        const response = await api8080.get(
+          `/servicos-empresas/` // path rota api
         );
 
+        console.log(response.data);
         setServicosVinculados(response.data);
-
       } catch (err) {
         console.log(err);
       }
@@ -73,18 +66,21 @@ function CadastrarServicos(props) {
 
     getTipoServicos();
     getServicos();
+    getServicosVinculados();
   }, []);
 
 
   const CadastroServicoApi = (value) => {
 
-    api.post(`/servico-empresa/`, {
+    
+
+    api8080.post(`/servicos-empresas/`, {
 
       idEmpresa: value.idEmpresa,
-      duracaoEstimada: value.duracaoEstimada,
+      idServico: value.idServico,
       valorServico: value.valorServico,
-      equipeResponsavel: value.equipeResponsavel,
-      tipoServico: value.opcaoSelecionada
+      duracaoEstimada: value.duracaoEstimada,
+      equipeResponsavel: value.equipeResponsavel
 
     }).then((res) => {
       console.log(res);
@@ -96,9 +92,9 @@ function CadastrarServicos(props) {
         timer: 1500
       })
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 10000);
 
     }).catch((err) => {
       console.log(err);
@@ -115,11 +111,14 @@ function CadastrarServicos(props) {
   };
 
   const CadastroServicoNovo = (value) => {
+    
+    console.log(value.fkCategoriaServico)
+    console.log(value.descricao)
 
-    api.post(`/servico-empresa/`, {
+    api8080.post(`/servicos/`, {
 
-      fkCategoriaServico: value.opcaoSelecionada,
-      descricao: value.descricao
+      descricao: value.descricao,
+      fkCategoriaServico: value.fkCategoriaServico
 
 
     }).then((res) => {
@@ -154,11 +153,21 @@ function CadastrarServicos(props) {
     Swal.fire({
       title: "Cadastrar Serviço",
       html: `
-              <Select id="selectOpcoes" options={servicos} value={selectedOption} onChange={setSelectedOption}/>
+              <select id="idServico" class="swal2-input select-competencia">
+              ${servicos
+          ? servicos.map(
+            (servico) =>
+              `<option value=${servico.id}>
+                        ${servico.descricao}
+                        </option>`
+          )
+          : <option>Sem Serviços</option>
+        }
+              </select>
 
               <form>
-                  <input id="duracaoEstimada" class="swal2-input" placeholder="duração Estimada">
-                  <input id="valorServico" type="password" class="swal2-input" placeholder="Valor do Serviço">
+                  <input id="duracaoEstimada" class="swal2-input" placeholder="duração Estimada (em minutos)">
+                  <input id="valorServico"  class="swal2-input" placeholder="Valor do Serviço">
                   <input id="equipeResponsavel" class="swal2-input" placeholder="equipe Responsável">
               </form>    
               `,
@@ -167,22 +176,22 @@ function CadastrarServicos(props) {
       cancelButtonText: "Cancelar",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        const opcaoSelecionada = Swal.getPopup().querySelector("#selectOpcoes").value;
+        const idServico = Swal.getPopup().querySelector("#idServico").value;
         const duracaoEstimada = Swal.getPopup().querySelector("#duracaoEstimada").value;
         const valorServico = Swal.getPopup().querySelector("#valorServico").value;
         const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
         if (!duracaoEstimada || !valorServico || !equipeResponsavel) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
-        if (!opcaoSelecionada) {
+        if (!idServico) {
           Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
         }
         return {
           idEmpresa: idEmpresa,
-          duracaoEstimada: duracaoEstimada,
+          idServico: idServico,
           valorServico: valorServico,
-          equipeResponsavel: equipeResponsavel,
-          tipoServico: opcaoSelecionada
+          duracaoEstimada: duracaoEstimada,
+          equipeResponsavel: equipeResponsavel
         };
       },
       allowOutsideClick: () => !Swal.isLoading(),
@@ -197,7 +206,17 @@ function CadastrarServicos(props) {
     Swal.fire({
       title: "Cadastrar Serviço",
       html: `
-              <Select id="selectOpcoes" options={options} value={selectedOption} onChange={setSelectedOption}/>
+      <select id="idCategoria" class="swal2-input select-competencia">
+      ${options
+          ? options.map(
+            (categoria) =>
+              `<option value=${categoria.id}>
+                ${categoria.areaSaude}
+                </option>`
+          )
+          : <option>Sem Serviços</option>
+        }
+      </select>
 
               <form>
                   <input id="descricao" class="swal2-input" placeholder="Descrição">
@@ -208,16 +227,16 @@ function CadastrarServicos(props) {
       cancelButtonText: "Cancelar",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        const opcaoSelecionada = Swal.getPopup().querySelector("#selectOpcoes").value;
+        const idCategoria = Swal.getPopup().querySelector("#idCategoria").value;
         const descricao = Swal.getPopup().querySelector("#descricao").value;
         if (!descricao) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
-        if (!opcaoSelecionada) {
+        if (!idCategoria || idCategoria == undefined) {
           Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
         }
         return {
-          fkCategoriaServico: opcaoSelecionada,
+          fkCategoriaServico: idCategoria,
           descricao: descricao
         };
       },
@@ -229,46 +248,102 @@ function CadastrarServicos(props) {
     });
   };
 
+  const putServicoApi = (value) => {
+
+    console.log(value.id)
+    console.log(value.idEmpresa)
+    console.log(value.idServico)
+    console.log(value.valorServico)
+    console.log(value.duracaoEstimada)
+    console.log(value.equipeResponsavel)
+
+    api8080.put(`/servicos-empresas/${value.id}`, {
+
+      
+      idEmpresa: value.idEmpresa,
+      idServico: value.idServico,
+      valorServico: value.valorServico,
+      duracaoEstimada: value.duracaoEstimada,
+      equipeResponsavel: value.equipeResponsavel
+
+    }).then((res) => {
+      console.log(res);
+
+      Swal.fire({
+        icon: "success",
+        title: "Atualização realizada com sucesso!",
+        showConfirmButton: true,
+        timer: 1500
+      })
+
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 10000);
+
+    }).catch((err) => {
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao realizar atualização!",
+        showConfirmButton: true,
+        timer: 1500
+      })
+
+
+    })
+
+  };
 
   const modalUpdateServico = (id) => {
     Swal.fire({
       title: "Atualizar Serviço",
       html: `
-              <Select id="selectOpcoes" options={servicos} value={selectedOption} onChange={setSelectedOption}/>
+      <select id="idServico" class="swal2-input select-competencia">
+              ${servicos
+          ? servicos.map(
+            (servico) =>
+              `<option value=${servico.id}>
+                        ${servico.descricao}
+                        </option>`
+          )
+          : <option>Sem Serviços</option>
+        }
+              </select>
 
               <form>
-                  <input id="duracaoEstimada" class="swal2-input" placeholder="duração Estimada">
-                  <input id="valorServico" type="password" class="swal2-input" placeholder="Valor do Serviço">
+                  <input id="duracaoEstimada" class="swal2-input" placeholder="duração Estimada (em minutos)">
+                  <input id="valorServico"  class="swal2-input" placeholder="Valor do Serviço">
                   <input id="equipeResponsavel" class="swal2-input" placeholder="equipe Responsável">
-              </form>    
+              </form>     
               `,
-      showCancelButton: true,
-      confirmButtonText: "Cadastrar",
-      cancelButtonText: "Cancelar",
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        const opcaoSelecionada = Swal.getPopup().querySelector("#selectOpcoes").value;
-        const duracaoEstimada = Swal.getPopup().querySelector("#duracaoEstimada").value;
-        const valorServico = Swal.getPopup().querySelector("#valorServico").value;
-        const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
-        if (!duracaoEstimada || !valorServico || !equipeResponsavel) {
-          Swal.showValidationMessage(`Preencha todos os campos`);
-        }
-        if (!opcaoSelecionada) {
-          Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
-        }
-        return {
-          idEmpresa: idEmpresa,
-          duracaoEstimada: duracaoEstimada,
-          valorServico: valorServico,
-          equipeResponsavel: equipeResponsavel,
-          tipoServico: opcaoSelecionada
-        };
+              showCancelButton: true,
+              confirmButtonText: "Cadastrar",
+              cancelButtonText: "Cancelar",
+              showLoaderOnConfirm: true,
+              preConfirm: () => {
+                const idServico = Swal.getPopup().querySelector("#idServico").value;
+                const duracaoEstimada = Swal.getPopup().querySelector("#duracaoEstimada").value;
+                const valorServico = Swal.getPopup().querySelector("#valorServico").value;
+                const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
+                if (!duracaoEstimada || !valorServico || !equipeResponsavel) {
+                  Swal.showValidationMessage(`Preencha todos os campos`);
+                }
+                if (!idServico) {
+                  Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
+                }
+                return {
+                  id: id,
+                  idEmpresa: idEmpresa,
+                  idServico: idServico,
+                  valorServico: valorServico,
+                  duracaoEstimada: duracaoEstimada,
+                  equipeResponsavel: equipeResponsavel
+                };
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        CadastroServicoApi(result.value);
+        putServicoApi(result.value);
       }
     });
   }
@@ -281,8 +356,8 @@ function CadastrarServicos(props) {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api
-          .delete(``) // sem back end no momento
+        api8080
+          .delete(`/servicos-empresas/${idServico}`)
           .then(() => {
             Swal.fire({
               icon: "success",
@@ -296,6 +371,12 @@ function CadastrarServicos(props) {
             }, 2000);
           })
           .catch((e) => {
+            Swal.fire({
+              icon: "error",
+              title: "Erro ao deletar serviço",
+              showConfirmButton: true,
+              timer: 1500,
+            });
             console.log(e);
           });
       },
@@ -307,22 +388,22 @@ function CadastrarServicos(props) {
       <NavbarPosLogin />
       <div className="container">
         <div className="btns-servicos">
-          
 
-            <Button
-              type="button"
-              id="Cadastrar"
-              onClick={cadastrarServico}
-              value="Cadastrar Serviço"
-            />
 
-            <Button
-              type="button"
-              id="Cadastrar"
-              onClick={VincularServico}
-              value="Vincular Serviço"
-            />
-          
+          <Button
+            type="button"
+            id="Cadastrar"
+            onClick={cadastrarServico}
+            value="Cadastrar Serviço"
+          />
+
+          <Button
+            type="button"
+            id="Cadastrar"
+            onClick={VincularServico}
+            value="Vincular Serviço"
+          />
+
         </div>
 
         <div className="card-read-servicos">
@@ -368,7 +449,6 @@ function CadastrarServicos(props) {
 
             <thead>
               <tr>
-                <th>Nome do Serviço</th>
                 <th>Área saúde</th>
               </tr>
             </thead>
@@ -377,7 +457,6 @@ function CadastrarServicos(props) {
                 servicos ? servicos.map((servico) => (
                   <tr key={servico.id}>
                     <td>{servico.descricao}</td>
-                    <td>{servico.areaSaude}</td>
                   </tr>
                 )) : <tr><td>Sem Serviços cadastrados</td></tr>
               }

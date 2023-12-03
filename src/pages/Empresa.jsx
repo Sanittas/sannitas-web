@@ -52,6 +52,7 @@ function Empresa() {
         const response = await api8080.get(`/competencias/`);
         console.log(response.data);
         setCompetencias(response.data);
+        console.log(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -312,9 +313,9 @@ function Empresa() {
         competencias
           ? competencias.map(
               (competencia) =>
-                `<option value=${competencia.id}>${competencia.descricao}</option>`
+                `<option value=${competencia.id}>${competencia.nome}</option>`
             )
-          : `<option>Sem competências</option>`
+          : <option>Sem competências</option>
       }
 
       

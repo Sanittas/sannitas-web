@@ -13,7 +13,7 @@ import Servicos from './pages/servicos';
 import LoginEmpresa from './pages/LoginEmpresa';
 import Empresa from './pages/Empresa';
 import Dashboard from './pages/Dashboard';
-
+import Agendamento from './pages/agendamento';
 
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
         <Route path="/empresa/:idEmpresa" element={<Empresa />} />
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/empresa/:idEmpresa/CadastrarServicos" element={<CadastrarServicos />} />
+        <Route path="/agendamento/:idServico" element={<Agendamento />} />
       </Routes>
     </BrowserRouter>
   );

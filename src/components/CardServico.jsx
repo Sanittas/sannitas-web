@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "./Button";
+
 function CardServico(props) {
 
     function contratar(idServico) {
-        // api.post(`/servico-empresa`)
+        
     }
 
     return (
