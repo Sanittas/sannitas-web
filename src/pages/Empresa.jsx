@@ -23,6 +23,7 @@ function Empresa() {
   const [funcionarios, setFuncionarios] = useState([]);
   const [empresas, setEmpresa] = useState();
   const [competencias, setCompetencias] = useState([]);
+  const [enderecos, setEnderecos] = useState([]);
   var [idFuncionario, setIdFuncionario] = useState();
 
   useEffect(() => {
@@ -61,9 +62,19 @@ function Empresa() {
       }
     };
 
+    const getEnderecos = async () => {
+      try {
+        const response = await api8080.get(`/enderecos/empresas/${idEmpresa}`);
+        setEnderecos(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     getEmpresa();
     getFuncionarios();
     getCompetencias();
+    getEnderecos();
   }, []);
 
   const modalUpdate = () => {
@@ -142,8 +153,7 @@ function Empresa() {
       } disabled>
       <input id="rg" class="swal2-input" placeholder="RG" value=${
         funcionarios?.find((funcionario) => funcionario.id === id).rg
-      } disabled
-      }>
+      } disabled>
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
       <select id="idCompetencia" class="swal2-input select-competencia" type="number">
@@ -476,10 +486,125 @@ function Empresa() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   const handleBotaoClick = () => {
-    mostrarModal ? setMostrarModal(false) : setMostrarModal(true)
-
-    
+    mostrarModal ? setMostrarModal(false) : setMostrarModal(true) 
   };
+
+  const updateEndereco = (idEndereco) => {
+    console.log(enderecos?.find((endereco) => endereco.id === idEndereco).logradouro);
+    Swal.fire({
+      title: "Atualizar Endereço",
+      html: `
+      <form>
+      <input id="logradouro" class="swal2-input" placeholder="Logradouro" value="${enderecos?.find((endereco) => endereco.id === idEndereco).logradouro}"/>
+      <input id="numero" class="swal2-input" placeholder="Número" value="${
+        enderecos?.find((endereco) => endereco.id === idEndereco).numero
+      }">
+      <input id="complemento" class="swal2-input" placeholder="Complemento" value="${
+        enderecos?.find((endereco) => endereco.id === idEndereco).complemento
+      }">
+      <input id="cidade" class="swal2-input" placeholder="Cidade" value="${
+        enderecos?.find((endereco) => endereco.id === idEndereco).cidade
+      }">
+      <input id="estado" class="swal2-input" placeholder="Estado" value="${
+        enderecos?.find((endereco) => endereco.id === idEndereco).estado
+      }">
+      
+  </form>    
+                `,
+      showCancelButton: true,
+      width: "600px",
+      confirmButtonText: "Atualizar",
+      cancelButtonText: "Cancelar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const logradouro = Swal.getPopup().querySelector("#logradouro").value;
+        const numero = Swal.getPopup().querySelector("#numero").value;
+        const complemento = Swal.getPopup().querySelector("#complemento").value;
+        const cidade = Swal.getPopup().querySelector("#cidade").value;
+        const estado = Swal.getPopup().querySelector("#estado").value;
+        if (
+          !logradouro ||
+          !numero ||
+          !complemento ||
+          !cidade ||
+          !estado
+        ) {
+          Swal.showValidationMessage(`Preencha todos os campos`);
+        }
+        return {
+          logradouro: logradouro,
+          numero: numero,
+          complemento: complemento,
+          cidade: cidade,
+          estado: estado,
+        };
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        api8080.put(`/enderecos/empresas/${idEndereco}`, {
+          logradouro: result.value.logradouro,
+          numero: result.value.numero,
+          complemento: result.value.complemento,
+          cidade: result.value.cidade,
+          estado: result.value.estado,
+        }).then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Alterações realizadas com sucesso!",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+  
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }).catch((e) => {
+          Swal.fire({
+            icon: "error",
+            title: "Erro ao realizar alterações!",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+        })
+      }
+    },
+    );
+  };
+
+  const deleteEndereco = (idEndereco) => {
+    Swal.fire({
+      title: "Tem certeza que deseja excluir este endereço?",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Não",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        api8080.delete(`/enderecos/empresas/${idEndereco}`)
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Endereço excluído com sucesso!",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Erro ao excluir endereço!",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+        });
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  }
 
   return (
     <>
@@ -536,8 +661,8 @@ function Empresa() {
                 <th>RG</th>
                 <th>Funcional</th>
                 <th>Registro de Atuação</th>
-                <th></th>
-                <th></th>
+                <th>Atualizar</th>
+                <th>Excluir</th>
               </tr>
             </thead>
             <tbody>
@@ -575,6 +700,57 @@ function Empresa() {
               )}
             </tbody>
           </table>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Logradouro</th>
+                <th>Número</th>
+                <th>Complemento</th>
+                <th>Cidade</th>
+                <th>UF</th>
+                <th>Atualizar</th>
+                <th>Excluir</th>
+              </tr>
+            </thead>
+            <tbody>
+              {enderecos ? (
+                enderecos.map((endereco) => (
+                  <tr key={endereco.id}>
+                    <td>{endereco.logradouro}</td>
+                    <td>{endereco.numero}</td>
+                    <td>{endereco.complemento}</td>
+                    <td>{endereco.cidade}</td>
+                    <td>{endereco.estado}</td>
+                    <td>
+                      <Button
+                        type="button"
+                        class="btn-update"
+                        value={<FontAwesomeIcon icon={faPen} />}
+                        onClick={() => updateEndereco(endereco.id)}
+                      />
+                    </td>
+                    <td>
+                      <Button
+                        type="button"
+                        class="btn-delete"
+                        value={<FontAwesomeIcon icon={faTrashAlt} />}
+                        onClick={() => deleteEndereco(endereco.id)}
+                      />
+                    </td>
+
+              
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Sem endereços</td>
+                </tr>
+              )}
+            </tbody>
+
+            
+            </table>
         </div>
       </div>
     </>

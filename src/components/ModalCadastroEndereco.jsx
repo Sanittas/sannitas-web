@@ -46,9 +46,34 @@ function ModalCadastroEndereco(props) {
 
     const cadastrarEndereco = () => {
         const token = sessionStorage.getItem("token");
-        const id = sessionStorage.getItem("id");
+        var idUsuario = sessionStorage.getItem("id");
+        var idEmpresa = sessionStorage.getItem("idEmpresa");
 
-        api8080.post(`/enderecos/empresas/${sessionStorage.getItem("idEmpresa")}`, {
+        idEmpresa ?  api8080.post(`/enderecos/empresas/${idEmpresa}`, {
+            logradouro: logradouro,
+            numero: numero,
+            complemento: complemento,
+            cidade: cidade,
+            estado: uf,
+        }, 
+        ).then((res) => {
+            Swal.fire({
+                icon: "success",
+                title: "Endereço Cadastrado com Sucesso!",
+                showConfirmButton: true,
+                timer: 1500,
+              });
+
+              fecharModal()
+        }).catch((err) => {
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao Cadastrar o Endereço",
+                showConfirmButton: true,
+                timer: 1500,
+              });
+              fecharModal()
+        }) : api8080.post(`/enderecos/usuarios/${idUsuario}`, {
             logradouro: logradouro,
             numero: numero,
             complemento: complemento,

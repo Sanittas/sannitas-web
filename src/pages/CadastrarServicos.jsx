@@ -92,9 +92,9 @@ function CadastrarServicos(props) {
         timer: 1500
       })
 
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 10000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
 
     }).catch((err) => {
       console.log(err);
@@ -152,6 +152,7 @@ function CadastrarServicos(props) {
   const VincularServico = () => {
     Swal.fire({
       title: "Cadastrar Serviço",
+      
       html: `
               <select id="idServico" class="swal2-input select-competencia">
               ${servicos
@@ -166,11 +167,12 @@ function CadastrarServicos(props) {
               </select>
 
               <form>
-                  <input id="duracaoEstimada" class="swal2-input" placeholder="duração Estimada (em minutos)">
+                  <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
                   <input id="valorServico"  class="swal2-input" placeholder="Valor do Serviço">
-                  <input id="equipeResponsavel" class="swal2-input" placeholder="equipe Responsável">
+                  <input id="equipeResponsavel" class="swal2-input" placeholder="Equipe Responsável">
               </form>    
               `,
+              width: "600px",
       showCancelButton: true,
       confirmButtonText: "Cadastrar",
       cancelButtonText: "Cancelar",
@@ -222,6 +224,7 @@ function CadastrarServicos(props) {
                   <input id="descricao" class="swal2-input" placeholder="Descrição">
               </form>    
               `,
+              width: "600px",
       showCancelButton: true,
       confirmButtonText: "Cadastrar",
       cancelButtonText: "Cancelar",
@@ -311,11 +314,12 @@ function CadastrarServicos(props) {
               </select>
 
               <form>
-                  <input id="duracaoEstimada" class="swal2-input" placeholder="duração Estimada (em minutos)">
+                  <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
                   <input id="valorServico"  class="swal2-input" placeholder="Valor do Serviço">
-                  <input id="equipeResponsavel" class="swal2-input" placeholder="equipe Responsável">
+                  <input id="equipeResponsavel" class="swal2-input" placeholder="Equipe Responsável">
               </form>     
               `,
+              width: "600px",
               showCancelButton: true,
               confirmButtonText: "Cadastrar",
               cancelButtonText: "Cancelar",
@@ -386,7 +390,7 @@ function CadastrarServicos(props) {
   return (
     <>
       <NavbarPosLogin />
-      <div className="container">
+      <div className="container-tela-servicos">
         <div className="btns-servicos">
 
 
@@ -416,6 +420,8 @@ function CadastrarServicos(props) {
                 <th>Valor do Serviço</th>
                 <th>Duração Estimada</th>
                 <th>Equipe responsável</th>
+                <th>Atualizar</th>
+                <th>Deletar</th>
               </tr>
             </thead>
             <tbody>

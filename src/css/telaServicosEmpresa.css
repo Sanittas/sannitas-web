@@ -1,71 +1,79 @@
-.containerServicos {
-    margin-top: 50px;
+/* telaServicosEmpresa.css */
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container-tela-servicos {
+    width: 80%;
+    height: 80vh;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-top: 40px;
+  }
+  
+  .btns-servicos {
     display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.btns-servicos {
-    display: flex;
-    width: 1000px;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.button-component {
-    width: 70%;
-}
-
-.card-read-servicos table {
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .card-read-servicos {
+    margin-bottom: 30px;
+  }
+  
+  .titulo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 0;
-    text-align: center;
-}
-
-.card-read-servicos table thead tr th {
-    background-color: #000;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #909CFF;
     color: #fff;
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: 0.5s;
-    width:200px;
-    text-align: center;
-    padding: 10px;
-    
-}
-
-.card-read-servicos table tbody tr td {
-    padding: 10px;
-    background-color: #fff;
-    color: #000;
-    font-size: 1.1rem;
-    font-weight: 500;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: 0.5s;
-    width:200px;
-    text-align: center;
+  }
+  
+  .btn-update, .btn-delete {
     cursor: pointer;
-    border-bottom: 1px solid #000;
-}
-
-.card-read-servicos table tbody tr td svg {
     color: #000;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.btn-update, .btn-delete {
-    background-color: transparent;
     border: none;
-    cursor: pointer;
-}
-
-.titulo {
-    font-size: 32px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
     display: flex;
-    justify-content: center;
-}
+    z-index: 1000;
+    font-size: 1.4rem;
+  }
+  
+  .btn-update:hover {
+    background-color: #297fb8;
+  }
+  
+  .btn-delete {
+    background-color: #e74c3c;
+  }
+  
+  .btn-delete:hover {
+    background-color: #d63a2e;
+  }
+  
+  /* Customize other styles as needed */
+  
