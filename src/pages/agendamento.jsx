@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useParams } from 'react-router-dom';
+import { api8081 } from '../api/apiToken';
 
-function agendamento(idServico) {
-  const idServico = useParams("idServico");
+function Agendamento() {
+  const idServico = useParams();
   const idUsuario = sessionStorage.getItem("id");
   const [value, onChange] = useState(new Date());
   const [endereco, setEndereco] = useState(new Date());
@@ -33,4 +34,4 @@ function agendamento(idServico) {
   );
 }
 
-export default agendamento;
+export default Agendamento;

@@ -26,14 +26,14 @@ function cadastroEmpresa() {
     const realizarCadastro = () => {
         const razaoSocial = document.getElementById("razaoSocial").value;
         const cnpj = document.getElementById("cnpj").value;
-        // const email = document.getElementById("email").value;
+        const email = document.getElementById("email").value;
         const senha = document.getElementById("senha").value;
         
         api.post("empresas/cadastrar/", {
             razaoSocial: razaoSocial,
             cnpj: cnpj,
             senha: senha,
-            // email: email
+            email: email
         }).then((res) => {
             console.log(res);
 
@@ -68,7 +68,7 @@ function cadastroEmpresa() {
                 <form>
                     <Input label="Razão Social" type="text" placeholder="Razão Social" id="razaoSocial" />
                     <Input label="CNPJ" type="text" placeholder="CNPJ" id="cnpj" mask="cnpj" max="18"/>
-                    {/* <Input label="Email" type="email" placeholder="Email" id="email" /> */}
+                    <Input label="Email" type="email" placeholder="Email" id="email" />
                     <Input label="Senha" type="password" placeholder="Senha" id="senha" max="20" />
                     <Button
                         type="button"

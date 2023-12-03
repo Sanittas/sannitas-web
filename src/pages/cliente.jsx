@@ -11,8 +11,6 @@ import cadastroImg from "../assets/hospital.jpg";
 import apiToken, { api8082 } from "../api/apiToken";
 
 import Swal from "sweetalert2";
-
-import { Outlet, Link, useLocation, useParams } from "react-router-dom";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import { useEffect } from "react";
 

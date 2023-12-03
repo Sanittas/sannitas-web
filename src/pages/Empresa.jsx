@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import Button from "../components/Button";
 import { api8080 } from "../api/apiToken";
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
-
+import mascara from "../api/mascara";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -69,6 +69,8 @@ function Empresa() {
       html: `
                 <form>
                     <input id="razaoSocial" class="swal2-input" placeholder="Razão Social">
+                    <input id="cnpj" class="swal2-input" placeholder"CNPJ" value=${empresas?.cnpj} disabled>
+                    <input id="email" class="swal2-input" placeholder="Email" type="email">
                     <input id="senha" type="password" class="swal2-input" placeholder="Senha">
                 </form>    
                 `,
@@ -79,17 +81,17 @@ function Empresa() {
       showLoaderOnConfirm: true,
       preConfirm: () => {
         const razaoSocial = Swal.getPopup().querySelector("#razaoSocial").value;
-        // const cnpj = Swal.getPopup().querySelector("#cnpj").value;
+        const cnpj = Swal.getPopup().querySelector("#cnpj").value;
         const senha = Swal.getPopup().querySelector("#senha").value;
-        // const email = Swal.getPopup().querySelector("#email").value;
-        if (!razaoSocial || !senha) {
+        const email = Swal.getPopup().querySelector("#email").value;
+        if (!razaoSocial || !senha || !email || !cnpj) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
           razaoSocial: razaoSocial,
-          // cnpj: cnpj,
+          cnpj: cnpj,
           senha: senha,
-          // email: email,
+          email: email,
         };
       },
       allowOutsideClick: () => !Swal.isLoading(),
@@ -104,9 +106,9 @@ function Empresa() {
     api8080
       .put(`/empresas/${idEmpresa}`, {
         razaoSocial: value.razaoSocial,
-        // cnpj: value.cnpj,
+        cnpj: value.cnpj,
         senha: value.senha,
-        // email: value.email,
+        email: value.email,
       })
       .then(() => {
         Swal.fire({
@@ -127,13 +129,18 @@ function Empresa() {
 
   const modalUpdateFuncionario = (id) => {
     Swal.fire({
-      title: "Cadastrar Funcionário",
+      title: "Atualzar Funcionário",
       html: `
       <form>
       <input id="nome" class="swal2-input" placeholder="Nome">
       <input id="email" class="swal2-input" placeholder="Email" type="email">
-      <input id="cpf" class="swal2-input" placeholder="CPF">
-      <input id="rg" class="swal2-input" placeholder="RG">
+      <input id="cpf" class="swal2-input" placeholder="CPF" value=${
+        funcionarios?.find((funcionario) => funcionario.id === id).cpf
+      } disabled>
+      <input id="rg" class="swal2-input" placeholder="RG" value=${
+        funcionarios?.find((funcionario) => funcionario.id === id).rg
+      } disabled
+      }>
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
       <select id="idCompetencia" class="swal2-input select-competencia" type="number">
@@ -297,6 +304,7 @@ function Empresa() {
       });
   };
 
+
   const cadastrarFuncionario = async () => {
     Swal.fire({
       title: "Cadastrar Funcionário",
@@ -304,8 +312,8 @@ function Empresa() {
       <form>
       <input id="nome" class="swal2-input" placeholder="Nome">
       <input id="email" class="swal2-input" placeholder="Email" type="email">
-      <input id="cpf" class="swal2-input" placeholder="CPF">
-      <input id="rg" class="swal2-input" placeholder="RG">
+      <input id="cpf" class="swal2-input" placeholder="CPF" maxLength="14">
+      <input id="rg" class="swal2-input" placeholder="RG" maxLength="12">
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
       <select id="idCompetencia" class="swal2-input select-competencia" type="number">
@@ -313,7 +321,7 @@ function Empresa() {
         competencias
           ? competencias.map(
               (competencia) =>
-                `<option value=${competencia.id}>${competencia.nome}</option>`
+                `<option value=${competencia.id}>${competencia.descricao}</option>`
             )
           : <option>Sem competências</option>
       }
@@ -398,9 +406,9 @@ function Empresa() {
 
             vincularFuncionarioCompetencia(result.value);
 
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
+            // setTimeout(() => {
+            //   window.location.reload();
+            // }, 2000);
           })
           .catch((err) => {
             console.log(err);
