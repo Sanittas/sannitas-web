@@ -1,0 +1,65 @@
+/* cliente.css */
+
+.container-servicos-contratar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  /* Estilizando o CardServico */
+  .card-servico {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card-servico:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  h4 {
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+  span {
+    margin-bottom: 6px;
+  }
+  
+  #btn-contrato {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #btn-contrato:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilizando a NavbarPosLogin (não fornecida no código fornecido) */
+  /* .navbar-pos-login {
+     Adicione estilos conforme necessário 
+  } */
+  
+  /* Outros estilos conforme necessário */
+  

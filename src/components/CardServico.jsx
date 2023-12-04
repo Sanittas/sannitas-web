@@ -3,16 +3,8 @@ import Button from "./Button";
 import "../css/contratar.css"
 
 function CardServico(props) {
-    // console.log("COMPONENTE");
-    // console.log(props.id);
-    // console.log(props.tempo);
-    // console.log(props.equipeResponsavel);
-    // console.log(props.valor);
-    // console.log(props.idEmpresa);
-    // console.log(props.descricao);
-    // console.log(props.area);
 
-
+    console.log(props);
     function contratar(idServico) {
         
     }
