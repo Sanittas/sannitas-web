@@ -179,97 +179,99 @@ function Cliente() {
       <NavbarPosLogin />
 
       <div className="container-cliente">
-        <div className="cliente">
-          <form onSubmit={handleSave}>
-            <h1>Olá, {sessionStorage.getItem("nome")}! Suas Informações</h1>
-            <div className="input-group">
-              <Input
-                id="nome"
-                type="text"
-                placeholder="Digite seu nome"
-                value={nome}
-                onChange={(value) => setNome(value)}
-              />
-              <Input
-                id="email"
-                type="email"
-                placeholder="Digite seu email"
-                value={email}
-                onChange={(value) => setEmail(value)}
-              />
+        <div className="perfil-cliente">
+          <div className="cliente">
+            <form onSubmit={handleSave}>
+              <h1>Olá, {sessionStorage.getItem("nome")}! Suas Informações</h1>
+              <div className="input-group">
+                <Input
+                  id="nome"
+                  type="text"
+                  placeholder="Digite seu nome"
+                  value={nome}
+                  onChange={(value) => setNome(value)}
+                />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Digite seu email"
+                  value={email}
+                  onChange={(value) => setEmail(value)}
+                />
 
-              <Input
-                id="cpf"
-                type="text"
-                placeholder="Digite seu CPF"
-                value={cpf}
-                onChange={(value) => setCpf(value)}
-                disabled
-              />
+                <Input
+                  id="cpf"
+                  type="text"
+                  placeholder="Digite seu CPF"
+                  value={cpf}
+                  onChange={(value) => setCpf(value)}
+                  disabled
+                />
 
-              <Input
-                id="senha"
-                type="password"
-                placeholder="Digite sua senha"
-                onChange={(value) => setSenha(value)}
-              />
-            </div>
+                <Input
+                  id="senha"
+                  type="password"
+                  placeholder="Digite sua senha"
+                  onChange={(value) => setSenha(value)}
+                />
+              </div>
 
-            <Button
-              type="submit"
-              id="btn-cadastrar"
-              value="Salvar alterações"
-              onClick={handleSave}
-            />
-          </form>
-        </div>
-
-        <div className="enderecos">
-          <h1>Endereços</h1>
-          <Button
-            type="submit"
-            id="btn-cadastrar"
-            value="Cadastrar Endereço"
-            onClick={handleBotaoClick}
-          />
-          <div className="enderecos-container">
-            {enderecos ? (
-              enderecos.map((endereco) => (
-                <div className="endereco" key={endereco.id}>
-                  <label>Logradouro</label>
-                  <p>{endereco.logradouro}</p>
-                  <label>Número</label>
-                  <p>{endereco.numero}</p>
-                  <label>Complemento</label>
-                  <p>{endereco.complemento}</p>
-                  <label>Cidade</label>
-                  <p>{endereco.cidade}</p>
-                  <label>Estado</label>
-                  <p>{endereco.estado}</p>
-
-                  <Button
-                    type="submit"
-                    id="btn-cadastrar"
-                    value="Excluir Endereço"
-                    onClick={() => handleDelete(endereco.id)}
-                  />
-                  <Button
-                    type="submit"
-                    id="btn-cadastrar"
-                    value="Editar Endereço"
-                    onClick={() => handleEdit(endereco)}
-                  />
-                </div>
-              ))
-            ) : (
               <Button
                 type="submit"
                 id="btn-cadastrar"
-                value="Cadastrar endereço"
-                onClick={handleBotaoClick}
+                value="Salvar alterações"
+                onClick={handleSave}
               />
-            )}
-            {viewModal ? <ModalCadastroEndereco /> : null}
+            </form>
+          </div>
+
+          <div className="enderecos">
+            <h1>Endereços</h1>
+            <Button
+              type="submit"
+              id="btn-cadastrar"
+              value="Cadastrar Endereço"
+              onClick={handleBotaoClick}
+            />
+            <div className="enderecos-container">
+              {enderecos ? (
+                enderecos.map((endereco) => (
+                  <div className="endereco" key={endereco.id}>
+                    <label>Logradouro</label>
+                    <p>{endereco.logradouro}</p>
+                    <label>Número</label>
+                    <p>{endereco.numero}</p>
+                    <label>Complemento</label>
+                    <p>{endereco.complemento}</p>
+                    <label>Cidade</label>
+                    <p>{endereco.cidade}</p>
+                    <label>Estado</label>
+                    <p>{endereco.estado}</p>
+
+                    <Button
+                      type="submit"
+                      id="btn-cadastrar"
+                      value="Excluir Endereço"
+                      onClick={() => handleDelete(endereco.id)}
+                    />
+                    <Button
+                      type="submit"
+                      id="btn-cadastrar"
+                      value="Editar Endereço"
+                      onClick={() => handleEdit(endereco)}
+                    />
+                  </div>
+                ))
+              ) : (
+                <Button
+                  type="submit"
+                  id="btn-cadastrar"
+                  value="Cadastrar endereço"
+                  onClick={handleBotaoClick}
+                />
+              )}
+              {viewModal ? <ModalCadastroEndereco /> : null}
+            </div>
           </div>
         </div>
 

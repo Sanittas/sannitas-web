@@ -72,6 +72,17 @@
     color: #333;
 }
 
+.modalCadastroEndereco .modalCadastroEnderecoContainer .modalCadastroEnderecoHeader button {
+    position: absolute;
+    top: 47px;
+    right: 770px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: #000;
+}
+
 .modalCadastroEnderecoBody {
     margin-top: 20px;
 }
