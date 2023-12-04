@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import CardServico from "../components/CardServico";
-import {api} from "../api/api";
+import {api, api8080} from "../api/api";
+import { api8081 } from "../api/apiToken";
 import "../css/cliente.css";
 import Swal from "sweetalert2";
+import { DisplaySettings } from "@mui/icons-material";
 
 function Servicos(props) {
   const { idUsuario } = useParams(); 
@@ -14,18 +16,21 @@ function Servicos(props) {
   
 
   useEffect(() => {
-    getServicosVinculados = async () => {
+    const getServicos = async () => {
       try {
         const response = await api8080.get(
-          `/servicos-empresas/` // path rota api
+          `/servicos/servico-empresa/categoria/` // path rota api
         );
-
+        console.log("AQUI");
         console.log(response.data);
         setServicos(response.data);
       } catch (err) {
+        console.log("AQUI ó ERRO");
         console.log(err);
       }
     }
+
+    getServicos();
   }, []);
 
   const handleSave = (e) => {
@@ -36,22 +41,38 @@ function Servicos(props) {
   return (
     <>
       <NavbarPosLogin />
+
+      
       
       {
-        servicos.map(servico => {
-            <CardServico
-            id = {servico.id} 
-            tempo = {servico.duracaoEstimada}
-            equipeResponsavel = {servico.equipeResponsavel}
-            valor = {servico.valorServico}
-            idEmpresa = {servico.idEmpresa}
-            idServico = {servico.idServico}
-            // descricao = {servico.descricao}
-            // area = {servico.areaSaude}
-            // titulo = {servico.titulo}
-            />
+        servicos.map((servico, index) => {
+          
+          {console.log("ID: " + servico.servicoEmpresa[0].id)}
+          {console.log("tempo: " + servico.servicoEmpresa[0].duracaoEstimada)}
+          {console.log("Equipe: " + servico.servicoEmpresa[0].equipeResponsavel)}
+          {console.log("Valor: " + servico.servicoEmpresa[0].valorServico)}
+          {console.log("IDEMPRESA: " + servico.servicoEmpresa[0].empresa.id)}
+          {console.log("DESCRiÇÃO: " + servico.descricao)}
+          {console.log("AREASAUDE: " + servico.categoriaServico.areaSaude)}
+
+          <React.Fragment key={index}>
+          <h1> olha AQUI</h1>
+
+          <CardServico
+          id = {servico.servicoEmpresa[0].id} 
+          tempo = {servico.servicoEmpresa[0].duracaoEstimada}
+          equipeResponsavel = {servico.servicoEmpresa[0].equipeResponsavel}
+          valor = {servico.servicoEmpresa[0].valorServico}
+          idEmpresa = {servico.servicoEmpresa[0].empresa.id}
+          descricao = {servico.descricao}
+          area = {servico.categoriaServico.areaSaude}
+          />
+          
+          </React.Fragment>
+          
         })
       }
+      
       
     </>
   );
