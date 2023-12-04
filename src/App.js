@@ -30,6 +30,7 @@ function App() {
         <Route path="/validarToken/:token" element={<TrocaSenha />} />
         <Route path="/cliente/:idUsuario" element={<Cliente />} />
         <Route path="/servicos/:idUsuario" element={<Servicos />} />
+        {/* <Route path='/servicos/' element={<Servicos />} /> */}
         <Route path="/cadastro/*" element={<Cadastro />} />
         <Route path="/cadastroEmpresa" element={<CadastroEmpresa />} />
         <Route path="/validarToken/:token" element={<TrocaSenha />} />
