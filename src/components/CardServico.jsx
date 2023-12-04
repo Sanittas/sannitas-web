@@ -4,9 +4,11 @@ import "../css/contratar.css"
 
 function CardServico(props) {
 
+    sessionStorage.setItem("idServico", props.id);
+
     console.log(props);
     function contratar(idServico) {
-        
+        window.location.href = `/agendamento/${idServico}`;
     }
 
     return (

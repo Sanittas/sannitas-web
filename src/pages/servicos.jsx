@@ -42,15 +42,16 @@ function Servicos(props) {
     
       <NavbarPosLogin />
       <div className="container-servicos-contratar">
-      {
-        servicos.map((servico, i) => (
+      { 
+        servicos.map((servico, i) => ( 
+          
           <CardServico
             area={servico.categoriaServico.areaSaude}
             descricao={servico.descricao}
-            valor={servico.servicoEmpresa[i].valorServico}
-            tempo={servico.servicoEmpresa[i].duracaoEstimada}
-            equipeResponsavel={servico.servicoEmpresa[i].equipeResponsavel}
-            id={servico.id}
+            valor={servico.servicoEmpresa[0].valorServico}
+            tempo={servico.servicoEmpresa[0].duracaoEstimada}
+            equipeResponsavel={servico.servicoEmpresa[0].equipeResponsavel}
+            id={servico.servicoEmpresa[0].id}
             key={i}
           />
         ))
