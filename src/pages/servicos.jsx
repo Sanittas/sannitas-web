@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavbarPosLogin from "../components/NavBarPosLogin";
+import Navbar from "../components/Navbar";
 import CardServico from "../components/CardServico";
 import {api8080} from "../api/api";
 import "../css/servicos.css";
@@ -40,7 +41,7 @@ function Servicos(props) {
   return (
     <>
     
-      <NavbarPosLogin />
+      {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
       <div className="container-servicos-contratar">
       { 
         servicos.map((servico, i) => ( 

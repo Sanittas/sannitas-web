@@ -1,45 +1,63 @@
-/* contratar.css */
+/* cardServico.css */
 
 .card-servico {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  margin: 10px;
-  padding: 10px;
-  width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 16px;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+  height: 30%;
+  width: 25%;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.card-conteudo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
+.card-servico:hover {
+  transform: scale(1.02);
 }
 
-h2 {
-  color: #333;
+.card-servico-header {
+  background-color: #909cff;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+}
+
+.card-servico-body {
+  padding: 16px;
+}
+
+.card-servico-body p {
   margin-bottom: 8px;
 }
 
-h4 {
-  color: #666;
-  margin-bottom: 12px;
+.card-servico-footer {
+  text-align: center;
+  padding: 12px;
 }
 
-span {
-  margin-bottom: 6px;
-}
-
-#btn-contrato {
-  background-color: #007bff;
+.btn-contratar {
+  background-color: #27ae60;
   color: #fff;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 14px;
+  transition: background-color 0.3s ease-in-out;
 }
 
-#btn-contrato:hover {
-  background-color: #0056b3;
+.btn-contratar:hover {
+  background-color: #219a52;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+  
 }

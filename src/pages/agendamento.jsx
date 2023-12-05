@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import "../css/agendamento.css";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useParams } from 'react-router-dom';
 import { api8080 } from '../api/api';
 import { api8081 } from '../api/apiToken';
 import Swal from 'sweetalert2';
@@ -17,13 +17,11 @@ function Agendamento() {
   const [value, onChange] = useState(new Date());
   const [endereco, setEndereco] = useState([]);
 
-  useEffect(() => {
+  useEffect((() => {
     if (sessionStorage.getItem("token") == null) {
       window.location.href = "/";
     }
 
-    console.log("idServico")
-    console.log(idServico)
 
     const getEndereco = async () => {
       try {
@@ -36,7 +34,7 @@ function Agendamento() {
     };
 
     getEndereco();
-  });
+  }), []);
 
   const [viewModal, setViewModal] = useState(false);
 
@@ -64,10 +62,9 @@ function Agendamento() {
           showConfirmButton: true,
           timer: 5000
         })
+
+        window.location.href = `/cliente/${idUsuario}`;
   
-        setTimeout(() => {
-          window.location.href = `/servicos/${idUsuario}`;
-        }, 2500);
   
       }).catch((err) => {
         console.log(err);
@@ -90,7 +87,7 @@ function Agendamento() {
   return (
     <>
     <NavbarPosLogin/>
-    <div>
+    <div className='container-agendamento'>
       <Calendar onChange={onChange} value={value} />
 
       <Button

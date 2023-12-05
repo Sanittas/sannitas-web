@@ -1,0 +1,12 @@
+/* agendamento.css */
+
+.container-agendamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 60vh; /* 100% da altura da viewport, para centralizar verticalmente */
+  }
+  
+  /* Adicione mais estilos conforme necessário */
+  

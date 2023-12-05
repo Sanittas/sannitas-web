@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./Button";
-import "../css/contratar.css"
+import "../css/cardServico.css"
 
 function CardServico(props) {
 
@@ -8,23 +8,35 @@ function CardServico(props) {
 
     console.log(props);
     function contratar(idServico) {
-        window.location.href = `/agendamento/${idServico}`;
+        if(!sessionStorage.getItem("token")){
+            window.location.href = "/login";
+        }else {
+            window.location.href = `/agendamento/${idServico}`;
+        }
+        
     }
 
     return (
         <>
-            <div class="card-servico">
-                {/* <div><h1>AQUI</h1></div> */}
-                <div class="card-conteudo">
-                    <h2>{props.area}</h2>
-                    <h4>{props.descricao}</h4>
-                    <span>{props.valor}</span> <span>{props.tempo}</span>
-                    <span>{props.equipeResponsavel}</span>
+            <div className="card-servico">
+                <div className="card-servico-header">
+                    <h3>{props.area}</h3>
+                </div>
+                <div className="card-servico-body">
+                    <p>{props.descricao}</p>
+                    <p>Valor: R$ {props.valor}</p>
+                    <p>Tempo estimado: {props.tempo} minutos</p>
+                    <p>Equipe responsável: {props.equipeResponsavel}</p>
+                </div>
+                <div className="card-servico-footer">
                     <Button
-                        type="button"
-                        id="btn-contrato"
+                        id="btn-contratar"
                         onClick={() => contratar(props.id)}
-                        value="Contratar" />
+                        value="Contratar"
+                        type="button"
+                    >
+                        Contratar
+                    </Button>
                 </div>
             </div>
         </>

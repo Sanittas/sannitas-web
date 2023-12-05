@@ -28,7 +28,7 @@ body {
 }
 
 .confirmacao h1 {
-    color: #3498db;
+    color: #909cff;
     font-weight: 500;
 }
 
@@ -51,7 +51,7 @@ body {
 .btn-login {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #909cff;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
