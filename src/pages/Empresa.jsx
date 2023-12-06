@@ -762,6 +762,15 @@ function Empresa() {
 
             
             </table>
+
+            
+
+          {/* <Button
+          type="button"
+          id="btn-contrato"
+          onClick={() => cadastroEmMassa()}
+          value="Cadastro em massa" /> */}
+
         </div>
       </div>
     </>
