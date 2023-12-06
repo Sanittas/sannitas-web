@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/cliente.css";
-import { api8081 } from "../api/apiToken";
+import { api8081} from "../api/apiToken";
+import { api8080 } from "../api/api";
 import Swal from "sweetalert2";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Input from "../components/Input";
@@ -11,6 +12,7 @@ function Cliente() {
   const idUsuario = sessionStorage.getItem("id");
 
   const [usuario, setUsuario] = useState({});
+  const [servicosContratados, setServicosContratados] = useState([]); // [
   const [enderecos, setEnderecos] = useState([]);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -41,9 +43,20 @@ function Cliente() {
       }
     };
 
+    const getServicosContratados = async () => {
+      try {
+        const response = await api8080.get(`/agendamentos/${idUsuario}`);
+        console.log(response);
+        setServicosContratados(response.data);
+      } catch (error) {
+        console.error("Erro ao obter serviços contratados:", error);
+      }
+    };
+
     if (idUsuario) {
       fetchUserInfo();
       getEnderecos();
+      getServicosContratados();
     }
   }, [idUsuario]);
 
@@ -262,14 +275,7 @@ function Cliente() {
                     />
                   </div>
                 ))
-              ) : (
-                <Button
-                  type="submit"
-                  id="btn-cadastrar"
-                  value="Cadastrar endereço"
-                  onClick={handleBotaoClick}
-                />
-              )}
+              ) : null}
               {viewModal ? <ModalCadastroEndereco /> : null}
             </div>
           </div>

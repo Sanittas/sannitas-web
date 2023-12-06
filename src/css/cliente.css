@@ -15,7 +15,7 @@
   }
   
   .cliente {
-    background-color: #fafafa;
+    background-color: #f1f1f1;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -48,7 +48,7 @@
   }
 
   .enderecos {
-    background-color: #fafafa;
+    background-color: #f1f1f1;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -105,7 +105,7 @@
  
 
  .servicos-contratados {
-    background-color: #fafafa;
+  background-color: #f1f1f1;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
