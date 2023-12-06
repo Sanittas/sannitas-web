@@ -46,6 +46,10 @@ function Agendamento() {
 
     setViewModal(false)
 
+    console.log(idServico)
+    console.log(idUsuario)
+    console.log(format(value, 'yyyy-MM-dd HH:mm:ss'))
+
     if (endereco) {
       api8080.post(`/agendamentos/` ,{
 
@@ -63,7 +67,7 @@ function Agendamento() {
           timer: 5000
         })
 
-        window.location.href = `/cliente/${idUsuario}`;
+        // window.location.href = `/cliente/${idUsuario}`;
   
   
       }).catch((err) => {
