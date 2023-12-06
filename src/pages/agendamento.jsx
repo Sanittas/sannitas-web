@@ -45,6 +45,10 @@ function Agendamento() {
   function agendar(id) {
 
     setViewModal(false)
+    console.log(idServico
+      )
+      console.log(idUsuario)
+      console.log(format(value, 'yyyy-MM-dd HH:mm:ss'))
 
     if (endereco) {
       api8080.post(`/agendamentos/` ,{
