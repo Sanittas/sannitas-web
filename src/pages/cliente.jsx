@@ -284,13 +284,23 @@ function Cliente() {
         <div className="servicos-contratados">
           <h1>Serviços contratados</h1>
           <div className="servicos-contratados-container">
-            {/* props.servicos.map((servico) => (
-                <div className="servico-contratado" key={servico.id}>
-                    <h3>{servico.nome}</h3>
-                    <p>{servico.descricao}</p>
-                    <p>{servico.preco}</p>
+            {
+              servicosContratados.length > 0 ? servicosContratados.map((servicoContratado, i) => (
+                <div className="servico-contratado" key={servicoContratado.id}>                  
+                  <label>Duração</label>
+                  <p>{servicoContratado.servicoEmpresa.duracaoEstimada} minutos</p>
+                  <label>Valor</label>
+                  <p>R$ {servicoContratado.servicoEmpresa.valorServico}</p>
+                  <label>Data do agendamento</label>
+                  <p>{servicoContratado.dataHoraAgendamento.substring(
+                    0,
+                    servicoContratado.dataHoraAgendamento.indexOf("T")
+                  )}</p>
+                  <label>Nome da empresa</label>
+                  <p>{servicoContratado.servicoEmpresa.empresa.razaoSocial}</p>
                 </div>
-            )) */}
+              )) : <p>Você ainda não contratou nenhum serviço!</p>
+            }
           </div>
         </div>
       </div>

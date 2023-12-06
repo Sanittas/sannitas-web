@@ -154,7 +154,7 @@ function Empresa() {
 
   const modalUpdateFuncionario = (id) => {
     Swal.fire({
-      title: "Atualzar Funcionário",
+      title: "Atualizar Funcionário",
       html: `
       <form>
       <input id="nome" class="swal2-input" placeholder="Nome">

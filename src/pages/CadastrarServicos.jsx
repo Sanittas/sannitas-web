@@ -151,7 +151,7 @@ function CadastrarServicos(props) {
 
   const VincularServico = () => {
     Swal.fire({
-      title: "Cadastrar Serviço",
+      title: "Vincular Serviço",
       
       html: `
               <select id="idServico" class="swal2-input select-competencia">
@@ -206,7 +206,7 @@ function CadastrarServicos(props) {
 
   const cadastrarServico = () => {
     Swal.fire({
-      title: "Cadastrar Serviço",
+      title: "Cadastrar subserviço",
       html: `
       <select id="idCategoria" class="swal2-input select-competencia">
       ${options
