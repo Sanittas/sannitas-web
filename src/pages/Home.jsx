@@ -17,13 +17,14 @@ import visao from "../assets/marketing-on-line.png";
 import valores from "../assets/valor.png";
 
 import somos from "../assets/Untitled-1.jpg"
+import NavbarPosLogin from "../components/NavBarPosLogin";
 
 
 function Home() {
   return (
     <>
-      <Navbar />
-      <header>
+      {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
+      <header id="home">
         <div class="banner">
           <div class="text-banner">
             <h1>Seja bem vindo!</h1>
@@ -88,7 +89,7 @@ function Home() {
           />
         </div>
 
-        <div class="sobre">
+        <div class="sobre" id="sobre">
           <div class="img-sobre">
             <img src={somos} alt="Imagem aleatória" />
           </div>

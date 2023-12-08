@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// const api = axios.create({ baseURL: "http://elb-sanittas-web-app-1514252692.us-east-1.elb.amazonaws.com/usuarios/"});
-
 const api = axios.create({ baseURL: "http://localhost:8080/"});
 
-export default api;
+const api8080 = axios.create({ baseURL: "http://localhost:8080/"});
+
+const api8081 = axios.create({ baseURL: "http://localhost:8081/"});
+
+
+export { api, api8080, api8081};

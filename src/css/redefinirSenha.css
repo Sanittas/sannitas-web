@@ -1,94 +1,63 @@
-.container-redefinir{
-    width: 100%;
-    height: 80vh;
+/* Estilos para a página RedefinirSenha */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container-redefinir {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    
-}
-
-.container-redefinir .redefinir{
-    width: 40%;
-    border: 1px solid black;
-    height: 40vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: #f1f1f1;
-}
-
-.container-redefinir .redefinir input{
-    width: 80%;
-    height: 50px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-    
-}
-
-.container-redefinir .confirmacao{
-    width: 40%;
-    border: 1px solid black;
-    height: 40vh;
-    display: none;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: #f1f1f1;
+    height: 86vh;
 }
 
-.container-redefinir .confirmacao input{
-    width: 80%;
-    height: 50px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-    
-    
-}
-
-.container-redefinir .confirmacao p{
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1.4rem;
-    font-weight: 500;
-    
-}
-
-
-.container-redefinir .redefinir a{
-
-    width: 30%;
-    height: 50px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 10px;
-
-    font-size: 1.2rem;
-    font-weight: 500;
-    background-color: #000;
-    color: #fff;
-    cursor: pointer;
+.redefinir,
+.confirmacao {
+    width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
     text-align: center;
 }
 
-.container-redefinir .redefinir a:hover{
-    background-color: #fff;
-    color: #000;
-    transition: all 0.5s ease-in-out;
+.confirmacao {
+    display: none;
 }
 
+.confirmacao h1 {
+    color: #909cff;
+    font-weight: 500;
+}
 
+.redefinir p {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.redefinir input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-login {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #909cff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background-color: #217dbb;
+}

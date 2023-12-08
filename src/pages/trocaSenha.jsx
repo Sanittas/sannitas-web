@@ -7,7 +7,7 @@ import "../css/trocaSenha.css";
 import Navbar from "../components/Navbar"
 
 
-import api from "../api/api";
+import {api, api8081} from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -15,13 +15,15 @@ import { Outlet, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Input from "../components/Input";
+
 function TrocaSenha() {
 
     const token = useParams("token");
 
     useEffect(() => {
         
-        api.get((`/usuarios/validarToken/${token}`)).then((response) => {
+        api8081.get((`/usuarios/validarToken/${token}`)).then((response) => {
             
         }).catch(() => {
 
@@ -43,7 +45,7 @@ function TrocaSenha() {
     
         if (senha >= 8 && senha.match(/[a-zA-Z0-9!@#$%^&*()_+-={}|;:<>,.?]/) && senha != null) {
             if (senha === senhaConfirmacao) {
-                api.post(`/usuarios/alterar-senha`, {
+                api8081.post(`/usuarios/alterar-senha`, {
                     token: token,
                     novaSenha: senha
         
@@ -96,8 +98,8 @@ return (
         <div className="container-troca">
             <div className="troca">
                 <h1>Insira a nova senha</h1>
-                <input type="text" placeholder="nova senha" id="senhaNova" className="" />
-                <input type="text" placeholder="Confirme a senha" id="senhaConfirmada" className="" />
+                <Input id="novaSenha" type="password" placeholder="Nova Senha" />
+                <Input id="senhaConfirmada" type="password" placeholder="Confirme a Senha" />
                 <a className="btn-login" onClick={confirmarTroca}>Atualizar Senha</a>
             </div>
         </div>

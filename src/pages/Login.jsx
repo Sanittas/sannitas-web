@@ -8,11 +8,17 @@ import Navbar from "../components/Navbar"
 
 import login from "../assets/senior-couple-holding-hands.jpg"
 
-import api from "../api/api";
+import {api8081, api} from "../api/api";
 
 import Swal from "sweetalert2";
 
 import { Outlet, Link } from "react-router-dom";
+import { responsiveFontSizes } from "@mui/material";
+
+import Input from "../components/Input";
+import Button from "../components/Button";
+
+
 
 
 
@@ -24,7 +30,9 @@ function Login() {
         const email = document.getElementById("email").value;
         const senha = document.getElementById("senha").value;
 
-        api.post("/login", {
+        
+
+        api8081.post("/usuarios/login", {
             email: email,
             senha: senha
             
@@ -33,6 +41,7 @@ function Login() {
             
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("nome", res.data.nome);
+            sessionStorage.setItem("id", res.data.userId);
 
             Swal.fire({
                 icon: "success",
@@ -42,7 +51,7 @@ function Login() {
             })
             
             // window.location.href = "/login/logoff";
-            window.location.href = "/cliente";
+            window.location.href = "/";
             
         }).catch((err) => {
             console.log(err);
@@ -53,6 +62,8 @@ function Login() {
                 timer: 1500
             })
         })
+        
+
     }
 
 
@@ -64,10 +75,26 @@ function Login() {
             <div className="login">
                 <h1>Login</h1>
                 <form>
-                    <input type="text" placeholder="Email" id="email" />
-                    <input type="password" placeholder="Senha" id="senha"/>
-                    <Link to="/redefinirSenha">Esqueceu sua senha?</Link>
-                    <a className="btn-login" onClick={realizarLogin}>Login</a>
+                    <Input 
+                    label="Email"
+                    type="email"
+                    placeholder="Email"
+                    id="email"
+                    />
+                    <Input
+                    label="Senha"
+                    type="password"
+                    placeholder="Senha"
+                    id="senha"
+                    />
+                    <Link className="redefSenha" to="/redefinirSenha">Esqueceu sua senha?</Link>
+                    <Button
+                    type="button"
+                    id="btn-login"
+                    value="Login"
+                    onClick={realizarLogin}
+                    />
+                    <Link className="loginEmpresa" to="/loginEmpresa">É uma empresa?</Link>
                 </form>
             </div>
 

@@ -1,12 +1,30 @@
 import React from "react";
 
+import { useState, useEffect } from "react";
+
 import { Outlet, Link } from "react-router-dom";
 
 import "../css/navbar.css";
 
 import logo from "../assets/icons-sanittas/white-bottomless.svg";
 
+
+
 function NavbarPosLogin(props) {
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") == null) {
+      window.location.href = "/login";
+    }
+  });
+
+
+  const deslogar = () => {
+    sessionStorage.clear();
+    window.location.href = "/";
+  };
+
+
   const toggleMenu = () => {
     const sideNav = document.querySelector(".side-nav");
 
@@ -34,14 +52,22 @@ function NavbarPosLogin(props) {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/servicos">Serviços</Link>
+          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
           </li>
           <li>
-            <Link to="/#sobre">Sobre</Link>
+          <a href="#sobre">Sobre</a>
+          </li>
+          {
+            sessionStorage.getItem("razaoSocial") ? <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li> : null
+          }
+          <li>
+            {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}`}>{sessionStorage.getItem("razaoSocial")}</Link> : <Link to={`/cliente/${sessionStorage.getItem("id")}`}>{sessionStorage.getItem("nome")}</Link>}
           </li>
           <li>
-            <Link to="/cliente">
-              Cliente
+            <Link className="btn-action" onClick={deslogar}>
+              Logoff
             </Link>
           </li>
 
