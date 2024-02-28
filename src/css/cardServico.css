@@ -5,52 +5,72 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  margin: 16px;
+  margin: 32px;
   background-color: #fff;
   transition: transform 0.2s ease-in-out;
-  height: 30%;
-  width: 25%;
   animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 30%;
+
 }
 
-.card-servico:hover {
-  transform: scale(1.02);
-}
 
-.card-servico-header {
-  background-color: #909cff;
+.card-servico .card-servico-header {
+  background-color: #5cc6ba;
   color: #fff;
   padding: 12px;
   text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  height: 15%;
+
 }
 
-.card-servico-body {
+.card-servico .card-servico-body {
   padding: 16px;
-}
+  height: 60%;
 
-.card-servico-body p {
+}
+.card-servico  .card-servico-body p {
   margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: #333;
+  height: 25%;
+
+
 }
 
-.card-servico-footer {
+.card-servico .card-servico-footer {
   text-align: center;
   padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
 }
 
 .btn-contratar {
-  background-color: #27ae60;
+  background-color: #5cc6ba;
   color: #fff;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-contratar:hover {
-  background-color: #219a52;
+  background-color: #fff;
+  color: #5cc6ba;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #5cc6ba;
 }
+
 
 @keyframes fadeIn {
   from {
@@ -59,5 +79,49 @@
   to {
     opacity: 1;
   }
+  
+}
+
+@media (max-width: 768px) {
+  .card-servico {
+    width: 80%;
+  }
+
+  .card-servico .card-servico-header {
+    font-size: 1.2rem;
+  }
+
+  .card-servico .card-servico-body p {
+    font-size: 1rem;
+  }
+
+  .card-servico .card-servico-footer {
+    font-size: 1rem;
+  }
+
+  .btn-contratar {
+    font-size: 1rem;
+  }
+
+  .card-servico .card-servico-header {
+    height: 20%;
+  }
+
+  .card-servico .card-servico-body {
+    height: 50%;
+  }
+
+  .card-servico .card-servico-footer {
+    height: 30%;
+  }
+
+  .card-servico .card-servico-body p {
+    height: 30%;
+  }
+
+  .card-servico {
+    height: 60vh;
+  }
+
   
 }

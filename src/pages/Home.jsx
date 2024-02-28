@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import CardEmpresa from "../components/CardEmpresa";
 import CardNoticia from "../components/CardNoticia";
 import Footer from "../components/Footer";
+import Button from "../components/Button";
 
 import "../css/home.css";
 
@@ -24,43 +25,30 @@ function Home() {
   return (
     <>
       {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
+      <div className="container">
       <header id="home">
-        <div class="banner">
-          <div class="text-banner">
-            <h1>Seja bem vindo!</h1>
-            <p>
-              A Sanittas é uma empresa que atua no segmento de home care, com
-              foco na assistência domiciliar de pacientes adultos e pediátricos.
-            </p>
-          </div>
+        <div className="text-header">
+          <h1>O cuidado que você precisa, no conforto do seu lar.</h1>
+
+          <p>
+          Na Sanittas, entendemos que cuidar da sua saúde é uma prioridade, e acreditamos que o conforto do seu lar é o melhor lugar para receber os cuidados de que você necessita. Com o nosso serviço de home care, oferecemos uma abordagem personalizada e compassiva para atender às suas necessidades específicas, garantindo que você receba o cuidado adequado, sem precisar sair de casa.
+          </p>
+
+          <Button
+            type="button"
+            id="btn-saiba-mais"
+            onClick={() => window.location.href = "/servicos"}  
+            value="Conheça nossos serviços"
+            class="btn-saiba-mais"
+          />
+
+        </div>
+
+        <div className="img-header">
         </div>
       </header>
 
-      <div className="container">
-        <div class="pos-banner">
-          <div class="title-pos-banner">
-            <h1>O cuidado que você precisa, no conforto do seu lar.</h1>
-          </div>
-
-          <div class="text-pos-banner">
-            <p>
-              O home care é uma solução para quem precisa de cuidados médicos ou
-              de assistência pessoal, mas deseja permanecer no conforto do
-              próprio lar. Com o home care, você ou seu familiar recebe o
-              suporte necessário para uma vida mais independente e saudável. O
-              home care é uma solução para quem precisa de cuidados médicos ou
-              de assistência pessoal, mas deseja permanecer no conforto do
-              próprio lar. Com o home care, você ou seu familiar recebe o
-              suporte necessário para uma vida mais.
-            </p>
-          </div>
-
-          <div class="imagens-pos-banner">
-            <img src="https://guardioesdevidas.com/wp-content/uploads/2019/06/293254-home-care-entenda-o-que-e-e-quais-os-seus-principais-beneficios.jpg" alt="Imagem aleatória" />
-            <img src="https://fasig.com.br/wp-content/uploads/2022/02/FASIG_JANEIRO_TESTEIRA_HOME_CARE_2560x1343.webp" alt="Imagem aleatória" />
-            <img src="https://www.masternursing.com.br/wp-content/uploads/empresas-de-home-care.jpg" alt="Imagem aleatória" />
-          </div>
-        </div>
+      
 
         <div className="cards">
           <Card
@@ -111,7 +99,7 @@ function Home() {
             image={missao}
             alt="Imagem aleatória"
             title="MISSÃO"
-            d1="Ser a empresa de home care de referência no Brasil, reconhecida pela qualidade, inovação e excelência no atendimento."
+            d1="Ser a principal plataforma de home care de referência no Brasil, reconhecida pela qualidade, inovação e excelência no atendimento."
           />
 
           <CardEmpresa

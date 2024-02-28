@@ -1,9 +1,8 @@
 .card {
-    width: 32.7%;
-    height: 85vh;
-    background-color: #5665E0;
+    width: 31%;
+    height: 80vh;
+    background-color: #5cc6ba;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     position: relative;
     display: flex;
@@ -14,19 +13,19 @@
 }
 
 .card img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .card h2 {
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin: 20px 0;
 }
 
 .card a {
-    padding: 20px;
+    padding: 15px;
     background-color: white;
     border-radius: 50px;
     color: #000;
@@ -39,10 +38,10 @@
 }
 
 .card a:hover {
-    background-color: #fff;
-    color: #000;
-    font-size: 1.3rem;
-    transition: all 0.5s ease-in-out;
+    background-color: #4EAB9D;
+    color: #fff;
+    font-size: 1.4rem;
+    transition: all 0.3s ease-in-out;
 }
 
 @media (max-width: 768px) {

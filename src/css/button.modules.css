@@ -1,5 +1,5 @@
 .button-component {
-    background-color: #909cff;
+    background-color: #5cc6ba;
     border: 2px solid #fff;
     border-radius: 5px;
     color: #fff;
@@ -17,7 +17,7 @@
 }
 
 button:hover {
-    background-color: #5665E0;
+    background-color: #5cc6ba;
     border-color: #fff;
     color: #fff;
     transition: all 0.5s ease-in-out;

@@ -20,10 +20,10 @@ function CardServico(props) {
         <>
             <div className="card-servico">
                 <div className="card-servico-header">
-                    <h3>{props.area}</h3>
+                    <p>{props.area}</p>
                 </div>
                 <div className="card-servico-body">
-                    <p>{props.descricao}</p>
+                    <p>Descricao: {props.descricao}</p>
                     <p>Valor: R$ {props.valor}</p>
                     <p>Tempo estimado: {props.tempo} minutos</p>
                     <p>Equipe responsável: {props.equipeResponsavel}</p>
@@ -34,6 +34,7 @@ function CardServico(props) {
                         onClick={() => contratar(props.id)}
                         value="Contratar"
                         type="button"
+                        class="btn-contratar"
                     >
                         Contratar
                     </Button>

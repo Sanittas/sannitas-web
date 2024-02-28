@@ -3,7 +3,7 @@ footer {
     justify-content: center;
     align-items: center;
     height: 18vh;
-    background-color: #909CFF;
+    background-color: #5cc6ba;
     color: #fff;
     font-size: 1.2rem;
     font-weight: 500;
@@ -101,7 +101,7 @@ footer .footer-right .icons-redes img {
         display: flex;
         justify-content: center;
         height: 18vh;
-        background-color: #909CFF;
+        background-color: #5cc6ba;
         color: #fff;
         font-size: 1.2rem;
         font-weight: 500;

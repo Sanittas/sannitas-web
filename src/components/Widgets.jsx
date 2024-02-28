@@ -83,7 +83,7 @@ function Widget({ type }) {
                 link: "Ver todos",
                 icon: <PersonOutlinedIcon className="icon" style={{
                     color: "#fff",
-                    backgroundColor: "#909CFF"
+                    backgroundColor: "#5cc6ba"
                 }} />,
             };
             break;
@@ -97,7 +97,7 @@ function Widget({ type }) {
                 link: "Ver todos",
                 icon: <HomeRepairServiceOutlinedIcon className="icon" style={{
                     color: "#fff",
-                    backgroundColor: "#909CFF"
+                    backgroundColor: "#5cc6ba"
                 }} />,
             };
             break;
@@ -111,7 +111,7 @@ function Widget({ type }) {
                 link: "Ver avaliações",
                 icon: <ThumbUpOffAltIcon className="icon" style={{
                     color: "#fff",
-                    backgroundColor: "#909CFF"
+                    backgroundColor: "#5cc6ba"
                 }} />,
             };
             break;
@@ -125,7 +125,7 @@ function Widget({ type }) {
                 link: "Ver detalhes",
                 icon: <AccountBalanceWalletOutlinedIcon className="icon" style={{
                     color: "#fff",
-                    backgroundColor: "#909CFF"
+                    backgroundColor: "#5cc6ba"
                 }} />,
             };
             break;

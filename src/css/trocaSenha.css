@@ -1,10 +1,12 @@
 /* Estilos para a página TrocaSenha */
 
-body {
-    font-family: 'Arial', sans-serif;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: Open Sans, sans-serif;
 }
+
 
 .container-troca {
     display: flex;
@@ -24,7 +26,7 @@ body {
 }
 
 .troca h1 {
-    color: #909cff;
+    color: #5cc6ba;
 }
 
 input {
@@ -39,7 +41,7 @@ input {
 .btn-login {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #909cff;
+    background-color: #5cc6ba;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;

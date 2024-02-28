@@ -631,6 +631,7 @@ function Empresa() {
               id="btn-update"
               value="Atualizar"
               onClick={modalUpdate}
+              class="btn"
             />
 
             <Button
@@ -638,6 +639,7 @@ function Empresa() {
               id="btn-update"
               value="Cadastrar Endereço"
               onClick={handleBotaoClick}
+              class="btn"
             />
 
             {mostrarModal ? (
@@ -658,6 +660,7 @@ function Empresa() {
               id="btn-update"
               value="Cadastrar"
               onClick={cadastrarFuncionario}
+              class="btn"
             />
           </div>
         </div>
@@ -692,6 +695,7 @@ function Empresa() {
                         class="btn-update"
                         value={<FontAwesomeIcon icon={faPen} />}
                         onClick={() => modalUpdateFuncionario(funcionario.id)}
+
                       />
                     </td>
                     <td>
