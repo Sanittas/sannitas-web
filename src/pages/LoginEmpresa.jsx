@@ -33,7 +33,6 @@ function LoginEmpresa() {
       .then((res) => {
         console.log(res);
 
-        sessionStorage.setItem("token", res.data.token);
         sessionStorage.setItem("razaoSocial", res.data.razaoSocial);
         sessionStorage.setItem("idEmpresa", res.data.enterpriseId);
 

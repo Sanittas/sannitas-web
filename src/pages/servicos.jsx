@@ -17,7 +17,7 @@ function Servicos(props) {
     const getServicos = async () => {
       try {
         const response = await api8080.get(
-          `/servicos/servico-empresa/categoria/` // path rota api
+          `/servicos/` // path rota api
         );
         
         setServicos(response.data);

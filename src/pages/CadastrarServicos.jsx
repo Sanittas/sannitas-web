@@ -19,25 +19,25 @@ function CadastrarServicos(props) {
 
   const [options, setOptions] = useState([]);
   const [servicos, setServicos] = useState([]);
-  const [servicosVinculados, setServicosVinculados] = useState([]);
+  // const [servicosVinculados, setServicosVinculados] = useState([]);
 
   useEffect(() => {
     if (sessionStorage.getItem("token") == null) {
       window.location.href = "/";
     }
 
-    const getTipoServicos = async () => {
-      try {
-        const response = await api8080.get(
-          `/categorias-servicos/` // path rota api
-        );
+    // const getTipoServicos = async () => {
+    //   try {
+    //     const response = await api8080.get(
+    //       `/categorias-servicos/` // path rota api
+    //     );
 
-        setOptions(response.data);
-        console.log(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    //     setOptions(response.data);
+    //     console.log(response.data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
 
     const getServicos = async () => {
       try {
@@ -51,22 +51,22 @@ function CadastrarServicos(props) {
       }
     };
 
-    const getServicosVinculados = async () => {
-      try {
-        const response = await api8080.get(
-          `/servicos-empresas/` // path rota api
-        );
+    // const getServicosVinculados = async () => {
+    //   try {
+    //     const response = await api8080.get(
+    //       `/servicos-empresas/` // path rota api
+    //     );
 
-        console.log(response.data);
-        setServicosVinculados(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    //     console.log(response.data);
+    //     setServicosVinculados(response.data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
 
-    getTipoServicos();
+    // getTipoServicos();
     getServicos();
-    getServicosVinculados();
+    // getServicosVinculados();
   }, []);
 
 
@@ -74,7 +74,7 @@ function CadastrarServicos(props) {
 
     
 
-    api8080.post(`/servicos-empresas/`, {
+    api8080.post(`/servicos/`, {
 
       idEmpresa: value.idEmpresa,
       idServico: value.idServico,
@@ -204,52 +204,52 @@ function CadastrarServicos(props) {
     });
   };
 
-  const cadastrarServico = () => {
-    Swal.fire({
-      title: "Cadastrar subserviço",
-      html: `
-      <select id="idCategoria" class="swal2-input select-competencia">
-      ${options
-          ? options.map(
-            (categoria) =>
-              `<option value=${categoria.id}>
-                ${categoria.areaSaude}
-                </option>`
-          )
-          : <option>Sem Serviços</option>
-        }
-      </select>
+  // const cadastrarServico = () => {
+  //   Swal.fire({
+  //     title: "Cadastrar subserviço",
+  //     html: `
+  //     <select id="idCategoria" class="swal2-input select-competencia">
+  //     ${options
+  //         ? options.map(
+  //           (categoria) =>
+  //             `<option value=${categoria.id}>
+  //               ${categoria.areaSaude}
+  //               </option>`
+  //         )
+  //         : <option>Sem Serviços</option>
+  //       }
+  //     </select>
 
-              <form>
-                  <input id="descricao" class="swal2-input" placeholder="Descrição">
-              </form>    
-              `,
-              width: "600px",
-      showCancelButton: true,
-      confirmButtonText: "Cadastrar",
-      cancelButtonText: "Cancelar",
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        const idCategoria = Swal.getPopup().querySelector("#idCategoria").value;
-        const descricao = Swal.getPopup().querySelector("#descricao").value;
-        if (!descricao) {
-          Swal.showValidationMessage(`Preencha todos os campos`);
-        }
-        if (!idCategoria || idCategoria == undefined) {
-          Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
-        }
-        return {
-          fkCategoriaServico: idCategoria,
-          descricao: descricao
-        };
-      },
-      allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        CadastroServicoNovo(result.value);
-      }
-    });
-  };
+  //             <form>
+  //                 <input id="descricao" class="swal2-input" placeholder="Descrição">
+  //             </form>    
+  //             `,
+  //             width: "600px",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Cadastrar",
+  //     cancelButtonText: "Cancelar",
+  //     showLoaderOnConfirm: true,
+  //     preConfirm: () => {
+  //       const idCategoria = Swal.getPopup().querySelector("#idCategoria").value;
+  //       const descricao = Swal.getPopup().querySelector("#descricao").value;
+  //       if (!descricao) {
+  //         Swal.showValidationMessage(`Preencha todos os campos`);
+  //       }
+  //       if (!idCategoria || idCategoria == undefined) {
+  //         Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
+  //       }
+  //       return {
+  //         fkCategoriaServico: idCategoria,
+  //         descricao: descricao
+  //       };
+  //     },
+  //     allowOutsideClick: () => !Swal.isLoading(),
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       CadastroServicoNovo(result.value);
+  //     }
+  //   });
+  // };
 
   const putServicoApi = (value) => {
 
@@ -260,14 +260,13 @@ function CadastrarServicos(props) {
     console.log(value.duracaoEstimada)
     console.log(value.equipeResponsavel)
 
-    api8080.put(`/servicos-empresas/${value.id}`, {
+    api8080.put(`/servicos/${value.id}`, {
 
       
-      idEmpresa: value.idEmpresa,
-      idServico: value.idServico,
-      valorServico: value.valorServico,
+      descricao: value.descricao,
+      areaSaude: value.areaSaude,
+      valor: value.valorServico,
       duracaoEstimada: value.duracaoEstimada,
-      equipeResponsavel: value.equipeResponsavel
 
     }).then((res) => {
       console.log(res);
@@ -301,22 +300,11 @@ function CadastrarServicos(props) {
     Swal.fire({
       title: "Atualizar Serviço",
       html: `
-      <select id="idServico" class="swal2-input select-competencia">
-              ${servicos
-          ? servicos.map(
-            (servico) =>
-              `<option value=${servico.id}>
-                        ${servico.descricao}
-                        </option>`
-          )
-          : <option>Sem Serviços</option>
-        }
-              </select>
-
               <form>
+                  <input id="areaSaude" class="swal2-input" Área Saúde">
+                  <input id="descricao" class="swal2-input" placeholder="Descrição">
                   <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
-                  <input id="valorServico"  class="swal2-input" placeholder="Valor do Serviço">
-                  <input id="equipeResponsavel" class="swal2-input" placeholder="Equipe Responsável">
+                  <input id="valor"  class="swal2-input" placeholder="Valor do Serviço">
               </form>     
               `,
               width: "600px",
@@ -325,11 +313,13 @@ function CadastrarServicos(props) {
               cancelButtonText: "Cancelar",
               showLoaderOnConfirm: true,
               preConfirm: () => {
-                const idServico = Swal.getPopup().querySelector("#idServico").value;
+                // const idServico = Swal.getPopup().querySelector("#idServico").value;
                 const duracaoEstimada = Swal.getPopup().querySelector("#duracaoEstimada").value;
-                const valorServico = Swal.getPopup().querySelector("#valorServico").value;
-                const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
-                if (!duracaoEstimada || !valorServico || !equipeResponsavel) {
+                const valorServico = Swal.getPopup().querySelector("#valor").value;
+                const areaSaude = Swal.getPopup().querySelector("#areaSaude").value;
+                const descricao = Swal.getPopup().querySelector("#descricao").value;
+                // const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
+                if (!duracaoEstimada || !valorServico || !areaSaude || !descricao) {
                   Swal.showValidationMessage(`Preencha todos os campos`);
                 }
                 if (!idServico) {
@@ -337,11 +327,10 @@ function CadastrarServicos(props) {
                 }
                 return {
                   id: id,
-                  idEmpresa: idEmpresa,
-                  idServico: idServico,
-                  valorServico: valorServico,
                   duracaoEstimada: duracaoEstimada,
-                  equipeResponsavel: equipeResponsavel
+                  areaSaude: areaSaude,
+                  valor: valor,
+                  duracaoEstimada: duracaoEstimada
                 };
       },
       allowOutsideClick: () => !Swal.isLoading(),
@@ -410,7 +399,7 @@ function CadastrarServicos(props) {
 
         </div>
 
-        <div className="card-read-servicos">
+        {/* <div className="card-read-servicos">
           <div className="titulo">
             Serviços Vinculados
           </div>
@@ -445,7 +434,7 @@ function CadastrarServicos(props) {
               }
             </tbody>
           </table>
-        </div>
+        </div> */}
 
         <div className="card-read-servicos">
           <div className="titulo">
