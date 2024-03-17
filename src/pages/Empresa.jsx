@@ -480,6 +480,11 @@ function Empresa() {
               showConfirmButton: true,
               timer: 1500,
             });
+
+            setTimeout(() => {
+              window.location.reload();
+            }
+            , 2000);
           });
       },
       allowOutsideClick: () => !Swal.isLoading(),

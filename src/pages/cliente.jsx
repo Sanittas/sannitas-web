@@ -299,7 +299,7 @@ function Cliente() {
                   <label>Nome da empresa</label>
                   <p>{servicoContratado.servicoEmpresa.empresa.razaoSocial}</p>
                 </div>
-              )) : <p>Você ainda não contratou nenhum serviço!</p>
+              )) : <p>Você ainda não contratou nenhum serviço!</p> 
             }
           </div>
         </div>

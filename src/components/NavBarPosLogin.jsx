@@ -1,6 +1,8 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+
+import sentinela from "../api/sentinela"
 
 import { Outlet, Link } from "react-router-dom";
 
@@ -13,9 +15,7 @@ import logo from "../assets/icons-sanittas/white-bottomless.svg";
 function NavbarPosLogin(props) {
 
   useEffect(() => {
-    if (sessionStorage.getItem("id") || sessionStorage.getItem("idEmpresa") == null) {
-      window.location.href = "/login";
-    }
+   sentinela();
   });
 
 
@@ -55,7 +55,11 @@ function NavbarPosLogin(props) {
           {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
           </li>
           <li>
-          <a href="#sobre">Sobre</a>
+            {window.location.pathname == "/" ? (<a href="#sobre">Sobre</a>
+            ) : (
+              <a href="#sobre" hidden>Sobre</a>
+            )}
+            
           </li>
           {
             sessionStorage.getItem("razaoSocial") ? <li>
@@ -82,7 +86,11 @@ function NavbarPosLogin(props) {
             <Link to={"/servicos"}>Serviços</Link>
           </li>
           <li>
-            <Link to={"/sobre"}>Sobre</Link>
+            {window.location.pathname == "/" ? (<a href="#sobre">Sobre</a>
+            ) : (
+              <a href="#sobre" hidden>Sobre</a>
+            )}
+            
           </li>
           <li>
             <Link to={`/cliente/${2}`}>Conta</Link>

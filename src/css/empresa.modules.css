@@ -86,6 +86,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     border-radius: 5px;
+    color: white;
     
 
 }
@@ -138,13 +139,9 @@
 }
 
 
-.card-read-funcionarios table tbody tr td:hover {
-    background-color: #f9f9f9;
-}
 
 .btn-update,
 .btn-delete {
-    background-color: #fff;
     border: 2px solid #5cc6ba;
     color: #5cc6ba;
     font-size: 1rem;
@@ -165,17 +162,24 @@
     margin: 0;
 }
 
+.btn-update:hover {
+    background-color: #5cc6ba;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-delete:hover {
+    background-color: #e74c3c;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}
+
 
 .btn-delete {
     border-color: #e74c3c;
     color: #e74c3c;
 }
 
-.btn-update:hover,
-.btn-delete:hover {
-    background-color: #000;
-    color: #fff;
-}
 
 .swal2-input {
     height: 48px !important;

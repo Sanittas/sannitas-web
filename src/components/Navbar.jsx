@@ -38,7 +38,11 @@ function Navbar(props) {
            <Link to={`/servicos/}`}> Serviços</Link>
           </li>
           <li>
-            <a href="#sobre">Sobre</a>
+            {window.location.pathname == "/" ? (<a href="#sobre">Sobre</a>
+            ) : (
+              <a href="#sobre" hidden>Sobre</a>
+            )}
+            
           </li>
           <li>
             <Link className="btn-action" to="/login">
