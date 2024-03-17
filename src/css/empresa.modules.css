@@ -92,7 +92,7 @@
 }
 
 .card-infos .btn:hover {
-    background-color: #5cc6ba;
+    background-color: #4EAB9D;
     transition: all 0.5s ease-in-out;
 }
 
@@ -154,6 +154,11 @@
     margin: auto;
 }
 
+.btn-delete {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
 .btn-delete svg, .btn-update svg {
     font-size: 1.5rem;
     cursor: pointer;
@@ -175,10 +180,7 @@
 }
 
 
-.btn-delete {
-    border-color: #e74c3c;
-    color: #e74c3c;
-}
+
 
 
 .swal2-input {

@@ -491,6 +491,7 @@ function Empresa() {
     });
   };
 
+
   return (
     <>
       <NavbarPosLogin />
@@ -531,7 +532,7 @@ function Empresa() {
             <Button
               type="button"
               id="btn-update"
-              value="Cadastrar"
+              value="Cadastrar Funcionário"
               onClick={cadastrarFuncionario}
               class="btn"
             />

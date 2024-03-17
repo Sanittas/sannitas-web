@@ -2,8 +2,6 @@ import React from "react";
 
 import "../css/telaServicosEmpresa.css"
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { api } from "../api/api";
 import { api8080 } from "../api/apiToken";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
@@ -422,11 +420,11 @@ function CadastrarServicos(props) {
                     <td>{servicoVinculado.equipeResponsavel}</td>
                     <td>
 
-                      <Button type="button" class="btn-update" value={<FontAwesomeIcon icon={faPen} />}
+                      <Button type="button" class="btn-update2" value={<FontAwesomeIcon icon={faPen} />}
                         onClick={() => modalUpdateServico(servicoVinculado.id)} />
                     </td>
                     <td>
-                      <Button type="button" class="btn-delete" value={<FontAwesomeIcon icon={faTrashAlt} />}
+                      <Button type="button" class="btn-delete2" value={<FontAwesomeIcon icon={faTrashAlt} />}
                         onClick={() => deleteServico(servicoVinculado.id)} />
                     </td>
                   </tr>
