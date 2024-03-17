@@ -1,6 +1,6 @@
 .button-component {
     background-color: #5cc6ba;
-    border: 2px solid #fff;
+    border: none;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
@@ -17,7 +17,7 @@
 }
 
 button:hover {
-    background-color: #5cc6ba;
+    background-color: #4EAB9D;
     border-color: #fff;
     color: #fff;
     transition: all 0.5s ease-in-out;

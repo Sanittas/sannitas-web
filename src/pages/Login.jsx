@@ -38,9 +38,10 @@ function Login() {
             
         }).then((res) => {
             console.log(res);
-            
+
             sessionStorage.setItem("nome", res.data.nome);
-            sessionStorage.setItem("id", res.data.userId);
+            sessionStorage.setItem("email", res.data.email);
+            sessionStorage.setItem("id", res.data.id);
 
             Swal.fire({
                 icon: "success",
@@ -60,6 +61,8 @@ function Login() {
                 showConfirmButton: true,
                 timer: 1500
             })
+
+            window.location.href = "/login";
         })
         
 

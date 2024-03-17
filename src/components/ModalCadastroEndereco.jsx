@@ -28,6 +28,8 @@ function ModalCadastroEndereco(props) {
       .get(`/${cep}/json`)
       .then((res) => {
         console.log(res);
+        setCep(res.data.cep);
+        setBairro(res.data.bairro);
         setLogradouro(res.data.logradouro);
         setBairro(res.data.bairro);
         setCidade(res.data.localidade);
@@ -39,17 +41,18 @@ function ModalCadastroEndereco(props) {
   };
 
   const cadastrarEndereco = () => {
-    const token = sessionStorage.getItem("token");
     var idUsuario = sessionStorage.getItem("id");
     var idEmpresa = sessionStorage.getItem("idEmpresa");
-
     idEmpresa
-      ? api8080
+      ?
+      api8080
           .post(`/enderecos/empresas/${idEmpresa}`, {
+            cep: cep,
             logradouro: logradouro,
             numero: numero,
             complemento: complemento,
             cidade: cidade,
+            bairro: bairro,
             estado: uf,
           })
           .then((res) => {

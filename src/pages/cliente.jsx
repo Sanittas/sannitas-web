@@ -195,7 +195,7 @@ function Cliente() {
         <div className="perfil-cliente">
           <div className="cliente">
             <form onSubmit={handleSave}>
-              <h1>Olá, {sessionStorage.getItem("nome")}! Suas Informações</h1>
+              <h1>Olá, {sessionStorage.getItem("nome")}</h1>
               <div className="input-group">
                 <Input
                   id="nome"

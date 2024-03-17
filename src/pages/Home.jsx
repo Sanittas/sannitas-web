@@ -24,7 +24,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 function Home() {
   return (
     <>
-      {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
+      {sessionStorage.getItem("id") || sessionStorage.getItem("idEmpresa") ? <NavbarPosLogin /> : <Navbar />}
       <div className="container">
       <header id="home">
         <div className="text-header">
@@ -77,8 +77,8 @@ function Home() {
           />
         </div>
 
-        <div class="sobre" id="sobre">
-          <div class="img-sobre">
+        <div className="sobre" id="sobre">
+          <div className="img-sobre">
             <img src={somos} alt="Imagem aleatória" />
           </div>
 
@@ -94,7 +94,7 @@ function Home() {
           </div>
         </div>
 
-        <div class="valores">
+        <div className="valores">
           <CardEmpresa
             image={missao}
             alt="Imagem aleatória"
@@ -117,11 +117,11 @@ function Home() {
           />
         </div>
 
-        <div class="noticias-title">
+        <div className="noticias-title">
           <h1>Noticias</h1>
         </div>
 
-        <div class="noticias">
+        <div className="noticias">
               <CardNoticia/>
           </div>
           

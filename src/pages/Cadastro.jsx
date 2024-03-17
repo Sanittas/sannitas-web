@@ -52,6 +52,8 @@ function cadastro() {
           showConfirmButton: true,
           timer: 1500,
         });
+
+        window.location.href = "/cadastro";
       });
   };
 

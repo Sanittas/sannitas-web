@@ -7,14 +7,11 @@ import Swal from "sweetalert2";
 import Button from "../components/Button";
 import { api8080 } from "../api/apiToken";
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
-import mascara from "../api/mascara";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import {
-  LocalConvenienceStoreOutlined,
-  SetMealSharp,
-} from "@mui/icons-material";
+import sentinela from "../api/sentinela";
 
 function Empresa() {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
@@ -28,9 +25,7 @@ function Empresa() {
   var [idFuncionario, setIdFuncionario] = useState();
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") == null) {
-      window.location.href = "/";
-    }
+    sentinela();
 
     const getEmpresa = async () => {
       try {
@@ -68,18 +63,18 @@ function Empresa() {
       } catch (err) {
         console.log(err);
       }
-    }
+    };
 
     const getCountFuncionarios = async () => {
       try {
         const response = await api8080.get(
-          `/funcionarios/count-empresa/`,
+          `/funcionarios/count-empresa/${idEmpresa}`
         );
-        setCountFuncionarios(response.data); 
+        setCountFuncionarios(response.data);
       } catch (err) {
         console.log(err);
       }
-    }
+    };
 
     getEmpresa();
     getFuncionarios();
@@ -93,10 +88,10 @@ function Empresa() {
       title: "Atualizar Empresa",
       html: `
                 <form>
-                    <input id="razaoSocial" class="swal2-input" placeholder="Razão Social">
+                    <input id="razaoSocial" class="swal2-input" placeholder="Razão Social" value=${empresas?.razaoSocial}>
                     <input id="cnpj" class="swal2-input" placeholder"CNPJ" value=${empresas?.cnpj} disabled>
-                    <input id="email" class="swal2-input" placeholder="Email" type="email">
-                    <input id="senha" type="password" class="swal2-input" placeholder="Senha">
+                    <input id="email" class="swal2-input" placeholder="Email" type="email" value=${empresas?.email}>
+                    <input id="senha" type="password" class="swal2-input" placeholder="Senha" value=${empresas?.senha}>
                 </form>    
                 `,
       showCancelButton: true,
@@ -157,32 +152,26 @@ function Empresa() {
       title: "Atualizar Funcionário",
       html: `
       <form>
-      <input id="nome" class="swal2-input" placeholder="Nome">
+      <input id="nome" class="swal2-input" placeholder="Nome" value = ${
+        funcionarios?.find((funcionario) => funcionario.id === id).nome
+      }
+      >
       <input id="email" class="swal2-input" placeholder="Email" type="email">
+      <input id="tel" class="swal2-input" placeholder="Telefone" type="tel">
       <input id="cpf" class="swal2-input" placeholder="CPF" value=${
         funcionarios?.find((funcionario) => funcionario.id === id).cpf
       } disabled>
-      <input id="rg" class="swal2-input" placeholder="RG" value=${
-        funcionarios?.find((funcionario) => funcionario.id === id).rg
+      <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number" value=${
+        funcionarios?.find((funcionario) => funcionario.id === id).funcional
       } disabled>
-      <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
-      <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
-      <select id="idCompetencia" class="swal2-input select-competencia" type="number">
-      ${
-        competencias
-          ? competencias.map(
-              (competencia) =>
-                `<option value=${competencia.id}>${competencia.descricao}</option>`
-            )
-          : `<option>Sem competências</option>`
-      }
-      
-      </select>
-      <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
-      <input id="especializacao" class="swal2-input" placeholder="Especialização">
-      <input id="nivelProficiencia" class="swal2-input" placeholder="Nível de Proficiência">
-  </form>    
-                `,
+
+      <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number" value=${
+        funcionarios?.find((funcionario) => funcionario.id === id)
+          .numeroRegistroAtuacao
+      } disabled>
+
+  </form>   `,
+
       showCancelButton: true,
       width: "600px",
       confirmButtonText: "Atualizar",
@@ -191,52 +180,28 @@ function Empresa() {
       preConfirm: () => {
         const nome = Swal.getPopup().querySelector("#nome").value;
         const email = Swal.getPopup().querySelector("#email").value;
+        const tel = Swal.getPopup().querySelector("#tel").value;
         const cpf = Swal.getPopup().querySelector("#cpf").value;
-        const rg = Swal.getPopup().querySelector("#rg").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
         const numeroRegAtuacao =
           Swal.getPopup().querySelector("#numeroRegAtuacao").value;
-        const idCompetencia =
-          Swal.getPopup().querySelector("#idCompetencia").value;
-        const expCompetencia =
-          Swal.getPopup().querySelector("#expCompetencia").value;
-        const especializacao =
-          Swal.getPopup().querySelector("#especializacao").value;
-        const nivelProficiencia =
-          Swal.getPopup().querySelector("#nivelProficiencia").value;
-        if (
-          !nome ||
-          !email ||
-          !cpf ||
-          !rg ||
-          !funcional ||
-          !numeroRegAtuacao ||
-          !expCompetencia ||
-          !especializacao ||
-          !nivelProficiencia ||
-          !idCompetencia
-        ) {
+        if (!nome || !email || !cpf  || !funcional || !numeroRegAtuacao) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
           id: id,
           nome: nome,
           email: email,
+          tel: tel,
           cpf: cpf,
-          rg: rg,
           funcional: funcional,
           numeroRegistroAtuacao: numeroRegAtuacao,
-          expCompetencia: expCompetencia,
-          especializacao: especializacao,
-          nivelProficiencia: nivelProficiencia,
-          idCompetencia: idCompetencia,
         };
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
         updateFuncionario(result.value);
-        updateFuncionarioCompetencia(result.value);
       }
     });
   };
@@ -246,57 +211,12 @@ function Empresa() {
       .put(`/funcionarios/${value.id}`, {
         nome: value.nome,
         email: value.email,
+        tel: value.tel,
         cpf: value.cpf,
-        rg: value.rg,
         funcional: value.funcional,
         numeroRegistroAtuacao: value.numeroRegistroAtuacao,
+        empresaId: parseInt(idEmpresa),
       })
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Alterações realizadas com sucesso!",
-          showConfirmButton: true,
-          timer: 1500,
-        });
-
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 2000);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  async function getIdFuncionario(cpf) {
-    let response = await api8080.get(`/funcionarios/cpf/${cpf}`);
-    let data = response.data;
-    return data;
-  }
-
-  async function getIdFuncionarioCompetencia(idFuncionario) {
-    let response = await api8080.get(
-      `/funcionarios-competencias/${idFuncionario}`
-    );
-    let data = response.data;
-    console.log(data);
-    return data[0].id;
-  }
-
-  const updateFuncionarioCompetencia = async (value) => {
-    api8080
-      .put(
-        `/funcionarios-competencias/${await getIdFuncionarioCompetencia(
-          value.id
-        )}`,
-        {
-          experiencia: value.expCompetencia,
-          especializacao: value.especializacao,
-          nivel_proficiencia: value.nivelProficiencia,
-          fk_competencia: value.idCompetencia,
-          fk_funcionario: value.id,
-        }
-      )
       .then(() => {
         Swal.fire({
           icon: "success",
@@ -311,22 +231,24 @@ function Empresa() {
       })
       .catch((e) => {
         console.log(e);
+        Swal.fire({
+          icon: "error",
+          title: "Erro ao realizar alterações!",
+          showConfirmButton: true,
+          timer: 1500,
+        });
+
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 2000);
       });
   };
 
-  const vincularFuncionarioCompetencia = async (value) => {
-    await api8080
-      .post(`/funcionarios-competencias/`, {
-        experiencia: value.expCompetencia,
-        especializacao: value.especializacao,
-        nivel_proficiencia: value.nivelProficiencia,
-        fk_competencia: value.idCompetencia,
-        fk_funcionario: await getIdFuncionario(value.cpf),
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  async function getIdFuncionario(cpf) {
+    let response = await api8080.get(`/funcionarios/cpf/${cpf}`);
+    let data = response.data;
+    return data;
+  }
 
   const cadastrarFuncionario = async () => {
     Swal.fire({
@@ -335,27 +257,10 @@ function Empresa() {
       <form>
       <input id="nome" class="swal2-input" placeholder="Nome">
       <input id="email" class="swal2-input" placeholder="Email" type="email">
+      <input id="tel" class="swal2-input" placeholder="Telefone" type="tel">
       <input id="cpf" class="swal2-input" placeholder="CPF" maxLength="14">
-      <input id="rg" class="swal2-input" placeholder="RG" maxLength="12">
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
-      <select id="idCompetencia" class="swal2-input select-competencia" type="number">
-      ${
-        competencias ? (
-          competencias.map(
-            (competencia) =>
-              `<option value=${competencia.id}>${competencia.descricao}</option>`
-          )
-        ) : (
-          <option>Sem competências</option>
-        )
-      }
-
-      
-      </select>
-      <input id="expCompetencia" class="swal2-input" placeholder="Experiência e Competência">
-      <input id="especializacao" class="swal2-input" placeholder="Especialização">
-      <input id="nivelProficiencia" class="swal2-input" placeholder="Nível de Proficiência">
   </form>    
                 `,
       width: "600px",
@@ -366,46 +271,22 @@ function Empresa() {
       preConfirm: () => {
         const nome = Swal.getPopup().querySelector("#nome").value;
         const email = Swal.getPopup().querySelector("#email").value;
+        const tel = Swal.getPopup().querySelector("#tel").value;
         const cpf = Swal.getPopup().querySelector("#cpf").value;
-        const rg = Swal.getPopup().querySelector("#rg").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
         const numeroRegAtuacao =
           Swal.getPopup().querySelector("#numeroRegAtuacao").value;
-        const idCompetencia =
-          Swal.getPopup().querySelector("#idCompetencia").value;
-        const expCompetencia =
-          Swal.getPopup().querySelector("#expCompetencia").value;
-        const especializacao =
-          Swal.getPopup().querySelector("#especializacao").value;
-        const nivelProficiencia =
-          Swal.getPopup().querySelector("#nivelProficiencia").value;
-        // const senha = Swal.getPopup().querySelector("#senha").value;
-        // const senhaConfirm = Swal.getPopup().querySelector("#senhaConfirm").value;
-        if (
-          !nome ||
-          !email ||
-          !cpf ||
-          !rg ||
-          !funcional ||
-          !numeroRegAtuacao ||
-          !idCompetencia ||
-          !expCompetencia ||
-          !especializacao ||
-          !nivelProficiencia
-        ) {
+
+        if (!nome || !email || !cpf || !funcional || !numeroRegAtuacao || !tel) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
           nome: nome,
           email: email,
+          tel: tel,
           cpf: cpf,
-          rg: rg,
           funcional: funcional,
           numeroRegAtuacao: numeroRegAtuacao,
-          idCompetencia: idCompetencia,
-          expCompetencia: expCompetencia,
-          especializacao: especializacao,
-          nivelProficiencia: nivelProficiencia,
         };
       },
       allowOutsideClick: () => !Swal.isLoading(),
@@ -415,11 +296,11 @@ function Empresa() {
           .post(`/funcionarios/`, {
             nome: result.value.nome,
             email: result.value.email,
+            tel: result.value.tel,
             cpf: result.value.cpf,
-            rg: result.value.rg,
             funcional: result.value.funcional,
             numeroRegistroAtuacao: result.value.numeroRegAtuacao,
-            // idEmpresa: idEmpresa
+            empresaId: parseInt(idEmpresa),
           })
           .then((res) => {
             Swal.fire({
@@ -429,11 +310,9 @@ function Empresa() {
               timer: 1500,
             });
 
-            vincularFuncionarioCompetencia(result.value);
-
-            // setTimeout(() => {
-            //   window.location.reload();
-            // }, 2000);
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           })
           .catch((err) => {
             console.log(err);
@@ -457,18 +336,7 @@ function Empresa() {
       showLoaderOnConfirm: true,
       preConfirm: () => {
         api8080
-          .get(`/funcionarios-competencias/${idFuncionario}`)
-          .then((res) => {
-            console.log(res.data);
-            res.data.map((funcionarioCompetencia) => {
-              api8080.delete(
-                `/funcionarios-competencias/${funcionarioCompetencia.id}`
-              );
-            });
-          })
-          .then(() => {
-            api8080.delete(`/funcionarios/${idFuncionario}`);
-          })
+          .delete(`/funcionarios/${idFuncionario}`)
           .then(() => {
             Swal.fire({
               icon: "success",
@@ -497,16 +365,20 @@ function Empresa() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   const handleBotaoClick = () => {
-    mostrarModal ? setMostrarModal(false) : setMostrarModal(true) 
+    mostrarModal ? setMostrarModal(false) : setMostrarModal(true);
   };
 
   const updateEndereco = (idEndereco) => {
-    console.log(enderecos?.find((endereco) => endereco.id === idEndereco).logradouro);
+    console.log(
+      enderecos?.find((endereco) => endereco.id === idEndereco).logradouro
+    );
     Swal.fire({
       title: "Atualizar Endereço",
       html: `
       <form>
-      <input id="logradouro" class="swal2-input" placeholder="Logradouro" value="${enderecos?.find((endereco) => endereco.id === idEndereco).logradouro}"/>
+      <input id="logradouro" class="swal2-input" placeholder="Logradouro" value="${
+        enderecos?.find((endereco) => endereco.id === idEndereco).logradouro
+      }"/>
       <input id="numero" class="swal2-input" placeholder="Número" value="${
         enderecos?.find((endereco) => endereco.id === idEndereco).numero
       }">
@@ -533,13 +405,7 @@ function Empresa() {
         const complemento = Swal.getPopup().querySelector("#complemento").value;
         const cidade = Swal.getPopup().querySelector("#cidade").value;
         const estado = Swal.getPopup().querySelector("#estado").value;
-        if (
-          !logradouro ||
-          !numero ||
-          !complemento ||
-          !cidade ||
-          !estado
-        ) {
+        if (!logradouro || !numero || !complemento || !cidade || !estado) {
           Swal.showValidationMessage(`Preencha todos os campos`);
         }
         return {
@@ -553,34 +419,36 @@ function Empresa() {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        api8080.put(`/enderecos/empresas/${idEndereco}`, {
-          logradouro: result.value.logradouro,
-          numero: result.value.numero,
-          complemento: result.value.complemento,
-          cidade: result.value.cidade,
-          estado: result.value.estado,
-        }).then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Alterações realizadas com sucesso!",
-            showConfirmButton: true,
-            timer: 1500,
+        api8080
+          .put(`/enderecos/empresas/${idEndereco}`, {
+            logradouro: result.value.logradouro,
+            numero: result.value.numero,
+            complemento: result.value.complemento,
+            cidade: result.value.cidade,
+            estado: result.value.estado,
+          })
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Alterações realizadas com sucesso!",
+              showConfirmButton: true,
+              timer: 1500,
+            });
+
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          })
+          .catch((e) => {
+            Swal.fire({
+              icon: "error",
+              title: "Erro ao realizar alterações!",
+              showConfirmButton: true,
+              timer: 1500,
+            });
           });
-  
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
-        }).catch((e) => {
-          Swal.fire({
-            icon: "error",
-            title: "Erro ao realizar alterações!",
-            showConfirmButton: true,
-            timer: 1500,
-          });
-        })
       }
-    },
-    );
+    });
   };
 
   const deleteEndereco = (idEndereco) => {
@@ -591,31 +459,32 @@ function Empresa() {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8080.delete(`/enderecos/empresas/${idEndereco}`)
-        .then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Endereço excluído com sucesso!",
-            showConfirmButton: true,
-            timer: 1500,
+        api8080
+          .delete(`/enderecos/empresas/${idEndereco}`)
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Endereço excluído com sucesso!",
+              showConfirmButton: true,
+              timer: 1500,
+            });
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              icon: "error",
+              title: "Erro ao excluir endereço!",
+              showConfirmButton: true,
+              timer: 1500,
+            });
           });
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire({
-            icon: "error",
-            title: "Erro ao excluir endereço!",
-            showConfirmButton: true,
-            timer: 1500,
-          });
-        });
       },
       allowOutsideClick: () => !Swal.isLoading(),
     });
-  }
+  };
 
   return (
     <>
@@ -645,7 +514,6 @@ function Empresa() {
             {mostrarModal ? (
               <>
                 <ModalCadastroEndereco />
-              
               </>
             ) : null}
           </div>
@@ -672,7 +540,6 @@ function Empresa() {
                 <th>Nome</th>
                 <th>Email</th>
                 <th>CPF</th>
-                <th>RG</th>
                 <th>Funcional</th>
                 <th>Registro de Atuação</th>
                 <th>Atualizar</th>
@@ -686,7 +553,6 @@ function Empresa() {
                     <td>{funcionario.nome}</td>
                     <td>{funcionario.email}</td>
                     <td>{funcionario.cpf}</td>
-                    <td>{funcionario.rg}</td>
                     <td>{funcionario.funcional}</td>
                     <td>{funcionario.numeroRegistroAtuacao}</td>
                     <td>
@@ -695,7 +561,6 @@ function Empresa() {
                         class="btn-update"
                         value={<FontAwesomeIcon icon={faPen} />}
                         onClick={() => modalUpdateFuncionario(funcionario.id)}
-
                       />
                     </td>
                     <td>
@@ -753,8 +618,6 @@ function Empresa() {
                         onClick={() => deleteEndereco(endereco.id)}
                       />
                     </td>
-
-              
                   </tr>
                 ))
               ) : (
@@ -763,18 +626,13 @@ function Empresa() {
                 </tr>
               )}
             </tbody>
-
-            
-            </table>
-
-            
+          </table>
 
           {/* <Button
           type="button"
           id="btn-contrato"
           onClick={() => cadastroEmMassa()}
           value="Cadastro em massa" /> */}
-
         </div>
       </div>
     </>

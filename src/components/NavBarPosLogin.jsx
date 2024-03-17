@@ -13,7 +13,7 @@ import logo from "../assets/icons-sanittas/white-bottomless.svg";
 function NavbarPosLogin(props) {
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") == null) {
+    if (sessionStorage.getItem("id") || sessionStorage.getItem("idEmpresa") == null) {
       window.location.href = "/login";
     }
   });
