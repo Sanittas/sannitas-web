@@ -10,7 +10,7 @@
   
   .container-tela-servicos {
     width: 80%;
-    height: 80vh;
+    min-height: 75vh;
     margin: 20px auto;
     background-color: #fff;
     border-radius: 8px;

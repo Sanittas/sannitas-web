@@ -6,11 +6,7 @@ import { api8080 } from "../api/apiToken";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import sentinela from "../api/sentinela";
 
 function CadastrarServicos(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
@@ -20,9 +16,7 @@ function CadastrarServicos(props) {
   // const [servicosVinculados, setServicosVinculados] = useState([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") == null) {
-      window.location.href = "/";
-    }
+    sentinela();
 
     // const getTipoServicos = async () => {
     //   try {

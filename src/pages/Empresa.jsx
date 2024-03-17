@@ -257,9 +257,10 @@ function Empresa() {
       <form>
       <input id="nome" class="swal2-input" placeholder="Nome">
       <input id="email" class="swal2-input" placeholder="Email" type="email">
-      <input id="tel" class="swal2-input" placeholder="Telefone" type="tel">
+      <input id="tel" class="swal2-input" placeholder="Telefone" type="tel" pattern="^\\([1-9]{2}\\) (?:[2-8]|9[1-9])[0-9]{3}\\-[0-9]{4}$" maxLength="14">
       <input id="cpf" class="swal2-input" placeholder="CPF" maxLength="14">
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
+      <input id="especializacao" class="swal2-input" placeholder="Especialização" type="text">
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
   </form>    
                 `,
