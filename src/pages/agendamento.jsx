@@ -9,12 +9,13 @@ import Button from '../components/Button';
 import NavbarPosLogin from '../components/NavBarPosLogin';
 import { format } from 'date-fns';
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
+import DateTimePicker from 'react-datetime-picker';
 
 
 function Agendamento() {
   const idServico = sessionStorage.getItem("idServico");
   const idUsuario = sessionStorage.getItem("id");
-  const [value, onChange] = useState(new Date());
+  const [value, setValue] = useState(new Date());
   const [endereco, setEndereco] = useState([]);
 
   useEffect((() => {
@@ -92,7 +93,12 @@ function Agendamento() {
     <>
     <NavbarPosLogin/>
     <div className='container-agendamento'>
-      <Calendar onChange={onChange} value={value} />
+    <DateTimePicker
+    label="Controlled picker"
+    value={value}
+    onChange={(newValue) => setValue(newValue)}
+    />
+    
 
       <Button
         type="button"
