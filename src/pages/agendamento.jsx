@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "../css/agendamento.css";
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { api8080 } from '../api/api';
 import { api8081 } from '../api/apiToken';
@@ -10,7 +9,9 @@ import NavbarPosLogin from '../components/NavBarPosLogin';
 import { format } from 'date-fns';
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
 import DateTimePicker from 'react-datetime-picker';
-
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
 
 function Agendamento() {
   const idServico = sessionStorage.getItem("idServico");
@@ -52,6 +53,7 @@ function Agendamento() {
     console.log(format(value, 'yyyy-MM-dd HH:mm:ss'))
 
     if (endereco) {
+      
       api8080.post(`/agendamentos/` ,{
 
         dataAgendamento : format(value, 'yyyy-MM-dd HH:mm:ss'),
@@ -106,7 +108,7 @@ function Agendamento() {
         onClick={() => agendar(idServico)}
         value="Contratar" />
     </div>
-
+    
     {viewModal ? <ModalCadastroEndereco /> : null}
     </>
   );

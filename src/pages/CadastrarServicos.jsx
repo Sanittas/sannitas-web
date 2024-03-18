@@ -7,7 +7,8 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
 import sentinela from "../api/sentinela";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 function CadastrarServicos(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
 
@@ -16,7 +17,7 @@ function CadastrarServicos(props) {
   // const [servicosVinculados, setServicosVinculados] = useState([]);
 
   useEffect(() => {
-    
+    sentinela();
 
     // const getTipoServicos = async () => {
     //   try {
