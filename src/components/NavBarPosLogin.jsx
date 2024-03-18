@@ -52,7 +52,7 @@ function NavbarPosLogin(props) {
             <Link to="/">Home</Link>
           </li>
           <li>
-          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
+          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("Id")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
           </li>
           <li>
             {window.location.pathname == "/" ? (<a href="#sobre">Sobre</a>

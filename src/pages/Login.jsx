@@ -40,7 +40,6 @@ function Login() {
             console.log(res);
 
             sessionStorage.setItem("nome", res.data.nome);
-            sessionStorage.setItem("email", res.data.email);
             sessionStorage.setItem("id", res.data.id);
 
             Swal.fire({
