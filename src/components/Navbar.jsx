@@ -22,15 +22,15 @@ function Navbar(props) {
 
   return (
     <>
-      <nav class="navbar">
-        <a href="#" class="icon-menu" onClick={toggleMenu}>
+      <nav className="navbar">
+        <a href="#" className="icon-menu" onClick={toggleMenu}>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/2048px-Hamburger_icon.svg.png"></img>
         </a>
         <Link to={"/"} className="logo">
           <img src={logo} />
         </Link>
 
-        <ul class="nav-full">
+        <ul className="nav-full">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -38,7 +38,11 @@ function Navbar(props) {
            <Link to={`/servicos/}`}> Serviços</Link>
           </li>
           <li>
-            <a href="#sobre">Sobre</a>
+            {window.location.pathname == "/" ? (<a href="#sobre">Sobre</a>
+            ) : (
+              <a href="#sobre" hidden>Sobre</a>
+            )}
+            
           </li>
           <li>
             <Link className="btn-action" to="/login">
@@ -54,7 +58,7 @@ function Navbar(props) {
           <Outlet />
         </ul>
 
-        <ul class="side-nav">
+        <ul className="side-nav">
           <li>
             <Link to={"/"}>Home</Link>
           </li>
@@ -73,7 +77,7 @@ function Navbar(props) {
         </ul>
       </nav>
 
-      <div class="navbar2">a</div>
+      <div className="navbar2">a</div>
     </>
   );
 }

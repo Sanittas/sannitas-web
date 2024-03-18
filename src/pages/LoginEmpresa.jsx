@@ -1,18 +1,16 @@
 import React from "react";
 
-import { useState } from "react";
-
 import "../css/login.css";
 
 import Navbar from "../components/Navbar";
 
 import login from "../assets/senior-couple-holding-hands.jpg";
 
-import {api} from "../api/api";
+import { api8080 } from "../api/api";
 
 import Swal from "sweetalert2";
 
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -21,11 +19,7 @@ function LoginEmpresa() {
   const realizarLogin = () => {
     const cnpj = document.getElementById("cnpj").value;
     const senha = document.getElementById("senha").value;
-
-    console.log(cnpj);
-    
-
-    api
+    api8080
       .post("/empresas/login", {
         cnpj: cnpj,
         senha: senha,
@@ -43,7 +37,6 @@ function LoginEmpresa() {
           timer: 1500,
         });
 
-        // window.location.href = "/login/logoff";
         window.location.href = "/";
       })
       .catch((err) => {
@@ -54,6 +47,8 @@ function LoginEmpresa() {
           showConfirmButton: true,
           timer: 1500,
         });
+
+        window.location.href = "/loginEmpresa";
       });
   };
 
@@ -65,17 +60,29 @@ function LoginEmpresa() {
         <div className="login">
           <h1>Login</h1>
           <form>
-            <Input label="CNPJ" id="cnpj" type="text" placeholder="CNPJ" mask="cnpj" max="18" />
+            <Input
+              label="CNPJ"
+              id="cnpj"
+              type="text"
+              placeholder="CNPJ"
+              mask="cnpj"
+              max="18"
+            />
 
-            <Input label="Senha" id="senha" type="password" placeholder="Senha" />
+            <Input
+              label="Senha"
+              id="senha"
+              type="password"
+              placeholder="Senha"
+            />
             <Link className="redefSenha" to="/redefinirSenha">
               Esqueceu sua senha?
             </Link>
             <Button
-            type="button"
-            id="btn-login"
-            value="Login"
-            onClick={realizarLogin}
+              type="button"
+              id="btn-login"
+              value="Login"
+              onClick={realizarLogin}
             />
             <Link className="loginEmpresa" to="/login">
               É um Cliente?

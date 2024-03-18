@@ -38,7 +38,7 @@ function Login() {
             
         }).then((res) => {
             console.log(res);
-            
+
             sessionStorage.setItem("nome", res.data.nome);
             sessionStorage.setItem("id", res.data.id);
 
@@ -60,6 +60,8 @@ function Login() {
                 showConfirmButton: true,
                 timer: 1500
             })
+
+            window.location.href = "/login";
         })
         
 

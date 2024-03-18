@@ -166,7 +166,7 @@ header .img-header {
     height: 50vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     color: #fff;
     margin: 40px 0;
     background-color: #5CC6BA;
