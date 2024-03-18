@@ -47,13 +47,13 @@ function Servicos(props) {
         servicos.map((servico, i) => ( 
           
           <CardServico
-            area={servico.categoriaServico.areaSaude}
+            area={servico.areaSaude}
             descricao={servico.descricao}
-            valor={servico.servicoEmpresa[0].valorServico}
-            tempo={servico.servicoEmpresa[0].duracaoEstimada}
-            equipeResponsavel={servico.servicoEmpresa[0].equipeResponsavel}
-            id={servico.servicoEmpresa[0].id}
-            key={i}
+            valor={servico.valor}
+            tempo={servico.duracaoEstimada}
+            // equipeResponsavel={servico.servicoEmpresa[0].equipeResponsavel}
+            id={servico.id}
+            key={i+1}
           />
         ))
       }

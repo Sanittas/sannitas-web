@@ -34,7 +34,7 @@ function LoginEmpresa() {
         console.log(res);
 
         sessionStorage.setItem("razaoSocial", res.data.razaoSocial);
-        sessionStorage.setItem("idEmpresa", res.data.enterpriseId);
+        sessionStorage.setItem("idEmpresa", res.data.id);
 
         Swal.fire({
           icon: "success",

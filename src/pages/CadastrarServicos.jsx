@@ -22,9 +22,7 @@ function CadastrarServicos(props) {
   // const [servicosVinculados, setServicosVinculados] = useState([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") == null) {
-      window.location.href = "/";
-    }
+    
 
     // const getTipoServicos = async () => {
     //   try {
@@ -76,11 +74,10 @@ function CadastrarServicos(props) {
 
     api8080.post(`/servicos/`, {
 
-      idEmpresa: value.idEmpresa,
-      idServico: value.idServico,
-      valorServico: value.valorServico,
+      areaSaude: value.areaSaude,
+      descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
-      equipeResponsavel: value.equipeResponsavel
+      valor: value.valor
 
     }).then((res) => {
       console.log(res);
@@ -112,13 +109,17 @@ function CadastrarServicos(props) {
 
   const CadastroServicoNovo = (value) => {
     
-    console.log(value.fkCategoriaServico)
+    console.log(value.areaSaude)
     console.log(value.descricao)
+    console.log(value.duracaoEstimada)
+    console.log(value.valor)
 
     api8080.post(`/servicos/`, {
 
+      areaSaude: value.areaSaude,
       descricao: value.descricao,
-      fkCategoriaServico: value.fkCategoriaServico
+      duracaoEstimada: value.duracaoEstimada,
+      valor: value.valor
 
 
     }).then((res) => {
@@ -152,156 +153,9 @@ function CadastrarServicos(props) {
   const VincularServico = () => {
     Swal.fire({
       title: "Vincular Serviço",
-      
-      html: `
-              <select id="idServico" class="swal2-input select-competencia">
-              ${servicos
-          ? servicos.map(
-            (servico) =>
-              `<option value=${servico.id}>
-                        ${servico.descricao}
-                        </option>`
-          )
-          : <option>Sem Serviços</option>
-        }
-              </select>
-
-              <form>
-                  <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
-                  <input id="valorServico"  class="swal2-input" placeholder="Valor do Serviço">
-                  <input id="equipeResponsavel" class="swal2-input" placeholder="Equipe Responsável">
-              </form>    
-              `,
-              width: "600px",
-      showCancelButton: true,
-      confirmButtonText: "Cadastrar",
-      cancelButtonText: "Cancelar",
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        const idServico = Swal.getPopup().querySelector("#idServico").value;
-        const duracaoEstimada = Swal.getPopup().querySelector("#duracaoEstimada").value;
-        const valorServico = Swal.getPopup().querySelector("#valorServico").value;
-        const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
-        if (!duracaoEstimada || !valorServico || !equipeResponsavel) {
-          Swal.showValidationMessage(`Preencha todos os campos`);
-        }
-        if (!idServico) {
-          Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
-        }
-        return {
-          idEmpresa: idEmpresa,
-          idServico: idServico,
-          valorServico: valorServico,
-          duracaoEstimada: duracaoEstimada,
-          equipeResponsavel: equipeResponsavel
-        };
-      },
-      allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        CadastroServicoApi(result.value);
-      }
-    });
-  };
-
-  // const cadastrarServico = () => {
-  //   Swal.fire({
-  //     title: "Cadastrar subserviço",
-  //     html: `
-  //     <select id="idCategoria" class="swal2-input select-competencia">
-  //     ${options
-  //         ? options.map(
-  //           (categoria) =>
-  //             `<option value=${categoria.id}>
-  //               ${categoria.areaSaude}
-  //               </option>`
-  //         )
-  //         : <option>Sem Serviços</option>
-  //       }
-  //     </select>
-
-  //             <form>
-  //                 <input id="descricao" class="swal2-input" placeholder="Descrição">
-  //             </form>    
-  //             `,
-  //             width: "600px",
-  //     showCancelButton: true,
-  //     confirmButtonText: "Cadastrar",
-  //     cancelButtonText: "Cancelar",
-  //     showLoaderOnConfirm: true,
-  //     preConfirm: () => {
-  //       const idCategoria = Swal.getPopup().querySelector("#idCategoria").value;
-  //       const descricao = Swal.getPopup().querySelector("#descricao").value;
-  //       if (!descricao) {
-  //         Swal.showValidationMessage(`Preencha todos os campos`);
-  //       }
-  //       if (!idCategoria || idCategoria == undefined) {
-  //         Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
-  //       }
-  //       return {
-  //         fkCategoriaServico: idCategoria,
-  //         descricao: descricao
-  //       };
-  //     },
-  //     allowOutsideClick: () => !Swal.isLoading(),
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       CadastroServicoNovo(result.value);
-  //     }
-  //   });
-  // };
-
-  const putServicoApi = (value) => {
-
-    console.log(value.id)
-    console.log(value.idEmpresa)
-    console.log(value.idServico)
-    console.log(value.valorServico)
-    console.log(value.duracaoEstimada)
-    console.log(value.equipeResponsavel)
-
-    api8080.put(`/servicos/${value.id}`, {
-
-      
-      descricao: value.descricao,
-      areaSaude: value.areaSaude,
-      valor: value.valorServico,
-      duracaoEstimada: value.duracaoEstimada,
-
-    }).then((res) => {
-      console.log(res);
-
-      Swal.fire({
-        icon: "success",
-        title: "Atualização realizada com sucesso!",
-        showConfirmButton: true,
-        timer: 1500
-      })
-
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 10000);
-
-    }).catch((err) => {
-      console.log(err);
-      Swal.fire({
-        icon: "error",
-        title: "Erro ao realizar atualização!",
-        showConfirmButton: true,
-        timer: 1500
-      })
-
-
-    })
-
-  };
-
-  const modalUpdateServico = (id) => {
-    Swal.fire({
-      title: "Atualizar Serviço",
       html: `
               <form>
-                  <input id="areaSaude" class="swal2-input" Área Saúde">
+                  <input id="areaSaude" class="swal2-input" Área Saúde" placeholder="Área Saúde">
                   <input id="descricao" class="swal2-input" placeholder="Descrição">
                   <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
                   <input id="valor"  class="swal2-input" placeholder="Valor do Serviço">
@@ -322,15 +176,95 @@ function CadastrarServicos(props) {
                 if (!duracaoEstimada || !valorServico || !areaSaude || !descricao) {
                   Swal.showValidationMessage(`Preencha todos os campos`);
                 }
-                if (!idServico) {
-                  Swal.showValidationMessage(`Selecione um tipo de serviço na lista`);
+                return {
+                  duracaoEstimada: duracaoEstimada,
+                  areaSaude: areaSaude,
+                  valor: valorServico,
+                  descricao: descricao
+                };
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        CadastroServicoNovo(result.value);
+      }
+    });
+  };
+
+  const putServicoApi = (value) => {
+
+    console.log(value.id)
+    console.log(value.valor)
+    console.log(value.duracaoEstimada)
+
+    api8080.put(`/servicos/${value.id}`, {
+
+      
+      descricao: value.descricao,
+      areaSaude: value.areaSaude,
+      valor: value.valor,
+      duracaoEstimada: value.duracaoEstimada,
+
+    }).then((res) => {
+      console.log(res);
+
+      Swal.fire({
+        icon: "success",
+        title: "Atualização realizada com sucesso!",
+        showConfirmButton: true,
+        timer: 1500
+      })
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 10000);
+
+    }).catch((err) => {
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao realizar atualização!",
+        showConfirmButton: true,
+        timer: 1500
+      })
+
+
+    })
+
+  };
+
+  const modalUpdateServico = (id) => {
+    Swal.fire({
+      title: "Atualizar Serviço",
+      html: `
+              <form>
+                  <input id="areaSaude" class="swal2-input" Área Saúde" placeholder="Área Saúde">
+                  <input id="descricao" class="swal2-input" placeholder="Descrição">
+                  <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
+                  <input id="valor"  class="swal2-input" placeholder="Valor do Serviço">
+              </form>     
+              `,
+              width: "600px",
+              showCancelButton: true,
+              confirmButtonText: "Cadastrar",
+              cancelButtonText: "Cancelar",
+              showLoaderOnConfirm: true,
+              preConfirm: () => {
+                // const idServico = Swal.getPopup().querySelector("#idServico").value;
+                const duracaoEstimada = Swal.getPopup().querySelector("#duracaoEstimada").value;
+                const valorServico = Swal.getPopup().querySelector("#valor").value;
+                const areaSaude = Swal.getPopup().querySelector("#areaSaude").value;
+                const descricao = Swal.getPopup().querySelector("#descricao").value;
+                // const equipeResponsavel = Swal.getPopup().querySelector("#equipeResponsavel").value;
+                if (!duracaoEstimada || !valorServico || !areaSaude || !descricao) {
+                  Swal.showValidationMessage(`Preencha todos os campos`);
                 }
                 return {
                   id: id,
                   duracaoEstimada: duracaoEstimada,
                   areaSaude: areaSaude,
-                  valor: valor,
-                  duracaoEstimada: duracaoEstimada
+                  valor: valorServico,
+                  descricao: descricao
                 };
       },
       allowOutsideClick: () => !Swal.isLoading(),
@@ -383,12 +317,12 @@ function CadastrarServicos(props) {
         <div className="btns-servicos">
 
 
-          <Button
+          {/* <Button
             type="button"
             id="Cadastrar"
             onClick={cadastrarServico}
             value="Cadastrar Serviço"
-          />
+          /> */}
 
           <Button
             type="button"
@@ -399,27 +333,29 @@ function CadastrarServicos(props) {
 
         </div>
 
-        {/* <div className="card-read-servicos">
+        <div className="card-read-servicos">
           <div className="titulo">
             Serviços Vinculados
           </div>
           <table>
             <thead>
               <tr>
-                <th>Valor do Serviço</th>
+                <th>Área Saude</th>
+                <th>Descrição</th>
                 <th>Duração Estimada</th>
-                <th>Equipe responsável</th>
+                <th>Valor do Serviço</th>
                 <th>Atualizar</th>
                 <th>Deletar</th>
               </tr>
             </thead>
             <tbody>
               {
-                servicosVinculados ? servicosVinculados.map((servicoVinculado) => (
+                servicos ? servicos.map((servicoVinculado) => (
                   <tr key={servicoVinculado.id}>
-                    <td>{servicoVinculado.valorServico}</td>
+                    <td>{servicoVinculado.areaSaude}</td>
+                    <td>{servicoVinculado.descricao}</td>
                     <td>{servicoVinculado.duracaoEstimada}</td>
-                    <td>{servicoVinculado.equipeResponsavel}</td>
+                    <td>{servicoVinculado.valor}</td>
                     <td>
 
                       <Button type="button" class="btn-update" value={<FontAwesomeIcon icon={faPen} />}
@@ -434,9 +370,9 @@ function CadastrarServicos(props) {
               }
             </tbody>
           </table>
-        </div> */}
+        </div>
 
-        <div className="card-read-servicos">
+        {/* <div className="card-read-servicos">
           <div className="titulo">
             Serviços Cadastrados
           </div>
@@ -457,7 +393,7 @@ function CadastrarServicos(props) {
               }
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
 
     </>

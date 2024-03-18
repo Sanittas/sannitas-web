@@ -13,9 +13,7 @@ import logo from "../assets/icons-sanittas/white-bottomless.svg";
 function NavbarPosLogin(props) {
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") == null) {
-      window.location.href = "/login";
-    }
+    
   });
 
 
@@ -52,7 +50,7 @@ function NavbarPosLogin(props) {
             <Link to="/">Home</Link>
           </li>
           <li>
-          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("idEmpresa")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
+          {sessionStorage.getItem("razaoSocial") ? <Link to={`/empresa/${sessionStorage.getItem("Id")}/CadastrarServicos`}>Serviços</Link> : <Link to={`/servicos/${sessionStorage.getItem("id")}`}>Serviços</Link>}
           </li>
           <li>
           <a href="#sobre">Sobre</a>

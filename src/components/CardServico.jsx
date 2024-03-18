@@ -8,12 +8,8 @@ function CardServico(props) {
 
     console.log(props);
     function contratar(idServico) {
-        if(!sessionStorage.getItem("token")){
-            window.location.href = "/login";
-        }else {
             window.location.href = `/agendamento/${idServico}`;
-        }
-        
+               
     }
 
     return (
@@ -26,7 +22,7 @@ function CardServico(props) {
                     <p>Descricao: {props.descricao}</p>
                     <p>Valor: R$ {props.valor}</p>
                     <p>Tempo estimado: {props.tempo} minutos</p>
-                    <p>Equipe responsável: {props.equipeResponsavel}</p>
+                    {/* <p>Equipe responsável: {props.equipeResponsavel}</p> */}
                 </div>
                 <div className="card-servico-footer">
                     <Button

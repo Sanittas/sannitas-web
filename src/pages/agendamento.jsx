@@ -18,9 +18,6 @@ function Agendamento() {
   const [endereco, setEndereco] = useState([]);
 
   useEffect((() => {
-    if (sessionStorage.getItem("token") == null) {
-      window.location.href = "/";
-    }
 
 
     const getEndereco = async () => {
@@ -45,8 +42,7 @@ function Agendamento() {
   function agendar(id) {
 
     setViewModal(false)
-    console.log(idServico
-      )
+     console.log("Teste", id)
       console.log(idUsuario)
       console.log(format(value, 'yyyy-MM-dd HH:mm:ss'))
 
@@ -58,7 +54,7 @@ function Agendamento() {
       api8080.post(`/agendamentos/` ,{
 
         dataAgendamento : format(value, 'yyyy-MM-dd HH:mm:ss'),
-        idServicoEmpresa : idServico,
+        idServico : idServico,
         idUsuario : idUsuario
   
       }).then((res) => {
