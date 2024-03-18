@@ -13,6 +13,7 @@ import LoginEmpresa from './pages/LoginEmpresa';
 import Empresa from './pages/Empresa';
 import Dashboard from './pages/Dashboard';
 import Agendamento from './pages/agendamento';
+import TestPagamento from './pages/TestPagamento'
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/empresa/:idEmpresa/CadastrarServicos" element={<CadastrarServicos />} />
         <Route path="/agendamento/:idServico" element={<Agendamento />} />
+        <Route path="/testPagamento" element={<TestPagamento />} />
       </Routes>
     </BrowserRouter>
   );
