@@ -281,7 +281,7 @@ function Cliente() {
           </div>
         </div>
 
-        <div className="servicos-contratados">
+        {/* <div className="servicos-contratados">
           <h1>Serviços contratados</h1>
           <div className="servicos-contratados-container">
             {
@@ -302,7 +302,7 @@ function Cliente() {
               )) : <p>Você ainda não contratou nenhum serviço!</p> 
             }
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

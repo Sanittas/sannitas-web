@@ -279,7 +279,7 @@ function CadastrarServicos(props) {
       showLoaderOnConfirm: true,
       preConfirm: () => {
         api8080
-          .delete(`/servicos-empresas/${idServico}`)
+          .delete(`/servicos/${idServico}`)
           .then(() => {
             Swal.fire({
               icon: "success",

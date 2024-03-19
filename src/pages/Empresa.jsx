@@ -58,7 +58,7 @@ function Empresa() {
 
     const getEnderecos = async () => {
       try {
-        const response = await api8080.get(`/enderecos/empresas/${idEmpresa}`);
+        const response = await api8080.get(`enderecos/empresas/${idEmpresa}`);
         setEnderecos(response.data);
       } catch (err) {
         console.log(err);
@@ -156,11 +156,12 @@ function Empresa() {
         funcionarios?.find((funcionario) => funcionario.id === id).nome
       }
       >
-      <input id="email" class="swal2-input" placeholder="Email" type="email">
+      <input id="email" class="swal2-input" placeholder="Email" type="email"  >
       <input id="tel" class="swal2-input" placeholder="Telefone" type="tel">
       <input id="cpf" class="swal2-input" placeholder="CPF" value=${
         funcionarios?.find((funcionario) => funcionario.id === id).cpf
       } disabled>
+      <input id="especializacao" class="swal2-input" placeholder="Especialização" type="text">
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number" value=${
         funcionarios?.find((funcionario) => funcionario.id === id).funcional
       } disabled>
@@ -168,7 +169,7 @@ function Empresa() {
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number" value=${
         funcionarios?.find((funcionario) => funcionario.id === id)
           .numeroRegistroAtuacao
-      } disabled>
+      }>
 
   </form>   `,
 
@@ -183,6 +184,7 @@ function Empresa() {
         const tel = Swal.getPopup().querySelector("#tel").value;
         const cpf = Swal.getPopup().querySelector("#cpf").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
+        const especializacao = Swal.getPopup().querySelector("#especializacao").value;
         const numeroRegAtuacao =
           Swal.getPopup().querySelector("#numeroRegAtuacao").value;
         if (!nome || !email || !cpf  || !funcional || !numeroRegAtuacao) {
@@ -194,6 +196,7 @@ function Empresa() {
           email: email,
           tel: tel,
           cpf: cpf,
+          especializacao: especializacao,
           funcional: funcional,
           numeroRegistroAtuacao: numeroRegAtuacao,
         };
@@ -211,10 +214,11 @@ function Empresa() {
       .put(`/funcionarios/${value.id}`, {
         nome: value.nome,
         email: value.email,
-        tel: value.tel,
+        telefone: value.tel,
         cpf: value.cpf,
+        especializacao: value.especializacao,
         funcional: value.funcional,
-        numeroRegistroAtuacao: value.numeroRegistroAtuacao,
+        registroAtuacao: value.numeroRegistroAtuacao,
         empresaId: parseInt(idEmpresa),
       })
       .then(() => {
@@ -274,6 +278,7 @@ function Empresa() {
         const email = Swal.getPopup().querySelector("#email").value;
         const tel = Swal.getPopup().querySelector("#tel").value;
         const cpf = Swal.getPopup().querySelector("#cpf").value;
+        const especializacao = Swal.getPopup().querySelector("#especializacao").value;
         const funcional = Swal.getPopup().querySelector("#funcional").value;
         const numeroRegAtuacao =
           Swal.getPopup().querySelector("#numeroRegAtuacao").value;
@@ -286,6 +291,7 @@ function Empresa() {
           email: email,
           tel: tel,
           cpf: cpf,
+          especializacao: especializacao,
           funcional: funcional,
           numeroRegAtuacao: numeroRegAtuacao,
         };
@@ -297,10 +303,11 @@ function Empresa() {
           .post(`/funcionarios/`, {
             nome: result.value.nome,
             email: result.value.email,
-            tel: result.value.tel,
+            telefone: result.value.tel,
             cpf: result.value.cpf,
             funcional: result.value.funcional,
-            numeroRegistroAtuacao: result.value.numeroRegAtuacao,
+            registroAtuacao: result.value.numeroRegAtuacao,
+            especializacao: result.value.especializacao,
             empresaId: parseInt(idEmpresa),
           })
           .then((res) => {
@@ -545,10 +552,10 @@ function Empresa() {
             <thead>
               <tr>
                 <th>Nome</th>
-                <th>Email</th>
+                {/* <th>Email</th> */}
                 <th>CPF</th>
                 <th>Funcional</th>
-                <th>Registro de Atuação</th>
+                {/* <th>Registro de Atuação</th> */}
                 <th>Atualizar</th>
                 <th>Excluir</th>
               </tr>
@@ -558,10 +565,10 @@ function Empresa() {
                 funcionarios.map((funcionario) => (
                   <tr key={funcionario.id}>
                     <td>{funcionario.nome}</td>
-                    <td>{funcionario.email}</td>
+                    {/* <td>{funcionario.email}</td> */}
                     <td>{funcionario.cpf}</td>
                     <td>{funcionario.funcional}</td>
-                    <td>{funcionario.numeroRegistroAtuacao}</td>
+                    {/* <td>{funcionario.numeroRegistroAtuacao}</td> */}
                     <td>
                       <Button
                         type="button"

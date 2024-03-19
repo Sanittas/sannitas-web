@@ -41,7 +41,7 @@ function Servicos(props) {
   return (
     <>
     
-      {sessionStorage.getItem("token") ? <NavbarPosLogin /> : <Navbar />}
+      {sessionStorage.getItem("id") || sessionStorage.getItem("idEmpresa") ? <NavbarPosLogin /> : <Navbar />}
       <div className="container-servicos-contratar">
       { 
         servicos.map((servico, i) => ( 
