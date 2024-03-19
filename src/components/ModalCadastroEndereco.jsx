@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import "../css/modalEndereco.css";
 
-import { api8081, api8080 } from "../api/apiToken";
+import { api8081, api8080 } from "../api/api";
 
 import apiViaCep from "../api/apiViaCep";
 import mascara from "../api/mascara";

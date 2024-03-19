@@ -5,7 +5,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-import { api8080 } from "../api/apiToken";
+import { api8080 } from "../api/api";
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

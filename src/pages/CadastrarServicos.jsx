@@ -2,7 +2,7 @@ import React from "react";
 
 import "../css/telaServicosEmpresa.css"
 import { useState, useEffect } from "react";
-import { api8080 } from "../api/apiToken";
+import { api8080 } from "../api/api";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";

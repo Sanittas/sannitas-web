@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/cliente.css";
-import { api8081} from "../api/apiToken";
-import { api8080 } from "../api/api";
+import { api8081} from "../api/api";
+import { api8080, api8081 } from "../api/api";
 import Swal from "sweetalert2";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Input from "../components/Input";
