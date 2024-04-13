@@ -29,7 +29,7 @@ function cadastro() {
         nome: nome,
         email: email,
         cpf: cpf,
-        celular: telefone,
+        telefone: telefone,
         senha: senha,
       })
       .then((res) => {

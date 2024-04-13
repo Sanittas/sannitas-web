@@ -45,7 +45,7 @@ function Cliente() {
 
     const getServicosContratados = async () => {
       try {
-        const response = await api8080.get(`/agendamentos/${idUsuario}`);
+        const response = await api8080.get(`/agendamentos/usuario/${idUsuario}`);
         console.log(response);
         setServicosContratados(response.data);
       } catch (error) {
@@ -287,8 +287,6 @@ function Cliente() {
             {
               servicosContratados.length > 0 ? servicosContratados.map((servicoContratado, i) => (
                 <div className="servico-contratado" key={servicoContratado.id}>                  
-                  <label>Duração</label>
-                  <p>{servicoContratado.servicoEmpresa.duracaoEstimada} minutos</p>
                   <label>Valor</label>
                   <p>R$ {servicoContratado.servicoEmpresa.valorServico}</p>
                   <label>Data do agendamento</label>

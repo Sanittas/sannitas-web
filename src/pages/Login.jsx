@@ -46,11 +46,13 @@ function Login() {
                 icon: "success",
                 title: "Login realizado com sucesso!",
                 showConfirmButton: true,
-                timer: 1500
+                timer: 2000
             })
             
             // window.location.href = "/login/logoff";
+            setTimeout(() => {
             window.location.href = "/";
+            }, 2500);
             
         }).catch((err) => {
             console.log(err);
@@ -58,10 +60,12 @@ function Login() {
                 icon: "error",
                 title: "Erro ao realizar login!",
                 showConfirmButton: true,
-                timer: 1500
+                timer: 2000
             })
 
-            window.location.href = "/login";
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 2500);
         })
         
 

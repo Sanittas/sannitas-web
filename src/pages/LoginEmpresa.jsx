@@ -34,10 +34,12 @@ function LoginEmpresa() {
           icon: "success",
           title: "Login realizado com sucesso!",
           showConfirmButton: true,
-          timer: 1500,
+          timer: 2000,
         });
 
-        window.location.href = "/";
+        setTimeout(() => {
+          window.location.href = `/empresa/${res.data.id}`;
+        }, 2500);
       })
       .catch((err) => {
         console.log(err);
@@ -45,10 +47,12 @@ function LoginEmpresa() {
           icon: "error",
           title: "Erro ao realizar login!",
           showConfirmButton: true,
-          timer: 1500,
+          timer: 2000,
         });
 
-        window.location.href = "/loginEmpresa";
+        setTimeout(() => {
+          window.location.href = "/loginEmpresa";
+        }, 2500);
       });
   };
 

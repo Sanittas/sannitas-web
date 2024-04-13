@@ -2,11 +2,110 @@
 
 .container-agendamento {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    height: 60vh; /* 100% da altura da viewport, para centralizar verticalmente */
-  }
+    min-height: 70vh;
+    width: 80%;
+    margin: auto;
+    }
+
+.container-agendamento .container-info-cliente {
+  width: 60%;
+  height: 65vh;
+}
+
+.container-agendamento .container-info-cliente .info-cliente {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 28%;
+}
+
+.container-agendamento .container-info-cliente .info-cliente h1 {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.container-agendamento .container-info-cliente .info-cliente p {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.container-agendamento .container-info-cliente .info-cliente p span {
+  font-weight: 400;
+
+}
+
+.container-agendamento .container-info-cliente .info-endereco {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
+}
+
+.container-agendamento .container-info-cliente .info-endereco h1 {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.container-agendamento .container-info-cliente .info-endereco p {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.container-agendamento .container-info-cliente .info-endereco .btn-endereco {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.container-agendamento .container-info-cliente .info-servico h1 {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.container-agendamento .container-info-cliente .info-servico p {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.container-agendamento .container-info-servicos {
+  width: 30%;
+  height: 65vh;
+
+}
+
+.container-agendamento .container-info-servicos h1 {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.container-agendamento .container-info-servicos p {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.container-agendamento .container-info-servicos select {
+  width: 100%;
+  height: 7%;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.container-agendamento .container-info-servicos p span {
+  font-weight: 400;
+}
+
+.container-agendamento .container-info-servicos .button-component {
+  width: 100%;
+}
+
+
   
   /* Adicione mais estilos conforme necessário */
   

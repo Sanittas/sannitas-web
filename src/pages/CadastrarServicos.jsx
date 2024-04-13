@@ -114,7 +114,8 @@ function CadastrarServicos(props) {
       areaSaude: value.areaSaude,
       descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
-      valor: value.valor
+      valor: value.valor,
+      fkEmpresa: idEmpresa
 
 
     }).then((res) => {

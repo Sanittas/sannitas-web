@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import "../css/cardServico.css"
+import Swal from "sweetalert2";
 
 function CardServico(props) {
 
@@ -8,7 +9,22 @@ function CardServico(props) {
 
     console.log(props);
     function contratar(idServico) {
+        if(sessionStorage.getItem("id") === null){
+            Swal.fire({
+                icon: "info",
+                title: "Você precisa estar logado para contratar um serviço!",
+                showConfirmButton: true,
+                timer: 3000,
+            });
+            
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 4000);
+
+            
+        } else {
             window.location.href = `/agendamento/${idServico}`;
+        }
                
     }
 
