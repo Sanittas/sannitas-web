@@ -9,7 +9,7 @@
 
 .login {
     width: 40%;
-    height: 60%;
+    height: 80%;
     background-color: #fff;
     border-radius: 10px;
     display: flex;
@@ -64,21 +64,21 @@
 .login form .btn-login {
     width: 100%;
     height: 50px;
-    border: 1px solid #000;
+    border: none;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px 0;
+    margin: 20px 0;
     font-size: 1.2rem;
     font-weight: 500;
-    background-color: #000;
     color: #fff;
     cursor: pointer;
     text-align: center;
+    
 }
 
 .login form .btn-login:hover {
-    background-color: #fff;
-    color: #000;
+    background-color: #4EAB9D;
+    color: white;
     transition: all 0.5s ease-in-out;
 }
 
