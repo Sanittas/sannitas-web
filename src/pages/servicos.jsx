@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import CardServico from "../components/CardServico";
 import {api8080} from "../api/api";
 import "../css/servicos.css";
+import sentinela from "../api/sentinela";
 
 function Servicos(props) {
   const { idUsuario } = useParams();
@@ -14,6 +15,7 @@ function Servicos(props) {
 
 
   useEffect(() => {
+    sentinela();
     const getServicos = async () => {
       try {
         const response = await api8080.get(

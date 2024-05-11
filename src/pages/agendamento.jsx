@@ -12,11 +12,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
-import axios from "axios";
+import sentinela from "../api/sentinela";
 
-import { loadMercadoPago } from "@mercadopago/sdk-js";
 
-import { Payment, MercadoPagoConfig } from "mercadopago";
+
+
 
 // import DateTimePicker from "react-datetime-picker";
 // import "react-datetime-picker/dist/DateTimePicker.css";
@@ -24,8 +24,7 @@ import { Payment, MercadoPagoConfig } from "mercadopago";
 // import "react-clock/dist/Clock.css";
 dayjs.locale("pt-br");
 function Agendamento() {
-  loadMercadoPago();
-  const mp = new MercadoPagoConfig("TEST-2276921b-bae1-47b1-b05e-82c9e6b3b019")
+
   const idServico = sessionStorage.getItem("idServico");
   const idUsuario = sessionStorage.getItem("id");
   const [value, setValue] = useState(new Date());
@@ -34,6 +33,8 @@ function Agendamento() {
   const [servico, setServico] = useState();
 
   useEffect(() => {
+      sentinela();
+
     const getEndereco = async () => {
       try {
         const response = await api8081.get(`/enderecos/usuarios/${idUsuario}`);
@@ -68,74 +69,46 @@ function Agendamento() {
 
   const [viewModal, setViewModal] = useState(false);
 
-  // const handleBotaoClick = () => {
-  //   endereco ? setViewModal(true) : setViewModal(false);
-  // };
 
-  // const client = new MercadoPagoConfig({
-  //   accessToken:
-  //     "APP_USR-1461285240365389-041212-a6b30b0222df26656b3536d338ec3dc9-825045004",
-  // });
-  // const payment = new Payment(client);
 
-  const apiMP = axios.create({
-    baseURL: "https://api.mercadopago.com",
-    headers: {
-      Authorization: `Bearer ${process.env.REACT_APP_TOKEN_MP}`,
-      "X-Idempotency-Key" : "0d5020ed-1af6-469c-ae06-c3bec19954bb"
-    },
-  });
 
-  // mp.interceptors.request.use(async (config) => {
-  //   const token = process.env.REACT_APP_TOKEN_MP
-  //   config.headers.Authorization = `Bearer ${token}`;
-  //   config.headers["Access-Control-Allow-Origin"] = "*";
-  //   config.headers["Access-Control-Allow-Credentials"] = "true";
-  //   config.headers["Access-Control-Allow-Methods"] = "PUT, GET, POST, DELETE, OPTIONS";
-  //   config.headers["Access-Control-Allow-Headers"] = "Content-Type";
-  //   return config;
-  // });
 
   function agendar(id) {
     setViewModal(false);
     if (endereco) {
       var cpf = usuario?.cpf;
       var email = usuario?.email;
-      var pagamento = document.getElementById("slc-pagamento").value;
-      const body = {
-        transaction_amount: 0.5,
-        description: "Teste",
-        payment_method_id: "pix",
-        payer: {
-          email: "paulo@gmail.com",
-          identification: {
-            type: "CPF",
-            number: "48664158860",
-          },
-        },
-      };
 
-      apiMP.post("/v1/payments", body)
-        .then((res) => {
-          console.log(res);
-
+      api8081.post("/usuarios/pagamentos/criar-pagamento", {
+        cpf: cpf,
+        nome: usuario?.nome,
+        email: email,
+        valor: 0.01,
+        nomeProduto: servico?.descricao,
+      
+      }).then((infoPagamento) => {
+        console.log(infoPagamento);
+        let encoded = encodeURIComponent(infoPagamento.data.qrCode);
+        console.log(encoded);
           api8080
             .post(`/agendamentos/`, {
               dataAgendamento: format(value, "yyyy-MM-dd HH:mm:ss"),
               idServico: idServico,
               idUsuario: idUsuario,
+              idFuncionario: 1,
             })
             .then((res) => {
               console.log(res);
 
               Swal.fire({
                 icon: "success",
-                title: "Agendamento realizado com sucesso!",
+                title: "Agendamento realizado com sucesso! Será redirecionado para o pagamento!",
                 showConfirmButton: true,
                 timer: 5000,
               });
 
-              // window.location.href = `/cliente/${idUsuario}`;
+              window.location.href = `/pagamento/${encoded}/${infoPagamento.data.valor}/${infoPagamento.data.id}`;
+
             })
             .catch((err) => {
               console.log(err);
@@ -146,20 +119,8 @@ function Agendamento() {
                 timer: 2500,
               });
 
-              window.location.reload();
+              // window.location.reload();
             });
-
-          Swal.fire({
-            icon: "success",
-            title: "Será redirecionado para o pagamento!",
-            showConfirmButton: true,
-            timer: 4000,
-          });
-
-          setTimeout(() => {
-            window.location.href =
-              res.point_of_interaction.transaction_data.ticket_url;
-          }, 2500);
         })
         .catch((err) => {
           console.log(err);
@@ -170,6 +131,8 @@ function Agendamento() {
             showConfirmButton: true,
             timer: 2500,
           });
+
+          window.location.reload();
         });
     } else {
       setViewModal(true);

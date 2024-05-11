@@ -7,7 +7,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
-
+import sentinela from "../api/sentinela";
 function Cliente() {
   const idUsuario = sessionStorage.getItem("id");
 
@@ -20,6 +20,7 @@ function Cliente() {
   const [senha, setSenha] = useState("");
 
   useEffect(() => {
+      sentinela();
     async function fetchUserInfo() {
       try {
         const response = await api8081.get(`/usuarios/${idUsuario}`);

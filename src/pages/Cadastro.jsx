@@ -5,7 +5,7 @@ import { useState } from "react";
 import "../css/cadastro.css";
 
 import Navbar from "../components/Navbar";
-
+import sentinela from "../api/sentinela";
 import cadastroImg from "../assets/senior-couple-holding-hands.jpg";
 
 import { api8081 } from "../api/api";

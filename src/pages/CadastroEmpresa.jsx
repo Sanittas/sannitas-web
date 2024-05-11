@@ -12,15 +12,13 @@ import { api } from "../api/api";
 
 import Swal from "sweetalert2";
 
-import { Outlet, Link } from "react-router-dom";
-
+import {Link } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
 
 
 function cadastroEmpresa() {
-
 
     
     const realizarCadastro = () => {

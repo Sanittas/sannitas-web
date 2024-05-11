@@ -13,7 +13,7 @@ import LoginEmpresa from "../pages/LoginEmpresa";
 import Empresa from "../pages/Empresa";
 import Dashboard from "../pages/Dashboard";
 import Agendamento from "../pages/agendamento";
-import TestPagamento from "../pages/TestPagamento";
+import Pagamento from "../pages/Pagamento";
 
 const RoutesJS = () => {
   return (
@@ -32,7 +32,6 @@ const RoutesJS = () => {
       <Route path="/cadastro/*" element={<Cadastro />} />
       <Route path="/cadastroEmpresa" element={<CadastroEmpresa />} />
       <Route path="/validarToken/:token" element={<TrocaSenha />} />
-      <Route path="/cliente/:idUsuario" element={<Cliente />} />
       <Route path="/loginEmpresa" element={<LoginEmpresa />} />
       <Route path="/empresa/:idEmpresa" element={<Empresa />} />
       <Route path="/dashboard/" element={<Dashboard />} />
@@ -41,7 +40,8 @@ const RoutesJS = () => {
         element={<CadastrarServicos />}
       />
       <Route path="/agendamento/:idServico" element={<Agendamento />} />
-      <Route path="/testPagamento" element={<TestPagamento />} />
+      <Route path="/pagamento/:qrCode/:valor/:id" element={<Pagamento />} />
+      <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </BrowserRouter>
     
