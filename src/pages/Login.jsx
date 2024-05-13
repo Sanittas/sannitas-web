@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 import login from "../assets/senior-couple-holding-hands.jpg";
 
-import { api8081 } from "../api/api";
+import { api8081, api8080 } from "../api/api";
 
 import Swal from "sweetalert2";
 import Modal from "react-modal";
@@ -26,16 +26,19 @@ function Login() {
     const senha = document.getElementById("senha").value;
 
     //MODAL
+    console.log(email)
+    console.log(senha)
 
-    api8081
-      .post("/usuarios/login", {
-        email: email,
-        senha: senha,
+    api8080
+      .post("/login/usuario", {
+        username: email,
+        password: senha,
       })
       .then((res) => {
         console.log(res);
 
-        sessionStorage.setItem("nome", res.data.nome);
+        sessionStorage.setItem("token", res.data.token);
+        sessionStorage.setItem("nome", res.data.username);
         sessionStorage.setItem("id", res.data.id);
 
         Swal.fire({
@@ -60,7 +63,7 @@ function Login() {
         });
 
         setTimeout(() => {
-          window.location.href = "/login";
+          // window.location.href = "/login";
         }, 2500);
       });
   };

@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import sentinela from "../api/sentinela";
 import cadastroImg from "../assets/senior-couple-holding-hands.jpg";
 
-import { api8081 } from "../api/api";
+import { api8081, api8080 } from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -25,7 +25,13 @@ function cadastro() {
     const cpf = document.getElementById("cpf").value;
     const senha = document.getElementById("senha").value;
 
-    api8081.post("usuarios/cadastrar/", {
+    console.log(nome)
+    console.log(email)
+    console.log(telefone)
+    console.log(cpf)
+    console.log(senha)
+
+    api8080.post("cadastrar/usuario/", {
         nome: nome,
         email: email,
         cpf: cpf,
@@ -53,7 +59,7 @@ function cadastro() {
           timer: 1500,
         });
 
-        window.location.href = "/cadastro";
+        // window.location.href = "/cadastro";
       });
   };
 

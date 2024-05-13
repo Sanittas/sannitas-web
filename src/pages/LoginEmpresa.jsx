@@ -20,15 +20,16 @@ function LoginEmpresa() {
     const cnpj = document.getElementById("cnpj").value;
     const senha = document.getElementById("senha").value;
     api8080
-      .post("/empresas/login", {
-        cnpj: cnpj,
-        senha: senha,
+      .post("/login/empresa", {
+        username: cnpj,
+        password: senha,
       })
       .then((res) => {
         console.log(res);
 
         sessionStorage.setItem("razaoSocial", res.data.razaoSocial);
         sessionStorage.setItem("idEmpresa", res.data.id);
+        sessionStorage.setItem("token", res.data.token);
 
         Swal.fire({
           icon: "success",

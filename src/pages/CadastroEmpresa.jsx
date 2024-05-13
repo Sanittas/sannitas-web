@@ -27,7 +27,7 @@ function cadastroEmpresa() {
         const email = document.getElementById("email").value;
         const senha = document.getElementById("senha").value;
         
-        api.post("empresas/", {
+        api.post("/cadastrar/empresa/", {
             razaoSocial: razaoSocial,
             cnpj: cnpj,
             senha: senha,
