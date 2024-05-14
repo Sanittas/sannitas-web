@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar"
 
 import cadastroImg from "../assets/hospital.jpg"
 
-import { api } from "../api/api";
+import { api8080WTokenAuth } from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -27,7 +27,7 @@ function cadastroEmpresa() {
         const email = document.getElementById("email").value;
         const senha = document.getElementById("senha").value;
         
-        api.post("/cadastrar/empresa/", {
+        api8080WTokenAuth.post("/cadastrar/empresa/", {
             razaoSocial: razaoSocial,
             cnpj: cnpj,
             senha: senha,

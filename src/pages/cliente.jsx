@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/cliente.css";
 // import { api8081} from "../api/api";
-import { api8080, api8081 } from "../api/api";
+import { api8080WTokenEmpresas, api8080WTokenUsuarios } from "../api/api";
 import Swal from "sweetalert2";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Input from "../components/Input";
@@ -23,7 +23,7 @@ function Cliente() {
       sentinela();
     async function fetchUserInfo() {
       try {
-        const response = await api8081.get(`/usuarios/${idUsuario}`);
+        const response = await api8080WTokenUsuarios.get(`/usuarios/${idUsuario}`);
         setUsuario(response.data);
         setNome(response.data.nome);
         setEmail(response.data.email);
@@ -36,7 +36,7 @@ function Cliente() {
 
     const getEnderecos = async () => {
       try {
-        const response = await api8081.get(`enderecos/usuarios/${idUsuario}`);
+        const response = await api8080WTokenUsuarios.get(`usuarios/enderecos/${idUsuario}`);
         console.log(response);
         setEnderecos(response.data);
       } catch (error) {
@@ -46,7 +46,7 @@ function Cliente() {
 
     const getServicosContratados = async () => {
       try {
-        const response = await api8080.get(`/agendamentos/usuario/${idUsuario}`);
+        const response = await api8080WTokenEmpresas.get(`empresas/agendamentos/usuario/${idUsuario}`);
         console.log(response);
         setServicosContratados(response.data);
       } catch (error) {
@@ -65,7 +65,7 @@ function Cliente() {
     e.preventDefault();
 
     try {
-      await api8081.put(`/usuarios/${idUsuario}`, {
+      await api8080WTokenUsuarios.put(`/usuarios/${idUsuario}`, {
         nome,
         email,
         cpf,
@@ -101,7 +101,7 @@ function Cliente() {
 
   const handleDelete = async (id) => {
     try {
-      await api8081.delete(`/enderecos/usuarios/${id}`);
+      await api8080WTokenUsuarios.delete(`usuarios/enderecos/${id}`);
       Swal.fire({
         icon: "success",
         title: "Endereço excluído com sucesso!",
@@ -154,8 +154,8 @@ function Cliente() {
         const cidade = result.value.cidade;
         const estado = result.value.estado;
 
-        api8081
-          .put(`/enderecos/usuarios/${value.id}`, {
+        api8080WTokenUsuarios
+          .put(`usuarios/enderecos/${value.id}`, {
             logradouro: logradouro,
             numero: numero,
             complemento: complemento,

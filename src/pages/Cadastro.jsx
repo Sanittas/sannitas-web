@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import sentinela from "../api/sentinela";
 import cadastroImg from "../assets/senior-couple-holding-hands.jpg";
 
-import { api8081, api8080 } from "../api/api";
+import { api8080WTokenAuth } from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -31,7 +31,7 @@ function cadastro() {
     console.log(cpf)
     console.log(senha)
 
-    api8080.post("cadastrar/usuario/", {
+    api8080WTokenAuth.post("cadastrar/usuario/", {
         nome: nome,
         email: email,
         cpf: cpf,

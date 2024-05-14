@@ -2,7 +2,7 @@ import React from "react";
 
 import "../css/telaServicosEmpresa.css"
 import { useState, useEffect } from "react";
-import { api8080 } from "../api/api";
+import { api8080WTokenEmpresas, api8080WTokenUsuarios } from "../api/api";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
@@ -34,8 +34,8 @@ function CadastrarServicos(props) {
 
     const getServicos = async () => {
       try {
-        const resposta = await api8080.get(
-          `/servicos/` // path rota api
+        const resposta = await api8080WTokenEmpresas.get(
+          `empresas/servicos/` // path rota api
         );
 
         setServicos(resposta.data);
@@ -67,7 +67,7 @@ function CadastrarServicos(props) {
 
     
 
-    api8080.post(`/servicos/`, {
+    api8080WTokenEmpresas.post(`empresas/servicos/`, {
 
       areaSaude: value.areaSaude,
       descricao: value.descricao,
@@ -109,7 +109,7 @@ function CadastrarServicos(props) {
     console.log(value.duracaoEstimada)
     console.log(value.valor)
 
-    api8080.post(`/servicos/`, {
+    api8080WTokenEmpresas.post(`empresas/servicos/`, {
 
       areaSaude: value.areaSaude,
       descricao: value.descricao,
@@ -193,7 +193,7 @@ function CadastrarServicos(props) {
     console.log(value.valor)
     console.log(value.duracaoEstimada)
 
-    api8080.put(`/servicos/${value.id}`, {
+    api8080WTokenEmpresas.put(`empresas/servicos/${value.id}`, {
 
       
       descricao: value.descricao,
@@ -279,8 +279,8 @@ function CadastrarServicos(props) {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8080
-          .delete(`/servicos/${idServico}`)
+        api8080WTokenEmpresas
+          .delete(`empresas/servicos/${idServico}`)
           .then(() => {
             Swal.fire({
               icon: "success",
