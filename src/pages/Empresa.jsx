@@ -5,7 +5,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-import { api8080, api8081 } from "../api/api";
+import { api8081WToken } from "../api/api";
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +29,7 @@ function Empresa() {
 
     const getEmpresa = async () => {
       try {
-        const response = await api8081.get(`/empresas/${idEmpresa}`);
+        const response = await api8081WToken.get(`/empresas/${idEmpresa}`);
         setEmpresa(response.data);
       } catch (err) {
         console.log(err);
@@ -38,7 +38,7 @@ function Empresa() {
 
     const getFuncionarios = async () => {
       try {
-        const response = await api8081.get(
+        const response = await api8081WToken.get(
           `/funcionarios/empresa/${idEmpresa}`
         );
         setFuncionarios(response.data);
@@ -49,7 +49,7 @@ function Empresa() {
 
     const getCompetencias = async () => {
       try {
-        const response = await api8081.get(`/competencias/`);
+        const response = await api8081WToken.get(`/competencias/`);
         setCompetencias(response.data);
       } catch (err) {
         console.log(err);
@@ -58,7 +58,7 @@ function Empresa() {
 
     const getEnderecos = async () => {
       try {
-        const response = await api8081.get(`enderecos/empresas/${idEmpresa}`);
+        const response = await api8081WToken.get(`enderecos/empresas/${idEmpresa}`);
         setEnderecos(response.data);
       } catch (err) {
         console.log(err);
@@ -67,7 +67,7 @@ function Empresa() {
 
     const getCountFuncionarios = async () => {
       try {
-        const response = await api8081.get(
+        const response = await api8081WToken.get(
           `/funcionarios/count-empresa/${idEmpresa}`
         );
         setCountFuncionarios(response.data);
@@ -123,7 +123,7 @@ function Empresa() {
   };
 
   const updateEmpresa = (value) => {
-    api8081
+    api8081WToken
       .put(`/empresas/${idEmpresa}`, {
         razaoSocial: value.razaoSocial,
         cnpj: value.cnpj,
@@ -210,7 +210,7 @@ function Empresa() {
   };
 
   const updateFuncionario = (value) => {
-    api8081
+    api8081WToken
       .put(`/funcionarios/${value.id}`, {
         nome: value.nome,
         email: value.email,
@@ -249,7 +249,7 @@ function Empresa() {
   };
 
   async function getIdFuncionario(cpf) {
-    let response = await api8081.get(`/funcionarios/cpf/${cpf}`);
+    let response = await api8081WToken.get(`/funcionarios/cpf/${cpf}`);
     let data = response.data;
     return data;
   }
@@ -299,7 +299,7 @@ function Empresa() {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        api8081
+        api8081WToken
           .post(`/funcionarios/`, {
             nome: result.value.nome,
             email: result.value.email,
@@ -343,7 +343,7 @@ function Empresa() {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8081
+        api8081WToken
           .delete(`/funcionarios/${idFuncionario}`)
           .then(() => {
             Swal.fire({
@@ -427,7 +427,7 @@ function Empresa() {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        api8081
+        api8081WToken
           .put(`/enderecos/empresas/${idEndereco}`, {
             logradouro: result.value.logradouro,
             numero: result.value.numero,
@@ -467,7 +467,7 @@ function Empresa() {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8081
+        api8081WToken
           .delete(`/enderecos/empresas/${idEndereco}`)
           .then(() => {
             Swal.fire({

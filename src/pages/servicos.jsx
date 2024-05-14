@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Navbar from "../components/Navbar";
 import CardServico from "../components/CardServico";
-import {api8080} from "../api/api";
+import {api8081WToken} from "../api/api";
 import "../css/servicos.css";
 import sentinela from "../api/sentinela";
 
@@ -18,7 +18,7 @@ function Servicos(props) {
     sentinela();
     const getServicos = async () => {
       try {
-        const response = await api8080.get(
+        const response = await api8081WToken.get(
           `/servicos/` // path rota api
         );
         

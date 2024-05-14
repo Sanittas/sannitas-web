@@ -2,7 +2,7 @@ import React from "react";
 
 import "../css/telaServicosEmpresa.css"
 import { useState, useEffect } from "react";
-import { api8080 } from "../api/api";
+import { api8081WToken } from "../api/api";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
@@ -34,7 +34,7 @@ function CadastrarServicos(props) {
 
     const getServicos = async () => {
       try {
-        const resposta = await api8080.get(
+        const resposta = await api8081WToken.get(
           `/servicos/` // path rota api
         );
 
@@ -67,7 +67,7 @@ function CadastrarServicos(props) {
 
     
 
-    api8080.post(`/servicos/`, {
+    api8081WToken.post(`/servicos/`, {
 
       areaSaude: value.areaSaude,
       descricao: value.descricao,
@@ -109,7 +109,7 @@ function CadastrarServicos(props) {
     console.log(value.duracaoEstimada)
     console.log(value.valor)
 
-    api8080.post(`/servicos/`, {
+    api8081WToken.post(`/servicos/`, {
 
       areaSaude: value.areaSaude,
       descricao: value.descricao,
@@ -193,7 +193,7 @@ function CadastrarServicos(props) {
     console.log(value.valor)
     console.log(value.duracaoEstimada)
 
-    api8080.put(`/servicos/${value.id}`, {
+    api8081WToken.put(`/servicos/${value.id}`, {
 
       
       descricao: value.descricao,
@@ -279,7 +279,7 @@ function CadastrarServicos(props) {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8080
+        api8081WToken
           .delete(`/servicos/${idServico}`)
           .then(() => {
             Swal.fire({
