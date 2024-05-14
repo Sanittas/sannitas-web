@@ -25,12 +25,12 @@ headers: {
     Authorization: "Bearer " + sessionStorage.getItem("token")
     }});
 
-const api8080WTokenEmpresas = axios.create({ baseURL: "http://10.0.0.132:80/", 
+const api8080WTokenEmpresas = axios.create({ baseURL: "http://54.82.145.138:8080/", 
 headers: {
     Authorization: "Bearer " + sessionStorage.getItem("token")
     }});
 
-const api8080WTokenUsuarios = axios.create({ baseURL: "http://10.0.0.176:80/", 
+const api8080WTokenUsuarios = axios.create({ baseURL: "http://54.163.104.204:8080/", 
 headers: {
     Authorization: "Bearer " + sessionStorage.getItem("token")
     }});
