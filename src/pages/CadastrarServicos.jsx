@@ -68,7 +68,6 @@ function CadastrarServicos(props) {
     
 
     api8080WTokenEmpresas.post(`empresas/servicos/`, {
-
       areaSaude: value.areaSaude,
       descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
@@ -110,7 +109,6 @@ function CadastrarServicos(props) {
     console.log(value.valor)
 
     api8080WTokenEmpresas.post(`empresas/servicos/`, {
-
       areaSaude: value.areaSaude,
       descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
@@ -192,10 +190,7 @@ function CadastrarServicos(props) {
     console.log(value.id)
     console.log(value.valor)
     console.log(value.duracaoEstimada)
-
     api8080WTokenEmpresas.put(`empresas/servicos/${value.id}`, {
-
-      
       descricao: value.descricao,
       areaSaude: value.areaSaude,
       valor: value.valor,

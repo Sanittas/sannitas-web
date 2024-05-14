@@ -345,6 +345,8 @@ function Empresa() {
       preConfirm: () => {
         api8080WTokenEmpresas
           .delete(`empresas/funcionarios/${idFuncionario}`)
+        api8080WTokenEmpresas
+          .delete(`/funcionarios/${idFuncionario}`)
           .then(() => {
             Swal.fire({
               icon: "success",
