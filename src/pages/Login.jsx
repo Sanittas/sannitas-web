@@ -54,7 +54,7 @@ function Login() {
         }, 2500);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
         Swal.fire({
           icon: "error",
           title: "Erro ao realizar login!",
