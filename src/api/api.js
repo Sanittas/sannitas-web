@@ -18,6 +18,16 @@ const api8080 = axios.create({ baseURL: "http://localhost:8080/", headers: {
 //Usuario
 const api8081 = axios.create({ baseURL: "http://localhost:8081/", headers: { "Access-Control-Allow-Origin": "*" }});
 
+const api8080WTokenEmpresas = axios.create({ baseURL: "http://localhost:8080/", 
+headers: {
+    Authorization: "Bearer " + sessionStorage.getItem("token")
+    }});
+
+const api8080WTokenUsuarios = axios.create({ baseURL: "http://localhost:8080/", 
+headers: {
+    Authorization: "Bearer " + sessionStorage.getItem("token")
+    }});
+
 
 const api8081WToken = axios.create({ baseURL: "http://localhost:8081/", 
 headers: {
@@ -29,6 +39,11 @@ headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
         }});
 
+    const api8080WTokenAuth = axios.create({ baseURL: "http://18.206.185.43:8080/", 
+headers: {
+    Authorization: "Bearer " + sessionStorage.getItem("token")
+    }});
 
 
-export { api, api8080, api8081, api8082WToken, api8081WToken};
+
+export { api, api8080, api8081, api8082WToken, api8081WToken, api8080WTokenEmpresas, api8080WTokenUsuarios, api8080WTokenAuth};
