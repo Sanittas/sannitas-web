@@ -39,7 +39,7 @@ headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
         }});
 
-    const api8080WTokenAuth = axios.create({ baseURL: "http://18.206.185.43:8080/", 
+    const api8080WTokenAuth = axios.create({ baseURL: "http://localhost:8080/", 
 headers: {
     Authorization: "Bearer " + sessionStorage.getItem("token")
     }});
