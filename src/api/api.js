@@ -11,7 +11,7 @@ import axios from "axios";
 
 //Servico-Empresa
 const apiEmpresas = axios.create({
-    baseURL: "http://3.228.35.151:80/", headers: {
+    baseURL: "http://3.228.35.151:8080/", headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
     }
 });
@@ -19,7 +19,7 @@ const apiEmpresas = axios.create({
 
 //Auth    
 const apiAuth = axios.create({
-    baseURL: "http://3.228.35.151:80/",
+    baseURL: "http://3.228.35.151:8080/",
     headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
     }
@@ -27,7 +27,7 @@ const apiAuth = axios.create({
 
 //Usuario
 const apiUsuarios = axios.create({
-    baseURL: "http://3.228.35.151:80/",
+    baseURL: "http://3.228.35.151:8080/",
     headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
     }
