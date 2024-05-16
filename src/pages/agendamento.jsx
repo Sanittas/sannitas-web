@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/agendamento.css";
 import "react-calendar/dist/Calendar.css";
-import { api8080 } from "../api/api";
-import { api8081, api8082WToken, api8081WToken } from "../api/api";
+import { apiUsuarios, apiEmpresas  } from "../api/api";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
 import NavbarPosLogin from "../components/NavBarPosLogin";
@@ -37,7 +36,7 @@ function Agendamento() {
 
     const getEndereco = async () => {
       try {
-        const response = await api8082WToken.get(`/enderecos/usuarios/${idUsuario}`);
+        const response = await apiUsuarios.get(`usuarios/enderecos/${idUsuario}`);
         setEndereco(response.data);
       } catch (err) {
         console.log(err);
@@ -46,7 +45,7 @@ function Agendamento() {
 
     const getUsuario = async () => {
       try {
-        const response = await api8082WToken.get(`/usuarios/${idUsuario}`);
+        const response = await apiUsuarios.get(`/usuarios/${idUsuario}`);
         setUsuario(response.data);
       } catch (err) {
         console.log(err);
@@ -55,7 +54,7 @@ function Agendamento() {
 
     const getServico = async () => {
       try {
-        const response = await api8081WToken.get(`/servicos/${idServico}`);
+        const response = await apiEmpresas.get(`empresas/servicos/${idServico}`);
         setServico(response.data);
       } catch (err) {
         console.log(err);
@@ -79,7 +78,7 @@ function Agendamento() {
       var cpf = usuario?.cpf;
       var email = usuario?.email;
 
-      api8081WToken.post("/pagamentos/criar-pagamento", {
+      apiEmpresas.post("empresas/pagamentos/criar-pagamento", {
         cpf: cpf,
         nome: usuario?.nome,
         email: email,
@@ -90,8 +89,8 @@ function Agendamento() {
         console.log(infoPagamento);
         let encoded = encodeURIComponent(infoPagamento.data.qrCode);
         console.log(encoded);
-        api8081WToken
-            .post(`/agendamentos/`, {
+        apiEmpresas
+            .post(`empresas/agendamentos/`, {
               dataAgendamento: format(value, "yyyy-MM-dd HH:mm:ss"),
               idServico: idServico,
               idUsuario: idUsuario,

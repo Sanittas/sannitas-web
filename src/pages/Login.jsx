@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 import login from "../assets/senior-couple-holding-hands.jpg";
 
-import { api8080WTokenAuth, api8080WTokenUsuarios} from "../api/api";
+import { apiAuth, apiUsuarios} from "../api/api";
 
 import Swal from "sweetalert2";
 import Modal from "react-modal";
@@ -29,7 +29,7 @@ function Login() {
     console.log(email)
     console.log(senha)
 
-    api8080WTokenAuth
+    apiAuth
       .post("login/usuario", {
         username: email,
         password: senha,
@@ -80,7 +80,7 @@ function Login() {
 
   const usuarioPorEmail = (credential) => {
     // Remove 'await' keyword here
-    api8080WTokenUsuarios
+    apiUsuarios
       .get(`usuarios/email/${credential.email}`)
       .then((res) => {
         console.log(res);
@@ -111,7 +111,7 @@ function Login() {
     const cpf = document.getElementById("cpf").value;
     const telefone = document.getElementById("telefone").value;
 
-    api8080WTokenAuth
+    apiAuth
       .post("cadastrar/usuario/", {
         nome: infoGoogle.name,
         email: infoGoogle.email,

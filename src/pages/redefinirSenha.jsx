@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/redefinirSenha.css";
 import Navbar from "../components/Navbar";
-import {api8080WToken, api8080WTokenUsuarios} from "../api/api";
+import {apiEmpresas, apiUsuarios} from "../api/api";
 import Swal from "sweetalert2";
 import Input from "../components/Input";
 
@@ -12,7 +12,7 @@ function RedefinirSenha() {
         const div2 = document.querySelector("#confirmacao"); // seletor corrigido
 
         if (email != null && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-            api8080WTokenUsuarios
+            apiUsuarios
                 .post(`/usuarios/esqueci-senha?email=${email}`, {
                     email: email,
                 })

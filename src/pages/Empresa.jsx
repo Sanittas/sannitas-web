@@ -5,7 +5,7 @@ import NavbarPosLogin from "../components/NavBarPosLogin";
 import "../css/empresa.modules.css";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
-import { api8080WTokenEmpresas, api8080WTokenUsuarios } from "../api/api";
+import { apiEmpresas, apiUsuarios } from "../api/api";
 import ModalCadastroEndereco from "../components/ModalCadastroEndereco";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +29,7 @@ function Empresa() {
 
     const getEmpresa = async () => {
       try {
-        const response = await api8080WTokenEmpresas.get(`empresas/${idEmpresa}`);
+        const response = await apiEmpresas.get(`empresas/${idEmpresa}`);
         setEmpresa(response.data);
       } catch (err) {
         console.log(err);
@@ -38,7 +38,7 @@ function Empresa() {
 
     const getFuncionarios = async () => {
       try {
-        const response = await api8080WTokenEmpresas.get(
+        const response = await apiEmpresas.get(
           `empresas/funcionarios/empresa/${idEmpresa}`
         );
         setFuncionarios(response.data);
@@ -49,7 +49,7 @@ function Empresa() {
 
     const getCompetencias = async () => {
       try {
-        const response = await api8080WTokenEmpresas.get(`empresas/competencias/`);
+        const response = await apiEmpresas.get(`empresas/competencias/`);
         setCompetencias(response.data);
       } catch (err) {
         console.log(err);
@@ -58,7 +58,7 @@ function Empresa() {
 
     const getEnderecos = async () => {
       try {
-        const response = await api8080WTokenEmpresas.get(`empresas/enderecos/${idEmpresa}`);
+        const response = await apiEmpresas.get(`empresas/enderecos/${idEmpresa}`);
         setEnderecos(response.data);
       } catch (err) {
         console.log(err);
@@ -67,7 +67,7 @@ function Empresa() {
 
     const getCountFuncionarios = async () => {
       try {
-        const response = await api8080WTokenEmpresas.get(
+        const response = await apiEmpresas.get(
           `empresas/funcionarios/count-empresa/${idEmpresa}`
         );
         setCountFuncionarios(response.data);
@@ -123,7 +123,7 @@ function Empresa() {
   };
 
   const updateEmpresa = (value) => {
-    api8080WTokenEmpresas
+    apiEmpresas
       .put(`empresas/${idEmpresa}`, {
         razaoSocial: value.razaoSocial,
         cnpj: value.cnpj,
@@ -210,7 +210,7 @@ function Empresa() {
   };
 
   const updateFuncionario = (value) => {
-    api8080WTokenEmpresas
+    apiEmpresas
       .put(`empresas/funcionarios/${value.id}`, {
         nome: value.nome,
         email: value.email,
@@ -249,7 +249,7 @@ function Empresa() {
   };
 
   async function getIdFuncionario(cpf) {
-    let response = await api8080WTokenEmpresas.get(`empresas/funcionarios/cpf/${cpf}`);
+    let response = await apiEmpresas.get(`empresas/funcionarios/cpf/${cpf}`);
     let data = response.data;
     return data;
   }
@@ -299,7 +299,7 @@ function Empresa() {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        api8080WTokenEmpresas
+        apiEmpresas
           .post(`empresas/funcionarios/`, {
             nome: result.value.nome,
             email: result.value.email,
@@ -343,10 +343,8 @@ function Empresa() {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8080WTokenEmpresas
+        apiEmpresas
           .delete(`empresas/funcionarios/${idFuncionario}`)
-        api8080WTokenEmpresas
-          .delete(`/funcionarios/${idFuncionario}`)
           .then(() => {
             Swal.fire({
               icon: "success",
@@ -429,7 +427,7 @@ function Empresa() {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        api8080WTokenEmpresas
+        apiEmpresas
           .put(`empresas/enderecos/${idEndereco}`, {
             logradouro: result.value.logradouro,
             numero: result.value.numero,
@@ -469,7 +467,7 @@ function Empresa() {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8080WTokenEmpresas
+        apiEmpresas
           .delete(`empresas/enderecos/${idEndereco}`)
           .then(() => {
             Swal.fire({

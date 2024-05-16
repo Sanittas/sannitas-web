@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import "../css/modalEndereco.css";
 
-import { api8081, api8080, api8082WToken } from "../api/api";
+import { apiUsuarios, apiEmpresas } from "../api/api";
 
 import apiViaCep from "../api/apiViaCep";
 import mascara from "../api/mascara";
@@ -45,8 +45,8 @@ function ModalCadastroEndereco(props) {
     var idEmpresa = sessionStorage.getItem("idEmpresa");
     idEmpresa
       ?
-      api8082WToken
-          .post(`/enderecos/empresas/${idEmpresa}`, {
+      apiEmpresas
+          .post(`empresas/enderecos/${idEmpresa}`, {
             cep: cep,
             logradouro: logradouro,
             numero: numero,
@@ -77,8 +77,8 @@ function ModalCadastroEndereco(props) {
               timer: 1500,
             });
           })
-      : api8082WToken
-          .post(`/enderecos/usuarios/${idUsuario}`, {
+      : apiUsuarios
+          .post(`usuarios/enderecos/${idUsuario}`, {
             logradouro: logradouro,
             numero: numero,
             complemento: complemento,
