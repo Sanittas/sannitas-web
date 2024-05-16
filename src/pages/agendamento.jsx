@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/agendamento.css";
 import "react-calendar/dist/Calendar.css";
 import { api8080 } from "../api/api";
-import { api8081 } from "../api/api";
+import { api8081, api8082WToken, api8081WToken } from "../api/api";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
 import NavbarPosLogin from "../components/NavBarPosLogin";
@@ -37,7 +37,7 @@ function Agendamento() {
 
     const getEndereco = async () => {
       try {
-        const response = await api8081.get(`/enderecos/usuarios/${idUsuario}`);
+        const response = await api8082WToken.get(`/enderecos/usuarios/${idUsuario}`);
         setEndereco(response.data);
       } catch (err) {
         console.log(err);
@@ -46,7 +46,7 @@ function Agendamento() {
 
     const getUsuario = async () => {
       try {
-        const response = await api8081.get(`/usuarios/${idUsuario}`);
+        const response = await api8082WToken.get(`/usuarios/${idUsuario}`);
         setUsuario(response.data);
       } catch (err) {
         console.log(err);
@@ -55,7 +55,7 @@ function Agendamento() {
 
     const getServico = async () => {
       try {
-        const response = await api8080.get(`/servicos/${idServico}`);
+        const response = await api8081WToken.get(`/servicos/${idServico}`);
         setServico(response.data);
       } catch (err) {
         console.log(err);
@@ -79,7 +79,7 @@ function Agendamento() {
       var cpf = usuario?.cpf;
       var email = usuario?.email;
 
-      api8081.post("/usuarios/pagamentos/criar-pagamento", {
+      api8081WToken.post("/pagamentos/criar-pagamento", {
         cpf: cpf,
         nome: usuario?.nome,
         email: email,
@@ -90,7 +90,7 @@ function Agendamento() {
         console.log(infoPagamento);
         let encoded = encodeURIComponent(infoPagamento.data.qrCode);
         console.log(encoded);
-          api8080
+        api8081WToken
             .post(`/agendamentos/`, {
               dataAgendamento: format(value, "yyyy-MM-dd HH:mm:ss"),
               idServico: idServico,
@@ -132,7 +132,7 @@ function Agendamento() {
             timer: 2500,
           });
 
-          window.location.reload();
+          // window.location.reload();
         });
     } else {
       setViewModal(true);

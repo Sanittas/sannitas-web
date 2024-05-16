@@ -24,6 +24,11 @@ headers: {
     Authorization: "Bearer " + sessionStorage.getItem("token")
     }});
 
+    const api8082WToken = axios.create({ baseURL: "http://localhost:8082/", 
+    headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+        }});
 
 
-export { api, api8080, api8081, api8081WToken};
+
+export { api, api8080, api8081, api8082WToken, api8081WToken};
