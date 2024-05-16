@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 
 import login from "../assets/senior-couple-holding-hands.jpg";
 
-import { api8080 } from "../api/api";
+import { api8080WTokenAuth } from "../api/api";
 
 import Swal from "sweetalert2";
 
@@ -19,7 +19,7 @@ function LoginEmpresa() {
   const realizarLogin = () => {
     const cnpj = document.getElementById("cnpj").value;
     const senha = document.getElementById("senha").value;
-    api8080
+    api8080WTokenAuth
       .post("/login/empresa", {
         username: cnpj,
         password: senha,

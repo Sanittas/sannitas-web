@@ -2,7 +2,7 @@ import React from "react";
 
 import "../css/telaServicosEmpresa.css"
 import { useState, useEffect } from "react";
-import { api8081WToken } from "../api/api";
+import { api8080WTokenEmpresas, api8080WTokenUsuarios } from "../api/api";
 import NavbarPosLogin from "../components/NavBarPosLogin";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
@@ -34,8 +34,8 @@ function CadastrarServicos(props) {
 
     const getServicos = async () => {
       try {
-        const resposta = await api8081WToken.get(
-          `/servicos/` // path rota api
+        const resposta = await api8080WTokenEmpresas.get(
+          `empresas/servicos/` // path rota api
         );
 
         setServicos(resposta.data);
@@ -67,8 +67,7 @@ function CadastrarServicos(props) {
 
     
 
-    api8081WToken.post(`/servicos/`, {
-
+    api8080WTokenEmpresas.post(`empresas/servicos/`, {
       areaSaude: value.areaSaude,
       descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
@@ -109,8 +108,7 @@ function CadastrarServicos(props) {
     console.log(value.duracaoEstimada)
     console.log(value.valor)
 
-    api8081WToken.post(`/servicos/`, {
-
+    api8080WTokenEmpresas.post(`empresas/servicos/`, {
       areaSaude: value.areaSaude,
       descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
@@ -192,10 +190,7 @@ function CadastrarServicos(props) {
     console.log(value.id)
     console.log(value.valor)
     console.log(value.duracaoEstimada)
-
-    api8081WToken.put(`/servicos/${value.id}`, {
-
-      
+    api8080WTokenEmpresas.put(`empresas/servicos/${value.id}`, {
       descricao: value.descricao,
       areaSaude: value.areaSaude,
       valor: value.valor,
@@ -279,8 +274,8 @@ function CadastrarServicos(props) {
       cancelButtonText: "Não",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        api8081WToken
-          .delete(`/servicos/${idServico}`)
+        api8080WTokenEmpresas
+          .delete(`empresas/servicos/${idServico}`)
           .then(() => {
             Swal.fire({
               icon: "success",
