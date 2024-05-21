@@ -94,7 +94,7 @@ function Agendamento() {
               dataAgendamento: format(value, "yyyy-MM-dd HH:mm:ss"),
               idServico: idServico,
               idUsuario: idUsuario,
-              idFuncionario: 1,
+              idFuncionario: 3,
             })
             .then((res) => {
               console.log(res);
