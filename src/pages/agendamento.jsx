@@ -59,7 +59,7 @@ function Agendamento() {
       } catch (err) {
         console.log(err);
       }
-    };
+    };  
 
     getEndereco();
     getUsuario();

@@ -14,7 +14,7 @@ function CadastrarServicos(props) {
 
   const [options, setOptions] = useState([]);
   const [servicos, setServicos] = useState([]);
-  // const [servicosVinculados, setServicosVinculados] = useState([]);
+  const [servicosVinculados, setServicosVinculados] = useState([]);
 
   useEffect(() => {
     sentinela();
@@ -44,22 +44,20 @@ function CadastrarServicos(props) {
       }
     };
 
-    // const getServicosVinculados = async () => {
-    //   try {
-    //     const response = await api8080.get(
-    //       `/servicos-empresas/` // path rota api
-    //     );
+    const getServicosVinculados = async () => {
+      try {
+        const response = await apiEmpresas.get(`empresas/area-saude/`);
 
-    //     console.log(response.data);
-    //     setServicosVinculados(response.data);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
+        console.log(response.data);
+        setServicosVinculados(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     // getTipoServicos();
     getServicos();
-    // getServicosVinculados();
+    getServicosVinculados();
   }, []);
 
 
@@ -149,7 +147,15 @@ function CadastrarServicos(props) {
       title: "Vincular Serviço",
       html: `
               <form>
-                  <input id="areaSaude" class="swal2-input" Área Saúde" placeholder="Área Saúde">
+              <select id="areaSaude" class="swal2-input">
+              <option value="">Selecione uma área</optiion>
+              ${servicosVinculados.map(competencia => 
+      
+                `<option value="${competencia.especializacao}">${competencia.especializacao}</option>`
+      
+              )}
+      
+            </select>
                   <input id="descricao" class="swal2-input" placeholder="Descrição">
                   <input id="duracaoEstimada" class="swal2-input" placeholder="Duração Estimada (em minutos)">
                   <input id="valor"  class="swal2-input" placeholder="Valor do Serviço">

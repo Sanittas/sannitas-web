@@ -38,7 +38,7 @@ function Login() {
         console.log(res);
 
         sessionStorage.setItem("token", res.data.token);
-        sessionStorage.setItem("nome", res.data.username);
+        sessionStorage.setItem("nome", res.data.nome);
         sessionStorage.setItem("id", res.data.id);
 
         Swal.fire({
