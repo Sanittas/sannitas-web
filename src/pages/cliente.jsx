@@ -284,15 +284,28 @@ function Cliente() {
 
         <div className="servicos-contratados">
           <h1>Serviços contratados</h1>
-          <div className="servicos-contratados-container">
-            {
+          <div className="card-read-servicos">
+          {
               servicosContratados.length > 0 ? servicosContratados.map((servicoContratado, i) => (
-                <div className="servico-contratado" key={servicoContratado.id}>                  
-                  <label>Cliente</label>
-                  <p>{servicoContratado.usuario.nome}</p>
-                  <label>Data e Hora</label>
-                  <p>{servicoContratado.dataHoraAgendamento}</p>
-                </div>
+              
+                  <table>
+                    <tbody>
+                  <thead>
+              <tr>
+              <th>Data e Hora</th>
+              <th>Serviço</th>
+              </tr>
+              </thead>
+              <div key={servicoContratado.id}>
+              <td>{servicoContratado.dataHoraAgendamento}</td>
+              <td>{servicoContratado.servico.descricao}</td>
+              </div>
+                </tbody>
+              </table>
+
+              
+              
+
               )) : <p>Você ainda não contratou nenhum serviço!</p> 
             }
           </div>

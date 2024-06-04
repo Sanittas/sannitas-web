@@ -266,7 +266,7 @@ function Empresa() {
       <input id="tel" class="swal2-input" placeholder="Telefone" type="tel" pattern="^\\([1-9]{2}\\) (?:[2-8]|9[1-9])[0-9]{3}\\-[0-9]{4}$" maxLength="14">
       <input id="cpf" class="swal2-input" placeholder="CPF" maxLength="14">
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
-      <select id="especializacao" class="swal2-input">
+      <select id="especializacao" class="swal2-select">
         <option value="">Selecione uma especialização</option>
         ${competencias.map(competencia => 
 

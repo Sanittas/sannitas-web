@@ -27,7 +27,7 @@ function LoginEmpresa() {
       .then((res) => {
         console.log(res);
 
-        sessionStorage.setItem("razaoSocial", res.data.nome);
+        sessionStorage.setItem("razaoSocial", res.data.razao_social);
         sessionStorage.setItem("idEmpresa", res.data.id);
         sessionStorage.setItem("token", res.data.token);
 

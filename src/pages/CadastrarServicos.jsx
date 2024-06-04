@@ -147,7 +147,7 @@ function CadastrarServicos(props) {
       title: "Vincular Serviço",
       html: `
               <form>
-              <select id="areaSaude" class="swal2-input">
+              <select id="areaSaude" class="swal2-select">
               <option value="">Selecione uma área</optiion>
               ${servicosVinculados.map(competencia => 
       

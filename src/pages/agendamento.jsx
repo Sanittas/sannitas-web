@@ -29,12 +29,13 @@ function Agendamento() {
   const [value, setValue] = useState(new Date());
   const [endereco, setEndereco] = useState([]);
   const [usuario, setUsuario] = useState();
+  const [funcionario, setFuncionario] = useState();
   const [servico, setServico] = useState();
 
   useEffect(() => {
       sentinela();
 
-    const getEndereco = async () => {
+      const getEndereco = async () => {
       try {
         const response = await apiUsuarios.get(`usuarios/enderecos/${idUsuario}`);
         setEndereco(response.data);
@@ -56,10 +57,33 @@ function Agendamento() {
       try {
         const response = await apiEmpresas.get(`empresas/servicos/${idServico}`);
         setServico(response.data);
+
+        var areaSaude = response.data.areaSaude;
+
+        getFuncionario(areaSaude)
+        
       } catch (err) {
         console.log(err);
       }
     };  
+
+    const getFuncionario = async (areaSaude) => {
+      try {
+        
+          var especializacao = areaSaude;
+        
+    
+        const response = await apiEmpresas.post('empresas/funcionarios/servico', { especializacao: especializacao });
+
+        const firstFuncionario = response.data[0]; 
+
+        setFuncionario(firstFuncionario);
+        console.log("Funcionário definido:", firstFuncionario);
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     getEndereco();
     getUsuario();
@@ -70,13 +94,14 @@ function Agendamento() {
 
 
 
-
+  
 
   function agendar(id) {
     setViewModal(false);
     if (endereco) {
       var cpf = usuario?.cpf;
       var email = usuario?.email;
+      var idFuncionario = funcionario?.id;
 
       apiEmpresas.post("empresas/pagamentos/criar-pagamento", {
         cpf: cpf,
@@ -94,7 +119,7 @@ function Agendamento() {
               dataAgendamento: format(value, "yyyy-MM-dd HH:mm:ss"),
               idServico: idServico,
               idUsuario: idUsuario,
-              idFuncionario: 3,
+              idFuncionario: idFuncionario,
             })
             .then((res) => {
               console.log(res);
@@ -217,25 +242,29 @@ function Agendamento() {
           <p>
             Duração: <span>{servico?.duracaoEstimada} minutos</span>
           </p>
+          
+          <h1>Funcionário</h1>
+          {funcionario && (
+  <>
+    <p>
+      Nome: <span>{funcionario.nome}</span>
+    </p>
+    <p>
+      Email: <span>{funcionario?.contatos[0].email}</span>
+    </p>
+    <p>
+      Telefone: <span>{funcionario?.contatos[0].tel}</span>
+    </p>
+    <p>
+      Área de atuação: <span>{funcionario.competencias[0].especializacao}</span>
+    </p>
+    <p>
+      Registro: <span>{funcionario.competencias[0].registroAtuacao}</span>
+    </p>
+  </>
+)}
 
-          <hr />
-          <h1>Informações do Profissional</h1>
-          <p>
-            Nome: <span>{servico?.profissional?.nome}</span>
-          </p>
-          <p>
-            Email: <span>{servico?.profissional?.email}</span>
-          </p>
-          <p>
-            Telefone: <span>{servico?.profissional?.telefone}</span>
-          </p>
-          <p>
-            Área de atuação: <span>{servico?.profissional?.areaAtuacao}</span>
-          </p>
-          <p>
-            Registro: <span>{servico?.profissional?.registro}</span>
-          </p>
-          <hr />
+
           <h1>Agendar Serviço</h1>
           <p>Escolha a forma de pagamento</p>
           <select id="slc-pagamento">
