@@ -27,7 +27,7 @@ const apiAuth = axios.create({
 
 //Usuario
 const apiUsuarios = axios.create({
-    baseURL: "http://54.92.146.82:8082/",
+    baseURL: "http://54.92.146.82:8080/",
     headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
     }
