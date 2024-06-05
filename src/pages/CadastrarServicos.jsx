@@ -9,6 +9,7 @@ import Button from "../components/Button";
 import sentinela from "../api/sentinela";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 function CadastrarServicos(props) {
   const idEmpresa = sessionStorage.getItem("idEmpresa");
 
@@ -111,7 +112,7 @@ function CadastrarServicos(props) {
       descricao: value.descricao,
       duracaoEstimada: value.duracaoEstimada,
       valor: value.valor,
-      fkEmpresa: idEmpresa
+      empresaId: idEmpresa
 
 
     }).then((res) => {
