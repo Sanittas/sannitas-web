@@ -10,18 +10,18 @@ jobs:
     steps:
      - name: apaga conteudo da pasta build
        run: rm -r /build/
-       working-directory: /home/ubuntu/sanittas-web
+       working-directory: /home/ubuntu/sannitas-web
      - name: apaga conteudo da pasta html
        run: sudo rm -r /var/www/html/*
      - name: atualiza o repositorio
        run: git pull
-       working-directory: /home/ubuntu/sanittas-web
+       working-directory: /home/ubuntu/sannitas-web
      - name: builda o app react
        run: npm run build
-       working-directory: /home/ubuntu/sanittas-web
+       working-directory: /home/ubuntu/sannitas-web
      - name: move o conteudo da pasta build para pasta html
        run: sudo mv ./build/* /var/www/html/
-       working-directory: /home/ubuntu/sanittas-web
+       working-directory: /home/ubuntu/sannitas-web
      - name: faz o reload do nginx
        run: sudo systemctl reload nginx
   
