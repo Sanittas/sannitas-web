@@ -1,0 +1,25 @@
+name: ci-cd
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+     - name: entra no diretorio do app
+       run: cd home/ubuntu/sannitas-web
+     - name: apaga conteudo da pasta build
+       run: sudo rm -r build/
+     - name: apaga conteudo da pasta html
+       run: sudo rm -r /var/www/html/*
+     - name: atualiza o repositorio
+       run: git pull
+     - name: builda o app react
+       run: npm run build
+     - name: move o conteudo da pasta build para pasta html
+       run: sudo mv ./build/* /var/www/html/
+     - name: faz o reload do nginx
+       run: sudo systemctl reload nginx
+  
