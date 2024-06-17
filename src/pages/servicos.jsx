@@ -42,28 +42,24 @@ function Servicos(props) {
 
   return (
     <>
-    
       {sessionStorage.getItem("id") || sessionStorage.getItem("idEmpresa") ? <NavbarPosLogin /> : <Navbar />}
       <div className="container-servicos-contratar">
-      { 
-        servicos.map((servico, i) => ( 
-          
-          <CardServico
-            area={servico.areaSaude}
-            descricao={servico.descricao}
-            valor={servico.valor}
-            tempo={servico.duracaoEstimada}
-            // equipeResponsavel={servico.servicoEmpresa[0].equipeResponsavel}
-            id={servico.id}
-            key={i+1}
-          />
-        ))
-      }
+        {servicos.length > 0 ? (
+          servicos.map((servico, i) => (
+            <CardServico
+              area={servico.areaSaude}
+              descricao={servico.descricao}
+              valor={servico.valor}
+              tempo={servico.duracaoEstimada}
+              // equipeResponsavel={servico.servicoEmpresa[0].equipeResponsavel}
+              id={servico.id}
+              key={i + 1}
+            />
+          ))
+        ) : (
+          <p>Nenhum serviço disponível no momento.</p>
+        )}
       </div>
-
-      
-      
-      
     </>
   );
 }

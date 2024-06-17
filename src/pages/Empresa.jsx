@@ -268,11 +268,18 @@ function Empresa() {
       <input id="funcional" class="swal2-input" placeholder="Número Funcional" type="number">
       <select id="especializacao" class="swal2-select">
         <option value="">Selecione uma especialização</option>
-        ${competencias.map(competencia => 
+        ${
+          competencias.length > 0 ? (
+            competencias.map(competencia => 
 
-          `<option value="${competencia.especializacao}">${competencia.especializacao}</option>`
-
-        )}
+              `<option value="${competencia.especializacao}">${competencia.especializacao}</option>`
+    
+            )
+          ):
+          (
+            `<option value="--">--</option>`
+          )
+        }
 
       </select>
       <input id="numeroRegAtuacao" class="swal2-input" placeholder="Número de Registro de Atuação" type="number">
