@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
      - name: apaga conteudo da pasta build
-       run: rm -r /build/
+       run: rm -r build/
        working-directory: /home/ubuntu/sannitas-web
      - name: apaga conteudo da pasta html
        run: sudo rm -r /var/www/html/*
