@@ -17,6 +17,8 @@ jobs:
        run: git pull
        working-directory: /home/ubuntu/sannitas-web
      - name: builda o app react
+       env:
+        CI: true
        run: npm run build
        working-directory: /home/ubuntu/sannitas-web
      - name: move o conteudo da pasta build para pasta html
