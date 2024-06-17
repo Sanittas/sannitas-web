@@ -8,18 +8,20 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-     - name: entra no diretorio do app
-       run: cd /home/ubuntu/sannitas-web
      - name: apaga conteudo da pasta build
-       run: rm -r /home/ubuntu/sannitas-web/build/
+       run: rm -r /build/
+       working-directory: /home/ubuntu/sanittas-web
      - name: apaga conteudo da pasta html
        run: sudo rm -r /var/www/html/*
      - name: atualiza o repositorio
        run: git pull
+       working-directory: /home/ubuntu/sanittas-web
      - name: builda o app react
        run: npm run build
+       working-directory: /home/ubuntu/sanittas-web
      - name: move o conteudo da pasta build para pasta html
        run: sudo mv ./build/* /var/www/html/
+       working-directory: /home/ubuntu/sanittas-web
      - name: faz o reload do nginx
        run: sudo systemctl reload nginx
   
