@@ -12,7 +12,7 @@ jobs:
        run: rm -r build/
        working-directory: /home/ubuntu/sannitas-web
      - name: apaga conteudo da pasta html
-       run: sudo rm -r /var/www/html/*
+       run: sudo rm -r /var/www/html/
      - name: atualiza o repositorio
        run: git pull
        working-directory: /home/ubuntu/sannitas-web
