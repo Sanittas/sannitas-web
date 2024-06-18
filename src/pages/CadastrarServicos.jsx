@@ -151,16 +151,11 @@ function CadastrarServicos(props) {
               <select id="areaSaude" class="swal2-select">
               <option value="">Selecione uma área</optiion>
               ${
-                servicosVinculados.length > 0 ? (
-                  servicosVinculados.map(competencia => 
+                servicosVinculados.map(competencia => 
       
                     `<option value="${competencia.especializacao}">${competencia.especializacao}</option>`
           
                   )
-                ):
-                (
-                  `<option value="--">--</option>`
-                )
               }
       
             </select>
